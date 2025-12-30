@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Support My Mod</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 { color: #333; text-align: center; }
+        .wallet {
+            background: #f0f0f0;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            word-break: break-all;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        ul { list-style: none; padding: 0; }
+        li { margin: 10px 0; }
+        a {
+            color: #2196F3;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>💰 Support My Mod Development</h1>
+        
+        <div class="wallet">
+            <strong>USDT (TRC-20) Wallet:</strong><br>
+            <code id="wallet">TGa9qjeKQxGTCi8q8ZY4pL8otSzgjLj6t</code><br>
+            <button onclick="copyWallet()">Copy Address</button>
+        </div>
+        
+        <h3>Pay with Credit/Debit Card → USDT</h3>
+        <ul>
+            <li>🚀 <a href="https://ghostswap.io" target="_blank">GhostSwap.io</a> (Recommended)</li>
+            <li>💳 <a href="https://swaprocket.com" target="_blank">SwapRocket.com</a></li>
+        </ul>
+        
+        <p style="text-align:center; color:#666; margin-top:30px;">
+            All donations directly support mod development. Thank you! 🙏
+        </p>
+    </div>
+    
+    <script>
+        function copyWallet() {
+            navigator.clipboard.writeText('TGa9qjeKQxGTCi8q8ZY4pL8otSzgjLj6t');
+            alert('Wallet address copied!');
+        }
+    </script>
+</body>
+</html>
