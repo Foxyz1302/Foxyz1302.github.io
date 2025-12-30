@@ -28,11 +28,9 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            /* Background effects */
             background-image: 
                 radial-gradient(circle at 10% 20%, rgba(100, 0, 150, 0.15) 0%, transparent 40%),
                 radial-gradient(circle at 90% 80%, rgba(50, 0, 100, 0.15) 0%, transparent 40%);
-            /* Center content vertically if screen is tall */
         }
 
         h1, h2, h3 { font-family: 'Outfit', sans-serif; letter-spacing: -0.5px; }
@@ -42,7 +40,7 @@
         .main-wrapper {
             max-width: 1000px;
             margin: 0 auto;
-            padding: 1.5rem; /* Reduced padding for tight fit */
+            padding: 1.5rem;
             width: 100%;
             flex-grow: 1;
             display: flex;
@@ -55,7 +53,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 1.5rem; /* Reduced margin */
+            margin-bottom: 1.5rem;
         }
 
         .brand {
@@ -69,11 +67,11 @@
         /* Hero Text */
         .intro {
             text-align: center;
-            margin-bottom: 2rem; /* Reduced margin */
+            margin-bottom: 2rem;
         }
 
         .intro h1 {
-            font-size: 2.4rem; /* Slightly smaller to save vertical space */
+            font-size: 2.4rem;
             margin-bottom: 0.5rem;
             background: linear-gradient(to right, #fff, #e0aaff);
             -webkit-background-clip: text;
@@ -87,12 +85,24 @@
             margin: 0 auto;
         }
 
-        /* Donation Grid */
-        .donate-grid {
+        /* Section Labels */
+        .section-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            margin-bottom: 0.8rem;
+            display: block;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        /* Crypto Grid */
+        .crypto-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Min width 200px fits 4 items well */
-            gap: 1rem; /* Tighter gap */
-            margin-bottom: 1.5rem; /* Reduced margin */
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
+            gap: 1rem;
+            margin-bottom: 1.5rem;
         }
 
         .card {
@@ -101,7 +111,7 @@
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid var(--border);
             border-radius: var(--radius);
-            padding: 1.2rem; /* Reduced padding inside cards */
+            padding: 1.2rem;
             text-align: center;
             transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
             position: relative;
@@ -113,16 +123,17 @@
         }
 
         .card:hover {
-            transform: translateY(-3px); /* Less movement */
+            transform: translateY(-3px);
             border-color: var(--primary);
             box-shadow: 0 5px 20px -5px var(--primary-glow);
             background: rgba(45, 20, 60, 0.6);
         }
 
-        /* Preferred Card */
-        .card.preferred {
+        /* Highlighted USDT Card */
+        .card.highlight {
             border: 1px solid var(--primary);
-            background: linear-gradient(180deg, rgba(189,0,255,0.15) 0%, rgba(45,20,60,0.4) 100%);
+            background: linear-gradient(180deg, rgba(189,0,255,0.12) 0%, rgba(45,20,60,0.4) 100%);
+            box-shadow: 0 0 15px rgba(189, 0, 255, 0.15);
         }
 
         .card-title {
@@ -140,11 +151,6 @@
             letter-spacing: 1px;
         }
 
-        .preferred .card-subtitle {
-            color: var(--primary);
-            font-weight: 700;
-        }
-
         .wallet-box {
             background: rgba(0,0,0,0.3);
             border: 1px solid rgba(255,255,255,0.05);
@@ -152,7 +158,7 @@
             padding: 0.6rem;
             border-radius: 6px;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.65rem; /* Smaller font for compactness */
+            font-size: 0.65rem;
             margin: 0.5rem 0;
             cursor: pointer;
             word-break: break-all;
@@ -165,12 +171,13 @@
             background: rgba(0,0,0,0.5);
         }
 
+        /* Buttons */
         .btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
             width: 100%;
-            padding: 0.6rem; /* Smaller buttons */
+            padding: 0.6rem;
             border-radius: 6px;
             font-weight: 600;
             font-size: 0.8rem;
@@ -200,6 +207,25 @@
             border-color: rgba(255,255,255,0.2);
         }
 
+        /* Fiat Section (Smaller, Separate) */
+        .fiat-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .card.fiat-card {
+            max-width: 300px;
+            width: 100%;
+            opacity: 0.8; /* Slightly dimmed to indicate lower priority */
+            border-color: rgba(255,255,255,0.1);
+        }
+        
+        .card.fiat-card:hover {
+            opacity: 1;
+            border-color: var(--primary);
+        }
+
         /* Accordion */
         details.accordion {
             background: rgba(255,255,255,0.02);
@@ -215,7 +241,7 @@
         }
 
         summary.accordion-header {
-            padding: 0.8rem 1rem; /* Tighter padding */
+            padding: 0.8rem 1rem;
             cursor: pointer;
             font-weight: 600;
             color: var(--text-muted);
@@ -319,11 +345,11 @@
         @keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 30px; opacity: 1;} }
         @keyframes fadeout { from {bottom: 30px; opacity: 1;} to {bottom: 0; opacity: 0;} }
 
-        /* Responsive Adjustments for Phones */
+        /* Responsive */
         @media (max-width: 600px) {
             .intro h1 { font-size: 2rem; }
-            .donate-grid { grid-template-columns: 1fr; } /* Stack vertically on phone */
-            .wallet-box { font-size: 0.7rem; padding: 0.8rem; } /* Bigger touch targets on phone */
+            .crypto-grid { grid-template-columns: 1fr; } 
+            .wallet-box { font-size: 0.7rem; padding: 0.8rem; } 
             .btn { padding: 0.8rem; }
         }
     </style>
@@ -332,25 +358,26 @@
 
     <div class="main-wrapper">
         <header>
-            <div class="brand">FOXYZ</div>
+            <div class="brand">Foxyz</div>
         </header>
 
         <div class="intro">
-            <h1>Support The Work</h1>
-            <p>Independent modder & developer. Crypto preferred for lowest fees.</p>
+            <h1>Fund My Joblessness</h1>
+            <p>Independent modder keeping the dream alive (and the bills paid).</p>
         </div>
 
-        <!-- MAIN FOCUS: DONATION SECTION -->
-        <div class="donate-grid">
+        <!-- CRYPTO SECTION -->
+        <span class="section-label">Crypto Transfer (Preffered)</span>
+        <div class="crypto-grid">
             
-            <!-- USDT (PREFERRED) -->
-            <div class="card preferred">
+            <!-- USDT (Visually Focused) -->
+            <div class="card highlight">
                 <div>
                     <div class="card-title">USDT (TRC20)</div>
-                    <div class="card-subtitle">Best Choice</div>
+                    <div class="card-subtitle">Lowest Fees</div>
                     <div class="wallet-box" onclick="copyToClipboard('TXxa3cnP1Y9b2DnEiB512JBTgJ1NCAp2HH')">TXxa3cnP1Y9b2DnEiB512JBTgJ1NCAp2HH</div>
                 </div>
-                <button class="btn btn-primary" onclick="copyToClipboard('TXxa3cnP1Y9b2DnEiB512JBTgJ1NCAp2HH')">Copy Address</button>
+                <!-- <button class="btn btn-primary" onclick="copyToClipboard('TXxa3cnP1Y9b2DnEiB512JBTgJ1NCAp2HH')">Copy Address</button> -->
             </div>
 
             <!-- Ethereum -->
@@ -360,7 +387,7 @@
                     <div class="card-subtitle">ETH / ERC20</div>
                     <div class="wallet-box" onclick="copyToClipboard('0x5da1AfBFCB276c16723402A99e648a05381995a8')">0x5da1AfBFCB276c16723402A99e648a05381995a8</div>
                 </div>
-                <button class="btn btn-ghost" onclick="copyToClipboard('0x5da1AfBFCB276c16723402A99e648a05381995a8')">Copy Address</button>
+                <!-- <button class="btn btn-ghost" onclick="copyToClipboard('0x5da1AfBFCB276c16723402A99e648a05381995a8')">Copy Address</button> -->
             </div>
 
             <!-- Bitcoin -->
@@ -370,31 +397,34 @@
                     <div class="card-subtitle">BTC</div>
                     <div class="wallet-box" onclick="copyToClipboard('bc1q7luszqw5lzlkq0srvc0uzna87jk5lzvzlq3a6g')">bc1q7luszqw5lzlkq0srvc0uzna87jk5lzvzlq3a6g</div>
                 </div>
-                <button class="btn btn-ghost" onclick="copyToClipboard('bc1q7luszqw5lzlkq0srvc0uzna87jk5lzvzlq3a6g')">Copy Address</button>
-            </div>
-
-            <!-- Ko-fi (Low Priority) -->
-            <div class="card">
-                <div>
-                    <div class="card-title">Ko-fi</div>
-                    <div class="card-subtitle">Simple support</div>
-                    <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.5rem;">Standard card donation</p>
-                </div>
-                <a href="https://ko-fi.com/foxyz" target="_blank" class="btn btn-ghost">Donate via Ko-fi</a>
+                <!-- <button class="btn btn-ghost" onclick="copyToClipboard('bc1q7luszqw5lzlkq0srvc0uzna87jk5lzvzlq3a6g')">Copy Address</button> -->
             </div>
 
         </div>
 
+        <!-- FIAT / CARD SECTION (Separated & Lower Priority) -->
+        <span class="section-label">Card Support</span>
+        <div class="fiat-container">
+            <div class="card fiat-card">
+                <div>
+                    <div class="card-title">Ko-fi</div>
+                    <div class="card-subtitle">Standard fees apply</div>
+                    <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.5rem;">Simple card donation</p>
+                </div>
+                <a href="https://ko-fi.com/foxyz" target="_blank" class="btn btn-ghost">Donate via Ko-fi</a>
+            </div>
+        </div>
+
         <!-- EXPANDABLE WORKS SECTION -->
         <details class="accordion">
-            <summary class="accordion-header">See what I've made</summary>
+            <summary class="accordion-header">See what I've worked on</summary>
             <div class="accordion-content">
                 <div class="works-list">
                     
                     <!-- TEMPLATE ITEM -->
                     <div class="work-item">
-                        <span class="work-name">Mod Manager X</span>
-                        <span class="work-type">Tool / C#</span>
+                        <span class="work-name"> Empty for now</span>
+                        <!-- <span class="work-type">Tool / C#</span> -->
                     </div>
 
                     <!-- 
