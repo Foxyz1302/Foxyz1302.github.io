@@ -1,0 +1,164 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import DownloadButton from '../components/DownloadButton.astro';
+import { t, href, PLATFORM_LABEL, type App, type Lang } from '../lib/data';
+import { latestRelease, changelog } from '../lib/releases';
+import { ui } from '../i18n/ui';
+
+interface Props { lang: Lang; app: App }
+const { lang, app } = Astro.props;
+const s = ui(lang);
+const release = await latestRelease(app);
+const log = await changelog(app);
+const features = app.features?.[lang] ?? app.features?.en ?? [];
+
+// `code` and **bold** in changelog lines; everything else is escaped.
+const esc = (x: string) => x.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]!);
+const inline = (x: string) => esc(x).replace(/`([^`]+)`/g, '<code>$1</code>').replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+const ytId = (src: string) => src.match(/(?:v=|youtu\.be\/|embed\/)([\w-]{11})/)?.[1] ?? src;
+---
+<Base lang={lang} title={app.name} description={t(app.pitch, lang)}>
+  <div class="container page-head app-head">
+    <a class="back" href={href('/apps/', lang)}>← {s('apps.title')}</a>
+    <div class="app-hero">
+      <img class="app-icon reveal" src={app.icon} alt="" width="112" height="112" />
+      <div class="app-title">
+        <h1 class="reveal" style="--d:.04s">{app.name} {app.placeholder && <span class="todo-badge">{s('todo')}</span>}</h1>
+        <p class="lead reveal" style="--d:.08s">{t(app.pitch, lang)}</p>
+        <div class="chips reveal" style="--d:.12s">
+          <span class:list={['status', app.status]}>{s(`apps.status.${app.status}`)}</span>
+          {app.platforms.map((p) => <span class="chip plain">{PLATFORM_LABEL[p]}</span>)}
+          {app.tags?.map((tag) => <span class="chip">{tag}</span>)}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container app-body">
+    <div class="app-main">
+      {app.media && app.media.length > 0 && (
+        <section class="media reveal" aria-label={s('apps.media')}>
+          <div class="media-strip">
+            {app.media.map((m) => (
+              <figure class:list={['shot', { 'is-placeholder': m.placeholder }]}>
+                {m.type === 'image' && <img src={m.src} alt={t(m.alt, lang)} loading="lazy" />}
+                {m.type === 'video' && <video src={m.src} controls preload="metadata" playsinline />}
+                {m.type === 'youtube' && (
+                  <iframe src={`https://www.youtube-nocookie.com/embed/${ytId(m.src)}`} title={t(m.alt, lang) || app.name} loading="lazy" allow="encrypted-media; picture-in-picture" allowfullscreen />
+                )}
+              </figure>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {app.description && <p class="desc reveal">{t(app.description, lang)}</p>}
+
+      {features.length > 0 && (
+        <section class="reveal">
+          <h2 class="h-sm">{s('apps.features')}</h2>
+          <ul class="features">
+            {features.map((f) => <li><Icon name="check" /><span>{f}</span></li>)}
+          </ul>
+        </section>
+      )}
+
+      {log.length > 0 && (
+        <section class="reveal" id="changelog">
+          <h2 class="h-sm">{s('apps.changelog')}</h2>
+          {lang !== 'en' && <p class="muted small">{s('apps.changelogEn')}</p>}
+          <ol class="log">
+            {log.map((e, i) => (
+              <li>
+                <details open={i === 0}>
+                  <summary><span class="mono ver">{e.version}</span><span class="sum">{e.summary}</span></summary>
+                  {e.groups.map((g) => (
+                    <div class="log-group">
+                      <span class:list={['log-tag', g.title.toLowerCase()]}>{g.title}</span>
+                      <ul>{g.items.map((it) => <li set:html={inline(it)} />)}</ul>
+                    </div>
+                  ))}
+                </details>
+              </li>
+            ))}
+          </ol>
+          {release && <a class="all-versions" href={release.listUrl} target="_blank" rel="noopener">{s('apps.olderVersions')} <Icon name="external" /></a>}
+        </section>
+      )}
+    </div>
+
+    <aside class="app-side">
+      <div class="card side-card reveal">
+        <DownloadButton app={app} release={release} lang={lang} />
+        {app.requirements && (
+          <div class="req">
+            <h3>{s('apps.requirements')}</h3>
+            <p class="muted">{t(app.requirements, lang)}</p>
+          </div>
+        )}
+      </div>
+      <div class="card side-card like reveal" style="--d:.08s">
+        <h3>{s('apps.like')}</h3>
+        <p class="muted">{s('apps.likeText')}</p>
+        <a class="btn btn-ghost btn-sm" href={href('/support/', lang)}><Icon name="heart" />{s('nav.support')}</a>
+      </div>
+    </aside>
+  </div>
+</Base>
+
+<style>
+  .back { color: var(--muted); font-size: 0.9rem; display: inline-block; margin-bottom: 1.4rem; }
+  .back:hover { color: white; }
+  .app-hero { display: flex; gap: clamp(1rem, 3vw, 2rem); align-items: center; }
+  .app-icon { width: clamp(80px, 12vw, 112px); height: auto; border-radius: 26px; filter: drop-shadow(0 16px 32px rgba(0, 0, 0, 0.6)); flex: none; }
+  .app-title { display: grid; gap: 0.7rem; }
+  .app-title h1 { margin: 0; }
+  .app-title .chips { align-items: center; gap: 0.5rem; }
+
+  .app-body { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: clamp(20px, 3vw, 40px); align-items: start; padding-top: 2rem; }
+  .app-main { display: grid; gap: 2.4rem; min-width: 0; }
+  .app-side { position: sticky; top: 84px; display: grid; gap: 1rem; }
+  .side-card { display: grid; gap: 1.2rem; }
+  .req h3, .like h3 { font-size: 1rem; margin-bottom: 0.3rem; }
+  .req p, .like p { font-size: 0.9rem; }
+  .like { gap: 0.6rem; justify-items: start; }
+
+  .media-strip { display: flex; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 0.6rem; scrollbar-color: var(--primary) transparent; }
+  .shot { flex: 0 0 min(100%, 640px); scroll-snap-align: start; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); background: #000; aspect-ratio: 16 / 10; }
+  .shot img, .shot video, .shot iframe { width: 100%; height: 100%; object-fit: cover; border: 0; }
+  .shot.is-placeholder { outline-offset: -4px; }
+
+  .desc { font-size: 1.1rem; max-width: 68ch; }
+  .h-sm { font-size: var(--step-2); margin-bottom: 1rem; }
+  .small { font-size: 0.85rem; margin: -0.5rem 0 1rem; }
+  .features { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: 0.6rem; }
+  .features li { display: flex; gap: 0.7rem; align-items: flex-start; padding: 0.85rem 1rem; border-radius: var(--radius-sm); background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-soft); }
+  .features :global(svg) { width: 18px; height: 18px; color: var(--primary); flex: none; margin-top: 0.2rem; }
+
+  .log { list-style: none; padding: 0; display: grid; gap: 0.6rem; }
+  .log details { border: 1px solid var(--border-soft); border-radius: var(--radius-sm); background: rgba(255, 255, 255, 0.02); }
+  .log details[open] { border-color: var(--border); background: rgba(255, 255, 255, 0.035); }
+  .log summary { cursor: pointer; list-style: none; display: flex; gap: 1rem; align-items: baseline; padding: 0.9rem 1rem; }
+  .log summary::-webkit-details-marker { display: none; }
+  .ver { color: var(--accent); font-weight: 600; flex: none; }
+  .sum { color: var(--muted); font-size: 0.92rem; }
+  .log-group { padding: 0 1rem 0.9rem; }
+  .log-tag { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.15rem 0.5rem; border-radius: 4px; background: var(--primary-soft); color: var(--accent); }
+  .log-tag.fixed { background: rgba(74, 222, 128, 0.12); color: var(--ok); }
+  .log-tag.changed { background: rgba(251, 191, 36, 0.12); color: var(--warn); }
+  .log-group ul { margin-top: 0.5rem; padding-left: 1.2rem; font-size: 0.92rem; display: grid; gap: 0.3rem; }
+  .log-group li::marker { color: var(--primary); }
+  .log-group :global(code) { font-family: var(--mono); font-size: 0.85em; background: rgba(255, 255, 255, 0.06); padding: 0.05em 0.3em; border-radius: 4px; }
+  .all-versions { display: inline-flex; align-items: center; gap: 0.35rem; margin-top: 0.9rem; color: var(--accent); font-size: 0.9rem; }
+  .all-versions :global(svg) { width: 14px; height: 14px; }
+
+  @media (max-width: 900px) {
+    .app-body { grid-template-columns: 1fr; }
+    .app-side { position: static; order: -1; }
+  }
+  @media (max-width: 520px) {
+    .app-hero { flex-direction: column; align-items: flex-start; }
+    .log summary { flex-direction: column; gap: 0.2rem; }
+  }
+</style>

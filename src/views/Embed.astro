@@ -1,0 +1,101 @@
+---
+// The embeddable app card (/embed/<app>/), meant for an <iframe> or the
+// /embed.js snippet. Kept small: no header, footer or site scripts.
+import '@fontsource-variable/outfit';
+import '@fontsource-variable/onest';
+import Icon from '../components/Icon.astro';
+import DownloadButton from '../components/DownloadButton.astro';
+import { data, t, href, PLATFORM_LABEL, type App, type Lang } from '../lib/data';
+import { latestRelease } from '../lib/releases';
+import { ui } from '../i18n/ui';
+
+interface Props { lang: Lang; app: App }
+const { lang, app } = Astro.props;
+const s = ui(lang);
+const release = await latestRelease(app);
+const site = data.site.url;
+---
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>{app.name} · {data.person.name}</title>
+    <script is:inline>
+      // ?theme=light for light pages
+      if (new URLSearchParams(location.search).get('theme') === 'light') document.documentElement.dataset.theme = 'light';
+    </script>
+  </head>
+  <body>
+    <article class="ecard">
+      <a class="top" href={new URL(href(`/apps/${app.id}/`, lang), site).href} target="_blank" rel="noopener">
+        <img src={app.icon} alt="" width="56" height="56" />
+        <div>
+          <h1>{app.name}</h1>
+          <p class="by">{s('embed.by')} {data.person.name}
+            <span class="plats">{app.platforms.map((p) => <span title={PLATFORM_LABEL[p]}><Icon name={p} /></span>)}</span>
+          </p>
+        </div>
+      </a>
+      <p class="pitch">{t(app.pitch, lang)}</p>
+      <div class="actions">
+        <DownloadButton app={app} release={release} lang={lang} compact target="_blank" />
+        <a class="btn btn-ghost" href={new URL(href('/support/', lang), site).href} target="_blank" rel="noopener"><Icon name="heart" />{s('embed.support')}</a>
+      </div>
+    </article>
+    <script>
+      // Tell the page around the iframe how tall the card is (embed.js listens).
+      const send = () => parent.postMessage({ type: 'foxyz-embed:height', height: Math.ceil(document.documentElement.getBoundingClientRect().height) }, '*');
+      new ResizeObserver(send).observe(document.body);
+      send();
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  /* no color-scheme here: a dark scheme makes the iframe paint an opaque backdrop */
+  :root {
+    --bg: #110818; --panel: #1a0f24; --border: rgba(189, 0, 255, 0.3); --text: #f6f0fa; --muted: #a89fae;
+    --primary: #bd00ff; --primary-glow: rgba(189, 0, 255, 0.45); --accent: #d4aaff; --border-soft: rgba(255, 255, 255, 0.1);
+    --font: 'Outfit Variable', 'Onest Variable', system-ui, sans-serif; --mono: ui-monospace, monospace; --radius-sm: 10px;
+    --ease: cubic-bezier(0.22, 1, 0.36, 1); --warn: #fbbf24;
+  }
+  :root[data-theme='light'] {
+    --bg: #ffffff; --panel: #faf5ff; --border: rgba(140, 0, 200, 0.25); --text: #1d1424; --muted: #6b5a78;
+    --accent: #7a00a8; --border-soft: rgba(0, 0, 0, 0.1);
+  }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { background: transparent; }
+  body { font-family: var(--font); color: var(--text); padding: 2px; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  svg { display: block; }
+  .ecard {
+    background: linear-gradient(160deg, color-mix(in srgb, var(--primary) 12%, var(--panel)), var(--panel) 55%);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 16px;
+    display: grid;
+    gap: 12px;
+    max-width: 420px;
+  }
+  .top { display: flex; gap: 12px; align-items: center; }
+  .top img { width: 56px; height: 56px; border-radius: 14px; }
+  h1 { font-size: 1.25rem; line-height: 1.1; letter-spacing: -0.02em; }
+  .by { color: var(--muted); font-size: 0.82rem; display: flex; align-items: center; gap: 10px; margin-top: 2px; }
+  .plats { display: inline-flex; gap: 6px; }
+  .plats svg { width: 14px; height: 14px; }
+  .pitch { font-size: 0.92rem; line-height: 1.45; }
+  .actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.45em;
+    min-height: 40px; padding: 0 1.05rem; border-radius: 999px; font: 600 0.9rem/1 var(--font);
+    border: 1px solid transparent; cursor: pointer; white-space: nowrap; transition: transform 0.2s var(--ease), box-shadow 0.2s, background 0.2s;
+  }
+  .btn svg { width: 16px; height: 16px; }
+  .btn-primary { background: linear-gradient(135deg, #c51bff, #8a00e6); color: white; box-shadow: 0 6px 20px -8px var(--primary-glow); }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 24px -6px var(--primary-glow); }
+  .btn-ghost { border-color: var(--border-soft); color: var(--text); background: color-mix(in srgb, var(--text) 4%, transparent); }
+  .btn-ghost:hover { background: color-mix(in srgb, var(--text) 9%, transparent); }
+  .muted { color: var(--muted); }
+</style>

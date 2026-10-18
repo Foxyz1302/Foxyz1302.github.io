@@ -1,0 +1,42 @@
+---
+import Base from '../layouts/Base.astro';
+import AppCard from '../components/AppCard.astro';
+import UpcomingCard from '../components/UpcomingCard.astro';
+import { data, isReleased, type Lang } from '../lib/data';
+import { ui } from '../i18n/ui';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const s = ui(lang);
+// Released apps get the big cards; the rest sit below, quieter
+// ("in-development" before "coming", otherwise in data.json order).
+const released = data.apps.filter(isReleased);
+const rank = { 'in-development': 0, coming: 1 } as Record<string, number>;
+const upcoming = data.apps.filter((a) => !isReleased(a)).sort((a, b) => (rank[a.status] ?? 2) - (rank[b.status] ?? 2));
+---
+<Base lang={lang} title={s('apps.title')}>
+  <div class="container page-head">
+    <span class="eyebrow">// {s('apps.title')}</span>
+    <h1 class="gradient-text">{s('apps.title')}</h1>
+    <p class="lead">{s('apps.lead')}</p>
+  </div>
+  <section class="container section-tight">
+    <div class="grid grid-2">
+      {released.map((app, i) => <AppCard app={app} lang={lang} delay={i * 0.06} />)}
+    </div>
+  </section>
+  {upcoming.length > 0 && (
+    <section class="container section-tight" id="upcoming">
+      <span class="eyebrow">// {s('apps.upcoming')}</span>
+      <p class="muted up-lead">{s('apps.upcomingLead')}</p>
+      <div class="grid up-grid">
+        {upcoming.map((app, i) => <UpcomingCard app={app} lang={lang} delay={Math.min(i, 6) * 0.04} />)}
+      </div>
+    </section>
+  )}
+</Base>
+
+<style>
+  .up-lead { font-size: 0.92rem; margin: -0.4rem 0 1.2rem; }
+  .up-grid { grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 12px; }
+</style>

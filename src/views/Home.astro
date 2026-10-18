@@ -1,0 +1,118 @@
+---
+import Base from '../layouts/Base.astro';
+import AppCard from '../components/AppCard.astro';
+import Icon from '../components/Icon.astro';
+import { data, t, href, type Lang } from '../lib/data';
+import { ui } from '../i18n/ui';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const s = ui(lang);
+const featured = data.apps.filter((a) => a.featured && a.status === 'released').slice(0, 3);
+const upcomingCount = data.apps.filter((a) => a.status !== 'released').length;
+const c = data.commissions;
+const what = [
+  { icon: 'monitor', t: s('home.what1.t'), d: s('home.what1.d') },
+  { icon: 'phone', t: s('home.what2.t'), d: s('home.what2.d') },
+  { icon: 'layers', t: s('home.what3.t'), d: s('home.what3.d') },
+];
+---
+<Base lang={lang}>
+  <section class="hero container">
+    <div class="hero-text">
+      <a href={href('/commissions/', lang)} class:list={['status-pill reveal']}>
+        <span class:list={['status', c.status]}>{s(`com.status.${c.status}`)}</span>
+      </a>
+      <h1 class="reveal" style="--d:.05s">
+        <span class="gradient-text">{data.person.name}</span>
+        <span class="role">{t(data.person.role, lang)}</span>
+      </h1>
+      <p class="lead reveal" style="--d:.1s">{t(data.person.pitch, lang)}</p>
+      <div class="btn-row reveal" style="--d:.15s">
+        <a class="btn btn-primary" href={href('/commissions/', lang)}><Icon name="briefcase" />{s('home.hire')}</a>
+        <a class="btn btn-ghost" href={href('/support/', lang)}><Icon name="heart" />{s('home.support')}</a>
+      </div>
+    </div>
+    <div class="hero-mark reveal" style="--d:.1s" aria-hidden="true">
+      <div class="orb"></div>
+      <img src="/mark.svg" alt="" width="260" height="260" />
+    </div>
+  </section>
+
+  <section class="container section-tight">
+    <div class="section-head">
+      <span class="eyebrow">// {s('home.featured')}</span>
+      <a class="see-all" href={href('/apps/', lang)}>{s('home.allApps')} <Icon name="arrow" /></a>
+    </div>
+    <div class="grid grid-3">
+      {featured.map((app, i) => <AppCard app={app} lang={lang} delay={i * 0.08} />)}
+      {upcomingCount > 0 && (
+        <a class="card more-card reveal" style="--d:.1s" href={href('/apps/#upcoming', lang)}>
+          <span class="more-n">+{upcomingCount}</span>
+          <span>{s('home.moreComing')}</span>
+          <Icon name="arrow" />
+        </a>
+      )}
+    </div>
+  </section>
+
+  <section class="container section">
+    <span class="eyebrow">// {s('home.what')}</span>
+    <div class="grid grid-3">
+      {what.map((w, i) => (
+        <div class="card what reveal" style={`--d:${i * 0.08}s`}>
+          <div class="what-icon"><Icon name={w.icon} /></div>
+          <h3>{w.t}</h3>
+          <p class="muted">{w.d}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    align-items: center;
+    gap: 2rem;
+    padding-top: clamp(48px, 9vw, 120px);
+    padding-bottom: clamp(32px, 6vw, 72px);
+  }
+  .hero-text { display: grid; gap: 1.4rem; justify-items: start; }
+  .status-pill { padding: 0.4rem 0.9rem; border-radius: 999px; background: rgba(255, 255, 255, 0.04); border: 1px solid var(--border-soft); transition: border-color 0.2s; }
+  .status-pill:hover { border-color: var(--border); }
+  .hero h1 { font-size: clamp(3rem, 2rem + 5vw, 5.6rem); letter-spacing: -0.045em; line-height: 0.98; }
+  .role { display: block; margin-top: 0.35em; line-height: 1.15; font-size: 0.42em; letter-spacing: -0.02em; color: var(--muted); font-weight: 500; }
+  .hero-mark { position: relative; display: grid; place-items: center; }
+  .hero-mark img { position: relative; width: min(260px, 60vw); filter: drop-shadow(0 20px 50px rgba(189, 0, 255, 0.45)); animation: float 7s ease-in-out infinite; }
+  .orb {
+    position: absolute;
+    width: 120%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(189, 0, 255, 0.28), transparent 62%);
+    animation: breathe 7s ease-in-out infinite;
+  }
+  @keyframes float { 50% { transform: translateY(-12px) rotate(-2deg); } }
+  @keyframes breathe { 50% { transform: scale(1.08); opacity: 0.8; } }
+
+  .section-head { display: flex; align-items: baseline; justify-content: space-between; }
+  .see-all { display: inline-flex; align-items: center; gap: 0.35rem; color: var(--accent); font-size: 0.9rem; }
+  .see-all :global(svg) { width: 16px; height: 16px; }
+
+  .more-card { display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 0.4rem; background: rgba(255, 255, 255, 0.02); border-style: dashed; border-color: var(--border-soft); color: var(--muted); }
+  .more-card:hover { color: white; }
+  .more-n { font-size: var(--step-3); font-weight: 700; color: var(--accent); letter-spacing: -0.03em; }
+  .more-card :global(svg) { width: 18px; height: 18px; }
+  .what h3 { margin: 0.9rem 0 0.4rem; }
+  .what-icon { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 12px; background: var(--primary-soft); border: 1px solid var(--border); color: var(--accent); }
+  .what-icon :global(svg) { width: 22px; height: 22px; }
+
+  @media (max-width: 760px) {
+    .hero { grid-template-columns: 1fr; padding-top: 32px; }
+    .hero-mark { order: -1; justify-self: start; }
+    .hero-mark img { width: 96px; }
+    .orb { width: 200%; }
+  }
+</style>

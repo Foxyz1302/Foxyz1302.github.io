@@ -1,0 +1,90 @@
+---
+// A one-page CV that prints cleanly (Ctrl+P → Save as PDF).
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import { data, t, href, type Lang } from '../lib/data';
+import { ui } from '../i18n/ui';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const s = ui(lang);
+const r = data.resume;
+const apps = data.apps.filter((a) => a.status === 'released');
+const site = data.site.url.replace(/^https?:\/\//, '');
+---
+<Base lang={lang} title="CV" bare>
+  <div class="cv-tools">
+    <a class="btn btn-ghost btn-sm" href={href('/about/', lang)}>← {s('cv.back')}</a>
+    <button class="btn btn-primary btn-sm" type="button" onclick="window.print()"><Icon name="print" />{s('cv.print')}</button>
+  </div>
+  <article class="paper">
+    <header class="cv-head">
+      <div>
+        <h1>{data.person.name}</h1>
+        <p class="cv-role">{t(data.person.role, lang)}</p>
+      </div>
+      <ul class="cv-contact">
+        <li>{site}</li>
+        {data.contact.map((c) => <li class:list={{ 'is-placeholder': c.placeholder }}>{c.label}: {c.value}</li>)}
+      </ul>
+    </header>
+    <p class="cv-summary">{t(r.summary, lang)} {t(data.person.languages, lang)}</p>
+
+    <h2>{s('about.skills')}</h2>
+    <dl class="cv-skills">
+      {r.skills.map((g) => <><dt>{t(g.group, lang)}</dt><dd>{g.items.join(' · ')}</dd></>)}
+    </dl>
+
+    <h2>{s('about.projects')}</h2>
+    {apps.map((a) => (
+      <div class="cv-item">
+        <h3>{a.name} <span>{a.platforms.join(', ')}</span></h3>
+        <p>{t(a.description ?? a.pitch, lang)}</p>
+      </div>
+    ))}
+
+    <h2>{s('about.timeline')}</h2>
+    {r.timeline.map((e) => (
+      <div class:list={['cv-item', { 'is-placeholder': e.placeholder }]}>
+        <h3>{t(e.what, lang)} <span>{e.when}</span></h3>
+        {e.detail && <p>{t(e.detail, lang)}</p>}
+      </div>
+    ))}
+  </article>
+</Base>
+
+<style>
+  .cv-tools { display: flex; justify-content: space-between; max-width: 820px; margin: 24px auto 0; padding-inline: var(--gutter); }
+  .paper {
+    max-width: 820px;
+    margin: 20px auto 60px;
+    padding: clamp(24px, 6vw, 56px);
+    background: #fbf8fd;
+    color: #1d1424;
+    border-radius: 14px;
+    box-shadow: 0 30px 80px -30px var(--primary-glow);
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+  .cv-head { display: flex; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; border-bottom: 3px solid #bd00ff; padding-bottom: 1rem; }
+  .cv-head h1 { font-size: 2.6rem; letter-spacing: -0.04em; }
+  .cv-role { color: #7a00a8; font-weight: 600; }
+  .cv-contact { list-style: none; padding: 0; font-family: var(--mono); font-size: 0.78rem; text-align: right; color: #4a3b55; }
+  .cv-summary { margin: 1.2rem 0; }
+  .paper h2 { font-size: 0.8rem; letter-spacing: 0.16em; text-transform: uppercase; color: #7a00a8; margin: 1.6rem 0 0.6rem; }
+  .cv-skills { display: grid; grid-template-columns: max-content 1fr; gap: 0.3rem 1.2rem; }
+  .cv-skills dt { font-weight: 600; }
+  .cv-item + .cv-item { margin-top: 0.8rem; }
+  .cv-item h3 { font-size: 1rem; display: flex; justify-content: space-between; gap: 1rem; }
+  .cv-item h3 span { font-family: var(--mono); font-size: 0.75rem; font-weight: 400; color: #6b5a78; }
+  .cv-item p { color: #3b2f45; }
+  @media (max-width: 560px) { .cv-contact { text-align: left; } .cv-skills { grid-template-columns: 1fr; } .cv-skills dd { margin-bottom: 0.5rem; } }
+  @media print {
+    :global(body) { background: white !important; }
+    :global(body::before) { display: none; }
+    .cv-tools { display: none; }
+    .paper { box-shadow: none; margin: 0; max-width: none; padding: 0; border-radius: 0; background: white; }
+    .is-placeholder { outline: none; }
+    @page { margin: 16mm; }
+  }
+</style>

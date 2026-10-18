@@ -1,0 +1,46 @@
+---
+// A small, quiet card for an app that is not released yet: no link, no
+// download, just the working title, one line and its status.
+import AppArt from './AppArt.astro';
+import Icon from './Icon.astro';
+import { t, PLATFORM_LABEL, type App, type Lang } from '../lib/data';
+import { ui } from '../i18n/ui';
+
+interface Props { app: App; lang: Lang; delay?: number }
+const { app, lang, delay = 0 } = Astro.props;
+const s = ui(lang);
+---
+<div class="up reveal" style={`--d:${delay}s`}>
+  {app.icon ? <img src={app.icon} alt="" width="44" height="44" class="up-icon" /> : <AppArt app={app} size={44} />}
+  <div class="up-text">
+    <h3>{app.name}{app.workingTitle && <span class="wt">{s('apps.workingTitle')}</span>}</h3>
+    <p>{t(app.pitch, lang)}</p>
+    <div class="up-meta">
+      <span class:list={['status', app.status]}>{s(`apps.status.${app.status}`)}</span>
+      <span class="plats" title={app.platforms.map((p) => PLATFORM_LABEL[p]).join(', ')}>{app.platforms.map((p) => <Icon name={p} />)}</span>
+    </div>
+  </div>
+</div>
+
+<style>
+  .up {
+    display: flex;
+    gap: 0.9rem;
+    align-items: flex-start;
+    padding: 1rem 1.1rem;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.022);
+    border: 1px solid var(--border-soft);
+    transition: border-color 0.3s, background 0.3s;
+  }
+  .up:hover { border-color: var(--border); background: rgba(255, 255, 255, 0.035); }
+  .up-icon { border-radius: 12px; flex: none; }
+  .up-text { min-width: 0; display: grid; gap: 0.25rem; }
+  .up h3 { font-size: 1rem; font-weight: 600; letter-spacing: -0.01em; display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.2rem 0.5rem; }
+  .wt { font-family: var(--mono); font-size: 0.62rem; font-weight: 400; letter-spacing: 0.06em; color: var(--muted); opacity: 0.8; }
+  .up p { font-size: 0.86rem; color: var(--muted); line-height: 1.45; }
+  .up-meta { display: flex; align-items: center; gap: 0.8rem; margin-top: 0.3rem; }
+  .up-meta .status { font-size: 0.68rem; }
+  .plats { display: inline-flex; gap: 0.4rem; color: var(--muted); opacity: 0.7; }
+  .plats :global(svg) { width: 13px; height: 13px; }
+</style>

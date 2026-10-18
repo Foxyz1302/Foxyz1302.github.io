@@ -1,0 +1,81 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import AppCard from '../components/AppCard.astro';
+import { data, t, href, type Lang } from '../lib/data';
+import { md } from '../lib/content';
+import { ui } from '../i18n/ui';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const s = ui(lang);
+const page = md('about', lang);
+const r = data.resume;
+const projects = data.apps.filter((a) => a.status === 'released');
+---
+<Base lang={lang} title={s('about.title')}>
+  <div class="container page-head about-head">
+    <img src={data.person.avatar} alt="" width="120" height="120" class="avatar reveal" />
+    <div>
+      <span class="eyebrow">// {s('about.title')}</span>
+      <h1 class="gradient-text">{page.frontmatter.title}</h1>
+      <p class="lead">{t(r.summary, lang)}</p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href={href('/about/cv/', lang)}><Icon name="print" />{s('about.cv')}</a>
+        <a class="btn btn-ghost" href={href('/commissions/', lang)}><Icon name="briefcase" />{s('home.hire')}</a>
+      </div>
+    </div>
+  </div>
+
+  <section class="container section-tight">
+    <div class="prose reveal"><page.Content /></div>
+  </section>
+
+  <section class="container section-tight">
+    <h2 class="h-sm reveal">{s('about.skills')}</h2>
+    <div class="grid skills">
+      {r.skills.map((g, i) => (
+        <div class="card reveal" style={`--d:${i * 0.06}s`}>
+          <h3>{t(g.group, lang)}</h3>
+          <div class="chips">{g.items.map((x) => <span class="chip plain">{x}</span>)}</div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="container section-tight">
+    <h2 class="h-sm reveal">{s('about.timeline')}</h2>
+    <ol class="timeline">
+      {r.timeline.map((e) => (
+        <li class:list={['reveal', { 'is-placeholder': e.placeholder }]}>
+          <span class="when mono">{e.when}</span>
+          <div>
+            <h3>{t(e.what, lang)} {e.placeholder && <span class="todo-badge">{s('todo')}</span>}</h3>
+            {e.detail && <p class="muted">{t(e.detail, lang)}</p>}
+          </div>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="container section-tight">
+    <h2 class="h-sm reveal">{s('about.projects')}</h2>
+    <div class="grid grid-3">{projects.map((a) => <AppCard app={a} lang={lang} />)}</div>
+  </section>
+</Base>
+
+<style>
+  .about-head { display: flex; gap: clamp(1.2rem, 4vw, 2.8rem); align-items: center; }
+  .about-head .lead { margin: 0.6rem 0 1.4rem; }
+  .avatar { width: clamp(88px, 14vw, 150px); border-radius: 32px; padding: 14px; background: var(--panel); border: 1px solid var(--border); box-shadow: 0 0 60px -20px var(--primary-glow); flex: none; }
+  .h-sm { font-size: var(--step-2); margin-bottom: 1rem; }
+  .skills { grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr)); }
+  .skills h3 { margin-bottom: 0.8rem; font-size: 1.05rem; }
+  .timeline { list-style: none; padding: 0; position: relative; display: grid; gap: 1.4rem; }
+  .timeline::before { content: ''; position: absolute; left: 4.4rem; top: 0.4rem; bottom: 0.4rem; width: 1px; background: linear-gradient(var(--primary), transparent); }
+  .timeline li { display: grid; grid-template-columns: 4.4rem 1fr; gap: 1.6rem; position: relative; }
+  .timeline li::before { content: ''; position: absolute; left: calc(4.4rem - 4px); top: 0.5rem; width: 9px; height: 9px; border-radius: 50%; background: var(--primary); box-shadow: 0 0 12px var(--primary-glow); }
+  .when { color: var(--accent); font-size: 0.85rem; padding-top: 0.15rem; }
+  .timeline h3 { margin-bottom: 0.3rem; }
+  @media (max-width: 600px) { .about-head { flex-direction: column; align-items: flex-start; } }
+</style>

@@ -1,0 +1,133 @@
+---
+// The frame of every page: <head> (title, link previews, icons), header,
+// footer and the few small scripts the site uses.
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { data, t, href, type Lang } from '../lib/data';
+import { ui } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  title?: string;
+  description?: string;
+  image?: string;
+  bare?: boolean; // no header/footer (CV print page)
+}
+const { lang, title, description, image = '/og.png', bare = false } = Astro.props;
+const s = ui(lang);
+
+// "/ru/apps/" -> "/apps/": the same page in the other language
+const path = Astro.url.pathname.replace(/^\/ru(?=\/|$)/, '') || '/';
+const other: Lang = lang === 'en' ? 'ru' : 'en';
+const otherHref = href(path, other);
+const site = data.site.url;
+const fullTitle = title ? `${title} · ${data.site.title}` : `${data.person.name} · ${t(data.person.role, lang)}`;
+const desc = description ?? t(data.site.description, lang);
+const canonical = new URL(href(path, lang), site).href;
+---
+<!doctype html>
+<html lang={lang} class="no-js">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={desc} />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="en" href={new URL(href(path, 'en'), site).href} />
+    <link rel="alternate" hreflang="ru" href={new URL(href(path, 'ru'), site).href} />
+    <link rel="alternate" hreflang="x-default" href={new URL(href(path, 'en'), site).href} />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#08040a" />
+
+    <!-- link previews (Discord, Telegram, X, ...) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={data.site.title} />
+    <meta property="og:title" content={title ?? data.person.name} />
+    <meta property="og:description" content={desc} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL(image, site).href} />
+    <meta property="og:locale" content={lang === 'ru' ? 'ru_RU' : 'en_US'} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <script is:inline>document.documentElement.classList.remove('no-js');</script>
+  </head>
+  <body>
+    {!bare && <Header lang={lang} path={path} />}
+    {!bare && (
+      <div class="lang-banner" data-lang-banner data-target={other} hidden>
+        <div class="container lang-banner-inner">
+          <span>{s('lang.banner')}</span>
+          <a class="btn btn-sm btn-ghost" href={otherHref} data-lang-link={other}>{s('lang.bannerGo')}</a>
+          <button class="lang-banner-x" type="button" aria-label={s('lang.bannerClose')} data-lang-dismiss>×</button>
+        </div>
+      </div>
+    )}
+    <main id="main">
+      <slot />
+    </main>
+    {!bare && <Footer lang={lang} />}
+    <div class="toast" role="status" aria-live="polite" data-toast></div>
+
+    <script>
+      // Fade sections in as they scroll into view.
+      const io = new IntersectionObserver(
+        (entries) => entries.forEach((e) => e.isIntersecting && (e.target.classList.add('in'), io.unobserve(e.target))),
+        { rootMargin: '0px 0px -8% 0px' },
+      );
+      document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+
+      // Copy buttons: <button data-copy="text" data-copied="Copied">.
+      const toast = document.querySelector<HTMLElement>('[data-toast]');
+      let timer: number | undefined;
+      document.addEventListener('click', async (ev) => {
+        const btn = (ev.target as HTMLElement).closest<HTMLElement>('[data-copy]');
+        if (!btn) return;
+        try {
+          await navigator.clipboard.writeText(btn.dataset.copy!);
+        } catch {
+          return;
+        }
+        if (toast) {
+          toast.textContent = btn.dataset.copied ?? 'Copied';
+          toast.classList.add('show');
+          clearTimeout(timer);
+          timer = window.setTimeout(() => toast.classList.remove('show'), 2200);
+        }
+      });
+
+      // Offer the other language once if the browser prefers it.
+      // Choosing a language (switch or banner) is remembered.
+      const banner = document.querySelector<HTMLElement>('[data-lang-banner]');
+      const KEY = 'lang-choice';
+      const read = () => { try { return localStorage.getItem(KEY); } catch { return null; } };
+      const save = (v: string) => { try { localStorage.setItem(KEY, v); } catch {} };
+      document.querySelectorAll<HTMLElement>('[data-lang-link]').forEach((a) =>
+        a.addEventListener('click', () => save(a.dataset.langLink!)),
+      );
+      if (banner && !read()) {
+        const target = banner.dataset.target!;
+        const wants = (navigator.languages ?? [navigator.language]).map((l) => l.slice(0, 2).toLowerCase());
+        const current = document.documentElement.lang;
+        if (wants[0] === target || (target === 'en' && !wants.includes(current))) {
+          banner.hidden = false;
+        }
+        banner.querySelector('[data-lang-dismiss]')?.addEventListener('click', () => {
+          banner.hidden = true;
+          save(current);
+        });
+      }
+    </script>
+
+    <style>
+      .lang-banner { background: linear-gradient(90deg, rgba(189, 0, 255, 0.18), rgba(189, 0, 255, 0.06)); border-bottom: 1px solid var(--border); }
+      .lang-banner-inner { display: flex; align-items: center; gap: 0.9rem; padding-block: 0.55rem; font-size: 0.92rem; }
+      .lang-banner-inner span { flex: 1; }
+      .lang-banner-x { background: none; border: 0; color: var(--muted); font-size: 1.4rem; line-height: 1; cursor: pointer; padding: 0.2rem 0.4rem; }
+      .lang-banner-x:hover { color: white; }
+    </style>
+  </body>
+</html>

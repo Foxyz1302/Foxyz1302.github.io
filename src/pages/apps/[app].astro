@@ -1,0 +1,10 @@
+---
+import View from '../../views/AppPage.astro';
+import { data } from '../../lib/data';
+
+// one page per released app in public/data.json
+export function getStaticPaths() {
+  return data.apps.filter((a) => a.status === 'released').map((app) => ({ params: { app: app.id }, props: { app } }));
+}
+---
+<View lang="en" app={Astro.props.app} />

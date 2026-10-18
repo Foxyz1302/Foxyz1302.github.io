@@ -1,0 +1,261 @@
+{
+  "$comment": "The one file that holds the site's content. Schema: docs/DATA.md. Text can be a plain string or {\"en\": ..., \"ru\": ...}. \"placeholder\": true marks something not decided yet: the site shows it with a dashed TODO badge, the app card feed leaves it out.",
+
+  "site": {
+    "url": "https://donations.foxyz.ru",
+    "title": "foxyz",
+    "description": {
+      "en": "foxyz, a solo Flutter developer: apps, commissions, resume and support.",
+      "ru": "foxyz, Flutter-разработчик: приложения, заказы, резюме и поддержка."
+    },
+    "sourceRepo": "https://github.com/Foxyz1302/Foxyz1302.github.io"
+  },
+
+  "person": {
+    "name": "foxyz",
+    "role": { "en": "Flutter developer", "ru": "Flutter-разработчик" },
+    "pitch": {
+      "en": "I build fast, good-looking desktop and mobile apps with Flutter, from the first sketch to the auto-updater.",
+      "ru": "Делаю быстрые и красивые приложения на Flutter для компьютера и телефона: от первого наброска до автообновления."
+    },
+    "languages": { "en": "Works in English and Russian, remotely.", "ru": "Работаю удалённо, на русском и английском." },
+    "avatar": "/mark.svg"
+  },
+
+  "contact": [
+    { "id": "discord", "label": "Discord", "value": "foxyz", "url": "https://discord.com/users/foxyz" },
+    { "id": "github", "label": "GitHub", "value": "Foxyz1302", "url": "https://github.com/Foxyz1302" },
+    { "id": "email", "label": "Email", "value": "you@example.com", "url": "mailto:you@example.com", "placeholder": true },
+    { "id": "telegram", "label": "Telegram", "value": "@placeholder", "url": "https://t.me/placeholder", "placeholder": true }
+  ],
+
+  "commissions": {
+    "status": "open",
+    "slots": 2,
+    "slotsPlaceholder": true,
+    "note": {
+      "en": "Taking small and medium Flutter projects. Replies within a day or two.",
+      "ru": "Беру небольшие и средние проекты на Flutter. Отвечаю в течение одного-двух дней."
+    },
+    "currency": "USD",
+    "prices": [
+      { "name": { "en": "Small fix or feature", "ru": "Небольшая правка или функция" }, "from": 50, "placeholder": true },
+      { "name": { "en": "Desktop or mobile app (MVP)", "ru": "Приложение для ПК или телефона (MVP)" }, "from": 600, "placeholder": true },
+      { "name": { "en": "Ongoing work", "ru": "Постоянная работа" }, "perHour": 15, "placeholder": true }
+    ],
+    "contact": "discord"
+  },
+
+  "donations": {
+    "order": {
+      "en": ["kofi", "usdt-trc20", "eth", "btc"],
+      "ru": ["boosty", "sbp", "kofi", "usdt-trc20", "eth", "btc"]
+    },
+    "options": [
+      {
+        "id": "kofi",
+        "kind": "link",
+        "name": "Ko-fi",
+        "url": "https://ko-fi.com/foxyz",
+        "note": { "en": "Card or PayPal, one-off or monthly.", "ru": "Иностранная карта или PayPal, разово или ежемесячно." }
+      },
+      {
+        "id": "boosty",
+        "kind": "link",
+        "name": "Boosty",
+        "url": "https://boosty.to/placeholder",
+        "note": { "en": "Russian cards.", "ru": "Российские карты, разово или подпиской." },
+        "placeholder": true
+      },
+      {
+        "id": "sbp",
+        "kind": "link",
+        "name": { "en": "SBP / card tip", "ru": "Чаевые по СБП или карте" },
+        "url": "https://example.com/placeholder",
+        "note": { "en": "Russian bank transfer.", "ru": "Перевод из любого российского банка, без комиссии." },
+        "placeholder": true
+      },
+      {
+        "id": "usdt-trc20",
+        "kind": "crypto",
+        "name": "USDT",
+        "network": "TRC20 (TRON)",
+        "address": "TXxa3cnP1Y9b2DnEiB512JBTgJ1NCAp2HH",
+        "note": { "en": "Lowest fees.", "ru": "Самая низкая комиссия." },
+        "preferred": true
+      },
+      {
+        "id": "eth",
+        "kind": "crypto",
+        "name": "Ethereum",
+        "network": "ETH / ERC20",
+        "address": "0x5da1AfBFCB276c16723402A99e648a05381995a8"
+      },
+      {
+        "id": "btc",
+        "kind": "crypto",
+        "name": "Bitcoin",
+        "network": "BTC",
+        "address": "bc1q7luszqw5lzlkq0srvc0uzna87jk5lzvzlq3a6g"
+      }
+    ]
+  },
+
+  "apps": [
+    {
+      "id": "starsync",
+      "name": "Starsync",
+      "status": "released",
+      "featured": true,
+      "icon": "/apps/starsync/icon.svg",
+      "pitch": {
+        "en": "Watch videos with friends, in sync, in a real mpv player.",
+        "ru": "Смотрите видео с друзьями синхронно, в настоящем плеере mpv."
+      },
+      "description": {
+        "en": "Pick from your Jellyfin library, paste any video link, or open a file from your disk; everyone's play, pause and seek stay together. A desktop app, not a browser tab: no transcoding, everyone plays the original file.",
+        "ru": "Выберите видео из библиотеки Jellyfin, вставьте ссылку или откройте файл с диска: пауза, перемотка и воспроизведение у всех идут вместе. Это приложение для компьютера, а не вкладка браузера: без перекодирования, каждый смотрит оригинал."
+      },
+      "platforms": ["linux", "windows"],
+      "tags": ["Flutter", "Desktop", "mpv", "Jellyfin"],
+      "features": {
+        "en": [
+          "Play, pause and seek stay in sync for everyone",
+          "Jellyfin library, direct links and local files",
+          "Links you put up are downloaded once for everyone",
+          "Chat, quick chat and danmaku over the video",
+          "Invite with one starsync:// link, no accounts",
+          "Updates itself, with a What's new list"
+        ],
+        "ru": [
+          "Пауза, перемотка и воспроизведение синхронны у всех",
+          "Библиотека Jellyfin, прямые ссылки и файлы с диска",
+          "Видео по ссылке скачивается один раз для всех",
+          "Чат, быстрый чат и данмаку поверх видео",
+          "Приглашение одной ссылкой starsync://, без аккаунтов",
+          "Обновляется сам и показывает, что нового"
+        ]
+      },
+      "requirements": {
+        "en": "Linux: mpv's library (the mpv or libmpv2 package). Windows: nothing extra, mpv is bundled.",
+        "ru": "Linux: библиотека mpv (пакет mpv или libmpv2). Windows: ничего не нужно, mpv уже внутри."
+      },
+      "media": [
+        { "type": "image", "src": "/apps/starsync/placeholder-1.svg", "alt": "Starsync player (placeholder)", "placeholder": true },
+        { "type": "image", "src": "/apps/starsync/placeholder-2.svg", "alt": "Starsync library (placeholder)", "placeholder": true }
+      ],
+      "releases": {
+        "sources": [
+          { "type": "github", "repo": "Foxyz1302/starsync" },
+          { "type": "gitea", "host": "https://git.senkochan.moe", "repo": "Foxyz/sync_replay_project" }
+        ],
+        "assets": {
+          "linux-x64": "-linux-x64.tar.gz",
+          "windows-x64": "-windows-x64.zip"
+        }
+      },
+      "changelog": {
+        "url": "https://git.senkochan.moe/Foxyz/sync_replay_project/raw/branch/main/CHANGELOG.md",
+        "show": 3
+      }
+    },
+    {
+      "id": "rimworld-mod-manager",
+      "name": "RimWorld mod manager",
+      "workingTitle": true,
+      "status": "in-development",
+      "platforms": ["linux", "windows"],
+      "pitch": { "en": "Sort, enable and check RimWorld mods from one desktop window.", "ru": "Сортировка, включение и проверка модов RimWorld в одном окне." }
+    },
+    {
+      "id": "elin-mod-manager",
+      "name": "Elin mod manager",
+      "workingTitle": true,
+      "status": "in-development",
+      "platforms": ["windows"],
+      "pitch": { "en": "Manage and order mods for Elin.", "ru": "Управление модами Elin и их порядком загрузки." }
+    },
+    {
+      "id": "deadlock-mod-manager",
+      "name": "Deadlock mod manager",
+      "workingTitle": true,
+      "status": "in-development",
+      "platforms": ["linux", "windows"],
+      "pitch": { "en": "Install, switch and remove Deadlock mods.", "ru": "Установка, переключение и удаление модов Deadlock." }
+    },
+    {
+      "id": "imagen",
+      "name": "Imagen",
+      "workingTitle": true,
+      "status": "in-development",
+      "platforms": ["linux", "windows", "android"],
+      "pitch": { "en": "A client for AI image generation on your own server.", "ru": "Клиент для генерации изображений нейросетью на своём сервере." }
+    },
+    {
+      "id": "meme-collector",
+      "name": "Meme collector",
+      "workingTitle": true,
+      "status": "in-development",
+      "platforms": ["windows"],
+      "pitch": { "en": "Search your saved memes and reaction GIFs and copy one in a keystroke.", "ru": "Поиск по своим мемам и GIF-реакциям и копирование одним нажатием." }
+    },
+    {
+      "id": "torrent-client",
+      "name": "Torrent client",
+      "workingTitle": true,
+      "status": "in-development",
+      "platforms": ["windows"],
+      "pitch": { "en": "A torrent client that can play video while it downloads.", "ru": "Торрент-клиент, который воспроизводит видео ещё во время загрузки." }
+    },
+    {
+      "id": "comfy-client",
+      "name": "Comfy client",
+      "workingTitle": true,
+      "status": "coming",
+      "platforms": ["linux", "android"],
+      "pitch": { "en": "A native app for running ComfyUI workflows.", "ru": "Нативное приложение для запуска сценариев ComfyUI." }
+    },
+    {
+      "id": "kemono-app",
+      "name": "Kemono app",
+      "workingTitle": true,
+      "status": "coming",
+      "platforms": ["linux", "windows", "android"],
+      "pitch": { "en": "A browser app for an online creator archive.", "ru": "Приложение для просмотра онлайн-архива авторов." }
+    },
+    {
+      "id": "booru-browser",
+      "name": "Booru browser",
+      "workingTitle": true,
+      "status": "coming",
+      "platforms": ["windows", "android"],
+      "pitch": { "en": "A fast browser for image-board sites.", "ru": "Быстрый просмотрщик сайтов-имиджбордов." }
+    },
+    {
+      "id": "pixiv-app",
+      "name": "Pixiv app",
+      "workingTitle": true,
+      "status": "coming",
+      "platforms": ["linux", "windows", "android"],
+      "pitch": { "en": "A client for browsing an illustration community.", "ru": "Клиент для просмотра сообщества иллюстраторов." }
+    }
+  ],
+
+  "resume": {
+    "summary": {
+      "en": "Solo Flutter developer who ships whole products: UI, networking, media playback, packaging and self-updates for Linux and Windows.",
+      "ru": "Flutter-разработчик, который доводит продукт до конца: интерфейс, сеть, воспроизведение видео, сборка и автообновление для Linux и Windows."
+    },
+    "skills": [
+      { "group": { "en": "Apps", "ru": "Приложения" }, "items": ["Flutter (desktop: Linux, Windows)", "Flutter (mobile)", "Dart", "State management", "Custom UI and animation"] },
+      { "group": { "en": "Systems", "ru": "Системы" }, "items": ["WebSocket protocols", "Dart servers", "Media playback (mpv, media_kit)", "yt-dlp integration", "Jellyfin API"] },
+      { "group": { "en": "Shipping", "ru": "Выпуск" }, "items": ["Release scripts and CI", "Self-updater", "Linux and Windows packaging", "Changelogs and docs"] },
+      { "group": { "en": "Also", "ru": "Ещё" }, "items": ["HTML, CSS, JS", "PHP", "Game mods"] }
+    ],
+    "timeline": [
+      { "when": "2026", "what": "Starsync", "detail": { "en": "Watch-together desktop app: Flutter client, Dart server, mpv playback, relay and auto-updates. In daily use by friends.", "ru": "Приложение для совместного просмотра: клиент на Flutter, сервер на Dart, mpv, ретрансляция и автообновления. Друзья пользуются каждый день." } },
+      { "when": "20XX", "what": { "en": "Game mods and mod tools", "ru": "Моды и инструменты для модов" }, "detail": { "en": "Placeholder: what you modded, for which games, what people used.", "ru": "Заглушка: что, для каких игр, сколько людей пользовалось." }, "placeholder": true },
+      { "when": "20XX", "what": { "en": "Earlier work or education", "ru": "Раньше: работа или учёба" }, "detail": { "en": "Placeholder.", "ru": "Заглушка." }, "placeholder": true }
+    ]
+  }
+}

@@ -1,0 +1,94 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import { data, t, contactById, type Lang } from '../lib/data';
+import { md } from '../lib/content';
+import { ui } from '../i18n/ui';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const s = ui(lang);
+const page = md('commissions', lang);
+const c = data.commissions;
+const main = contactById(c.contact);
+const others = data.contact.filter((x) => x.id !== c.contact);
+const money = (n: number) => new Intl.NumberFormat(lang === 'ru' ? 'ru-RU' : 'en-US', { style: 'currency', currency: c.currency, maximumFractionDigits: 0 }).format(n);
+---
+<Base lang={lang} title={s('com.title')} description={page.frontmatter.lead}>
+  <div class="container page-head">
+    <span class="eyebrow">// {s('com.title')}</span>
+    <h1 class="gradient-text">{page.frontmatter.title}</h1>
+    <p class="lead">{page.frontmatter.lead}</p>
+  </div>
+
+  <div class="container com-body">
+    <div class="prose reveal"><page.Content /></div>
+
+    <aside class="com-side">
+      <div class:list={['card status-card reveal', c.status]}>
+        <span class:list={['status', c.status]}>{s(`com.status.${c.status}`)}</span>
+        {c.slots != null && c.status !== 'closed' && (
+          <p class:list={['slots', { 'is-placeholder': c.slotsPlaceholder }]}><strong>{c.slots}</strong> {s('com.slots')}</p>
+        )}
+        {c.note && <p class="muted">{t(c.note, lang)}</p>}
+        {main && <a class="btn btn-primary" href={main.url} target="_blank" rel="noopener"><Icon name={main.id} />{s('com.write')} {main.label}</a>}
+      </div>
+    </aside>
+  </div>
+
+  <section class="container section-tight">
+    <h2 class="h-sm reveal">{s('com.prices')}</h2>
+    <div class="grid grid-3">
+      {c.prices.map((p, i) => (
+        <div class:list={['card price reveal', { 'is-placeholder': p.placeholder }]} style={`--d:${i * 0.06}s`}>
+          <h3>{t(p.name, lang)} {p.placeholder && <span class="todo-badge">{s('todo')}</span>}</h3>
+          <p class="amount">
+            {p.from != null && <><span class="muted">{s('com.from')}</span> {money(p.from)}</>}
+            {p.perHour != null && <>{money(p.perHour)} <span class="muted">{s('com.perHour')}</span></>}
+          </p>
+        </div>
+      ))}
+    </div>
+    <p class="muted note">{s('com.pricesNote')}</p>
+  </section>
+
+  <section class="container section-tight">
+    <div class="card contact-card reveal">
+      <div>
+        <h2 class="h-sm">{s('com.contact')}</h2>
+        <p class="muted">{s('com.contactText')}</p>
+      </div>
+      <div class="contacts">
+        {[main, ...others].filter(Boolean).map((x) => (
+          <a class:list={['contact', { 'is-placeholder': x!.placeholder }]} href={x!.url} target="_blank" rel="noopener">
+            <Icon name={x!.id} /><span>{x!.label}</span><span class="mono muted">{x!.value}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .com-body { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: clamp(20px, 4vw, 56px); align-items: start; padding-top: 1.5rem; }
+  .com-side { position: sticky; top: 84px; }
+  .status-card { display: grid; gap: 0.9rem; justify-items: start; }
+  .status-card.open { border-color: rgba(74, 222, 128, 0.35); box-shadow: 0 0 40px -20px rgba(74, 222, 128, 0.5); }
+  .slots { font-size: 1.1rem; }
+  .slots strong { font-size: 2.2rem; font-weight: 700; margin-right: 0.2rem; }
+  .h-sm { font-size: var(--step-2); margin-bottom: 1rem; }
+  .price h3 { font-size: 1.02rem; color: var(--muted); font-weight: 500; }
+  .amount { font-size: 1.8rem; font-weight: 700; margin-top: 0.5rem; letter-spacing: -0.02em; }
+  .amount .muted { font-size: 0.9rem; font-weight: 500; }
+  .note { font-size: 0.88rem; margin-top: 1rem; }
+  .contact-card { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center; }
+  .contacts { display: grid; gap: 0.5rem; }
+  .contact { display: grid; grid-template-columns: 22px auto 1fr; gap: 0.7rem; align-items: center; padding: 0.75rem 1rem; border-radius: var(--radius-sm); background: rgba(0, 0, 0, 0.25); border: 1px solid var(--border-soft); transition: border-color 0.2s; }
+  .contact:hover { border-color: var(--primary); }
+  .contact :global(svg) { width: 20px; height: 20px; color: var(--accent); }
+  .contact .mono { font-size: 0.8rem; text-align: right; overflow: hidden; text-overflow: ellipsis; }
+  @media (max-width: 860px) {
+    .com-body, .contact-card { grid-template-columns: 1fr; }
+    .com-side { position: static; order: -1; }
+  }
+</style>

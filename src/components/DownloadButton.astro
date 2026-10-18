@@ -1,0 +1,103 @@
+---
+// The Download button. At build time it knows the latest release and its
+// files; in the browser a small script picks the file for the visitor's
+// system ("Download for Windows"). Without JS, or when nothing matches, the
+// button opens the release page.
+import Icon from './Icon.astro';
+import { PLATFORM_LABEL, type App, type Lang } from '../lib/data';
+import { formatSize, releasesPage, type Release } from '../lib/releases';
+import { ui } from '../i18n/ui';
+
+interface Props { app: App; release: Release | null; lang: Lang; compact?: boolean; target?: string }
+const { app, release, lang, compact = false, target } = Astro.props;
+const s = ui(lang);
+const fallback = release?.pageUrl ?? releasesPage(app);
+const assets = (release?.assets ?? []).map((a) => ({ ...a, label: PLATFORM_LABEL[a.platform] ?? a.platform, sizeText: formatSize(a.size) }));
+const rel = target === '_blank' ? 'noopener' : undefined;
+---
+{fallback ? (
+  <div class:list={['dl', { compact }]} data-dl data-assets={JSON.stringify(assets)} data-label-for={s('apps.downloadFor')}>
+    <a class="btn btn-primary dl-main" href={fallback} target={target} rel={rel} data-dl-main>
+      <Icon name="download" /><span data-dl-text>{s('apps.download')}</span>
+    </a>
+    {!compact && (
+      <div class="dl-meta">
+        {release && <span class="mono">v{release.version}</span>}
+        <span class="mono" data-dl-size></span>
+        <span class="dl-none" data-dl-none hidden>{s('apps.notForYou')}</span>
+      </div>
+    )}
+    {!compact && assets.length > 0 && (
+      <details class="dl-other" data-dl-other>
+        <summary>{s('apps.otherPlatforms')}</summary>
+        <ul>
+          {assets.map((a) => (
+            <li><a href={a.url} target={target} rel={rel}><Icon name={a.platform} /><span>{a.label}</span><span class="mono muted">{a.name}</span><span class="mono muted">{a.sizeText}</span></a></li>
+          ))}
+        </ul>
+        {release && <a class="dl-all" href={release.listUrl} target={target} rel={rel}>{s('apps.allReleases')} <Icon name="arrow" /></a>}
+      </details>
+    )}
+  </div>
+) : (
+  <p class="muted">{s('apps.noBuildYet')}</p>
+)}
+
+<script>
+  function visitorOS(): string | null {
+    const ua = navigator.userAgent;
+    const p = ((navigator as any).userAgentData?.platform ?? navigator.platform ?? '').toLowerCase();
+    if (/android/i.test(ua)) return 'android';
+    if (/iphone|ipad|ipod/i.test(ua)) return 'ios';
+    if (p.includes('win') || /windows/i.test(ua)) return 'windows';
+    if (p.includes('mac')) return 'macos';
+    if (p.includes('linux') || /linux|x11|cros/i.test(ua)) return 'linux';
+    return null;
+  }
+  const os = visitorOS();
+  document.querySelectorAll<HTMLElement>('[data-dl]').forEach((box) => {
+    const assets = JSON.parse(box.dataset.assets || '[]');
+    if (!assets.length) return;
+    const match = assets.find((a: any) => a.platform.split('-')[0] === os);
+    const main = box.querySelector<HTMLAnchorElement>('[data-dl-main]')!;
+    if (match) {
+      main.href = match.url;
+      main.querySelector('[data-dl-text]')!.textContent = `${box.dataset.labelFor} ${match.label}`;
+      const size = box.querySelector('[data-dl-size]');
+      if (size && match.sizeText) size.textContent = match.sizeText;
+    } else {
+      box.querySelector<HTMLElement>('[data-dl-none]')?.removeAttribute('hidden');
+      box.querySelector<HTMLDetailsElement>('[data-dl-other]')?.setAttribute('open', '');
+    }
+  });
+</script>
+
+<style>
+  .dl { display: grid; gap: 0.7rem; justify-items: start; }
+  .dl-main { --h: 54px; padding: 0 1.7rem; font-size: 1.02rem; }
+  .compact .dl-main { --h: 40px; padding: 0 1.1rem; font-size: 0.9rem; }
+  .dl-meta { display: flex; flex-wrap: wrap; gap: 0.3rem 0.9rem; font-size: 0.8rem; color: var(--muted); }
+  .dl-none { color: var(--warn); font-size: 0.85rem; }
+  .dl-other { width: 100%; font-size: 0.9rem; }
+  .dl-other summary { cursor: pointer; color: var(--muted); list-style: none; display: inline-flex; gap: 0.4rem; align-items: center; }
+  .dl-other summary::before { content: '▸'; color: var(--primary); transition: transform 0.2s; }
+  .dl-other[open] summary::before { transform: rotate(90deg); }
+  .dl-other summary:hover { color: white; }
+  .dl-other ul { list-style: none; padding: 0; margin-top: 0.6rem; display: grid; gap: 0.35rem; }
+  .dl-other li a {
+    display: grid;
+    grid-template-columns: 20px auto 1fr auto;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.55rem 0.75rem;
+    border-radius: var(--radius-sm);
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid var(--border-soft);
+    transition: border-color 0.2s;
+  }
+  .dl-other li a:hover { border-color: var(--primary); }
+  .dl-other li :global(svg) { width: 18px; height: 18px; }
+  .dl-other li .mono { font-size: 0.72rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .dl-all { display: inline-flex; align-items: center; gap: 0.3rem; margin-top: 0.6rem; color: var(--accent); font-size: 0.85rem; }
+  .dl-all :global(svg) { width: 14px; height: 14px; }
+</style>
