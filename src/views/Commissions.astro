@@ -74,7 +74,7 @@ const money = (n: number) => new Intl.NumberFormat(lang === 'ru' ? 'ru-RU' : 'en
   .com-body { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: clamp(20px, 4vw, 56px); align-items: start; padding-top: 1.5rem; }
   .com-side { position: sticky; top: 84px; }
   .status-card { display: grid; gap: 0.9rem; justify-items: start; }
-  .status-card.open { border-color: rgba(74, 222, 128, 0.35); box-shadow: 0 0 40px -20px rgba(74, 222, 128, 0.5); }
+  .status-card.open { border-color: var(--ok); box-shadow: var(--card-shadow), 0 0 40px -20px color-mix(in srgb, var(--ok) 50%, transparent); }
   .slots { font-size: 1.1rem; }
   .slots strong { font-size: 2.2rem; font-weight: 700; margin-right: 0.2rem; }
   .h-sm { font-size: var(--step-2); margin-bottom: 1rem; }

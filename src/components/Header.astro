@@ -54,7 +54,7 @@ const isActive = (p: string) => path.startsWith(p);
     position: sticky;
     top: 0;
     z-index: 50;
-    background: rgba(8, 4, 10, 0.72);
+    background: var(--header-bg);
     backdrop-filter: blur(16px) saturate(140%);
     -webkit-backdrop-filter: blur(16px) saturate(140%);
     border-bottom: 1px solid var(--border-soft);
@@ -74,13 +74,13 @@ const isActive = (p: string) => path.startsWith(p);
     font-weight: 500;
     transition: color 0.2s, background 0.2s;
   }
-  .nav-link:hover { color: white; background: rgba(255, 255, 255, 0.05); }
-  .nav-link.active { color: white; background: var(--primary-soft); }
+  .nav-link:hover { color: var(--text-strong); background: color-mix(in srgb, var(--text) 5%, transparent); }
+  .nav-link.active { color: var(--text-strong); background: var(--primary-soft); }
   .nav-link.lang { display: inline-flex; align-items: center; gap: 0.5rem; border: 1px solid var(--border-soft); }
   .nav-link.lang:hover { border-color: var(--border); }
   .nav-link :global(svg) { width: 16px; height: 16px; }
   .nav-cta { margin-left: 0.4rem; }
-  .menu-btn { display: none; background: none; border: 1px solid var(--border-soft); color: white; border-radius: 10px; padding: 0.45rem; cursor: pointer; }
+  .menu-btn { display: none; background: none; border: 1px solid var(--border-soft); color: var(--text-strong); border-radius: 10px; padding: 0.45rem; cursor: pointer; }
   .menu-btn :global(svg) { width: 22px; height: 22px; }
   .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
 

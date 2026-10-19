@@ -82,7 +82,7 @@ const rel = target === '_blank' ? 'noopener' : undefined;
   .dl-other summary { cursor: pointer; color: var(--muted); list-style: none; display: inline-flex; gap: 0.4rem; align-items: center; }
   .dl-other summary::before { content: '▸'; color: var(--primary); transition: transform 0.2s; }
   .dl-other[open] summary::before { transform: rotate(90deg); }
-  .dl-other summary:hover { color: white; }
+  .dl-other summary:hover { color: var(--text-strong); }
   .dl-other ul { list-style: none; padding: 0; margin-top: 0.6rem; display: grid; gap: 0.35rem; }
   .dl-other li a {
     display: grid;

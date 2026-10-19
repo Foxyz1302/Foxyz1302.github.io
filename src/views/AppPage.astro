@@ -116,7 +116,7 @@ const ytId = (src: string) => src.match(/(?:v=|youtu\.be\/|embed\/)([\w-]{11})/)
 
 <style>
   .back { color: var(--muted); font-size: 0.9rem; display: inline-block; margin-bottom: 1.4rem; }
-  .back:hover { color: white; }
+  .back:hover { color: var(--text-strong); }
   .app-hero { display: flex; gap: clamp(1rem, 3vw, 2rem); align-items: center; }
   .app-icon { width: clamp(80px, 12vw, 112px); height: auto; border-radius: 26px; filter: drop-shadow(0 16px 32px rgba(0, 0, 0, 0.6)); flex: none; }
   .app-title { display: grid; gap: 0.7rem; }
@@ -145,14 +145,14 @@ const ytId = (src: string) => src.match(/(?:v=|youtu\.be\/|embed\/)([\w-]{11})/)
   .h-sm { font-size: var(--step-2); margin-bottom: 1rem; }
   .small { font-size: 0.85rem; margin: -0.5rem 0 1rem; }
   .features { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: 0.6rem; }
-  .features li { display: flex; gap: 0.7rem; align-items: flex-start; padding: 0.85rem 1rem; border-radius: var(--radius-sm); background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-soft); }
+  .features li { display: flex; gap: 0.7rem; align-items: flex-start; padding: 0.85rem 1rem; border-radius: var(--radius-sm); background: color-mix(in srgb, var(--text) 3%, transparent); border: 1px solid var(--border-soft); }
   .features :global(svg) { width: 18px; height: 18px; color: var(--primary); flex: none; margin-top: 0.2rem; }
 
   .log { list-style: none; padding: 0; display: grid; gap: 0.6rem; }
-  .log details { border: 1px solid var(--border-soft); border-radius: var(--radius-sm); background: rgba(255, 255, 255, 0.02); }
-  .log details[open] { border-color: var(--border); background: rgba(255, 255, 255, 0.035); }
+  .log details { border: 1px solid var(--border-soft); border-radius: var(--radius-sm); background: color-mix(in srgb, var(--text) 2%, transparent); }
+  .log details[open] { border-color: var(--border); background: color-mix(in srgb, var(--text) 3.5%, transparent); }
   .log summary { cursor: pointer; list-style: none; display: flex; gap: 1rem; align-items: baseline; padding: 0.9rem 1rem; }
-  .log summary:hover .sum { color: white; }
+  .log summary:hover .sum { color: var(--text-strong); }
   .latest { font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ok); border: 1px solid rgba(74, 222, 128, 0.35); border-radius: 4px; padding: 0.05rem 0.4rem; margin-right: 0.6rem; vertical-align: 0.1em; }
   .count { margin-left: auto; flex: none; display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--mono); font-size: 0.75rem; color: var(--muted); white-space: nowrap; }
   .chev { font-size: 1.1rem; line-height: 1; transition: transform 0.2s; }
@@ -166,7 +166,7 @@ const ytId = (src: string) => src.match(/(?:v=|youtu\.be\/|embed\/)([\w-]{11})/)
   .log-tag.changed { background: rgba(251, 191, 36, 0.12); color: var(--warn); }
   .log-group ul { margin-top: 0.5rem; padding-left: 1.2rem; font-size: 0.92rem; display: grid; gap: 0.3rem; }
   .log-group li::marker { color: var(--primary); }
-  .log-group :global(code) { font-family: var(--mono); font-size: 0.85em; background: rgba(255, 255, 255, 0.06); padding: 0.05em 0.3em; border-radius: 4px; }
+  .log-group :global(code) { font-family: var(--mono); font-size: 0.85em; background: color-mix(in srgb, var(--text) 6%, transparent); padding: 0.05em 0.3em; border-radius: 4px; }
   .all-versions { display: inline-flex; align-items: center; gap: 0.35rem; margin-top: 0.9rem; color: var(--accent); font-size: 0.9rem; }
   .all-versions :global(svg) { width: 14px; height: 14px; }
 

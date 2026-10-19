@@ -28,9 +28,18 @@ const desc = description ?? t(data.site.description, lang);
 const canonical = new URL(href(path, lang), site).href;
 ---
 <!doctype html>
-<html lang={lang} class="no-js">
+<html lang={lang} class="no-js" data-theme={data.site.theme ?? 'neon'}>
   <head>
     <meta charset="utf-8" />
+    <script is:inline>
+      // Preview another look: ?theme=ink (remembered in this browser); ?theme= alone goes back.
+      try {
+        const q = new URLSearchParams(location.search);
+        if (q.has('theme')) { q.get('theme') ? localStorage.setItem('theme', q.get('theme')) : localStorage.removeItem('theme'); }
+        const t = localStorage.getItem('theme');
+        if (t) document.documentElement.dataset.theme = t;
+      } catch (e) {}
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
     <meta name="description" content={desc} />
@@ -126,11 +135,11 @@ const canonical = new URL(href(path, lang), site).href;
     </script>
 
     <style>
-      .lang-banner { background: linear-gradient(90deg, rgba(189, 0, 255, 0.18), rgba(189, 0, 255, 0.06)); border-bottom: 1px solid var(--border); }
+      .lang-banner { background: var(--primary-soft); border-bottom: 1px solid var(--border); }
       .lang-banner-inner { display: flex; align-items: center; gap: 0.9rem; padding-block: 0.55rem; font-size: 0.92rem; }
       .lang-banner-inner span { flex: 1; }
       .lang-banner-x { background: none; border: 0; color: var(--muted); font-size: 1.4rem; line-height: 1; cursor: pointer; padding: 0.2rem 0.4rem; }
-      .lang-banner-x:hover { color: white; }
+      .lang-banner-x:hover { color: var(--text-strong); }
     </style>
   </body>
 </html>
