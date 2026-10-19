@@ -55,7 +55,7 @@ const canonical = new URL(href(path, lang), site).href;
     <!-- link previews (Discord, Telegram, X, ...) -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={data.site.title} />
-    <meta property="og:title" content={title ?? data.person.name} />
+    <meta property="og:title" content={title ?? t(data.site.shareTitle ?? data.person.name, lang)} />
     <meta property="og:description" content={desc} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={new URL(image, site).href} />

@@ -6,8 +6,12 @@
     "title": "Foxyz",
     "theme": "sumi",
     "description": {
-      "en": "Foxyz, a solo Flutter developer: apps, commissions, resume and support.",
-      "ru": "Foxyz, Flutter-разработчик: приложения, заказы, резюме и поддержка."
+      "en": "I make desktop and Android apps with Flutter and see them through to release. Open for commissions.",
+      "ru": "Делаю приложения на Flutter для компьютера и Android и довожу их до выпуска. Принимаю заказы."
+    },
+    "shareTitle": {
+      "en": "Flutter developer: apps and commissions",
+      "ru": "Flutter-разработчик: приложения и заказы"
     },
     "sourceRepo": "https://github.com/Foxyz1302/Foxyz1302.github.io"
   },

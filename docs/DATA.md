@@ -22,6 +22,7 @@ schema is in `src/lib/data.ts` (keep the two in step).
 | `url` | string | Public address, no trailing slash. Used for link previews, canonical links and the card feed. Change it together with `public/CNAME`. |
 | `title` | string | Short site name in tab titles. |
 | `description` | Text | Default page description for search and link previews. |
+| `shareTitle` | Text? | Title of the home page's link preview (Discord, Telegram); the site name shows above it, so it should not repeat the name. |
 | `sourceRepo` | string? | Link in the footer. |
 
 ## `analytics`
