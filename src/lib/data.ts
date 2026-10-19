@@ -72,6 +72,7 @@ export type StorySection = { title: Text; text?: Text } & (
   | { visual: 'recovery'; labels: Record<'playback' | 'network' | 'lost' | 'buffer' | 'back', Text> }
   | { visual: 'sharing'; labels: { sources: Text[]; host: Text; port: Text; viewers: Text } }
   | { visual: 'flow'; labels: Record<string, any>; modes: { name: Text; tag?: Text; source: Text; text: Text; edges: { from: string; to: string; label?: Text }[]; loop?: Text; memory?: boolean; rates: Record<'you' | 'host' | 'friends', Text> }[] }
+  | { visual: 'pipeline'; steps: { title: Text; text: Text; tech?: string[] }[] }
   | { visual: 'image'; src: string; alt?: Text }
 );
 

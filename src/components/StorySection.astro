@@ -77,6 +77,21 @@ const mark = { yes: '✓', no: '✕', partly: '~' } as const;
 
   {sec.visual === 'flow' && <FlowDiagram id={`flow${index}`} lang={lang} labels={sec.labels} modes={sec.modes} />}
 
+  {sec.visual === 'pipeline' && (
+    <ol class="pipe">
+      {sec.steps.map((st, i) => (
+        <li>
+          <span class="pipe-n">{i + 1}</span>
+          <div>
+            <h3>{t(st.title, lang)}</h3>
+            <p>{t(st.text, lang)}</p>
+            {st.tech && <div class="chips">{st.tech.map((x) => <span class="chip plain">{x}</span>)}</div>}
+          </div>
+        </li>
+      ))}
+    </ol>
+  )}
+
   {sec.visual === 'image' && (
     <figure class="shot">
       <a href={sec.src} target="_blank" rel="noopener"><img src={sec.src} alt={t(sec.alt, lang)} loading="lazy" /></a>
@@ -127,6 +142,12 @@ const mark = { yes: '✓', no: '✕', partly: '~' } as const;
   .viewer.c2 { fill: var(--ok); }
   .viewer.c3 { fill: var(--muted); }
 
+  .pipe { list-style: none; padding: 0; display: grid; gap: 0; position: relative; }
+  .pipe li { display: grid; grid-template-columns: 2.4rem 1fr; gap: 1rem; padding-bottom: 1.3rem; position: relative; }
+  .pipe li:not(:last-child)::before { content: ''; position: absolute; left: calc(1.2rem - 1px); top: 2.4rem; bottom: 0; width: 2px; background: var(--border); }
+  .pipe-n { width: 2.4rem; height: 2.4rem; border-radius: 50%; display: grid; place-items: center; background: var(--primary); color: var(--btn-fg); font: 800 1rem var(--font-head); }
+  .pipe h3 { font-size: 1.05rem; margin: 0.35rem 0 0.3rem; }
+  .pipe p { color: var(--muted); font-size: 0.95rem; max-width: 64ch; margin-bottom: 0.5rem; }
   .shot { margin: 0; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); background: #000; }
   .shot a { display: block; cursor: zoom-in; }
   .shot img { width: 100%; height: auto; }
