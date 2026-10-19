@@ -217,8 +217,8 @@
             "ru": "Ретрансляция: один поток на всех"
           },
           "text": {
-            "en": "The heart of Starsync. One person puts up a video and it is read once; the host passes that one stream to everyone. Nobody needs a copy of the file, nothing is uploaded first, and only the host needs an open port. Pick a way of sharing to see where the bytes go and what each connection pays.",
-            "ru": "Сердце Starsync. Один человек ставит видео, оно читается один раз, а хост раздаёт этот один поток всем. Никому не нужна копия файла, ничего не загружается заранее, и открытый порт нужен только хосту. Выберите способ ниже, чтобы увидеть, куда идут байты и во что это обходится каждому соединению."
+            "en": "The heart of Starsync. One person puts up a video and it is read once; the host passes that one stream to everyone. Nobody needs a copy of the file, nothing is uploaded first, and only the host needs an open port. The host can be anyone's PC or a small dedicated server on an always-on box. Pick a way of sharing to see where the bytes go and what each connection pays.",
+            "ru": "Сердце Starsync. Один человек ставит видео, оно читается один раз, а хост раздаёт этот один поток всем. Никому не нужна копия файла, ничего не загружается заранее, и открытый порт нужен только хосту. Хостом может быть ПК любого из вас или маленький отдельный сервер на постоянно включённой машине. Выберите способ ниже, чтобы увидеть, куда идут байты и во что это обходится каждому соединению."
           },
           "labels": {
             "you": {
@@ -603,6 +603,20 @@
                 "flow control",
                 "auto-reconnect"
               ]
+            },
+            {
+              "title": {
+                "en": "The next video is already warm",
+                "ru": "Следующее видео уже прогрето"
+              },
+              "text": {
+                "en": "Up next is one shared queue. While a video plays, the host already starts getting the first item from whoever added it (or fetches the link itself), and every app loads its first seconds. So when the 10-second countdown ends, or someone skips, the next video starts at once.",
+                "ru": "«Далее» — одна общая очередь. Пока играет видео, хост уже начинает получать первый пункт от того, кто его добавил (или сам скачивает ссылку), и каждое приложение заранее грузит его первые секунды. Поэтому когда закончится 10-секундный отсчёт или кто-то пропустит видео, следующее начинается сразу."
+              },
+              "tech": [
+                "warm relay",
+                "preload"
+              ]
             }
           ]
         },
@@ -671,20 +685,24 @@
         "en": [
           "The relay: anything one person can play, everyone can watch",
           "Play, pause and seek stay in sync for everyone",
+          "Shared Up next queue: anyone adds, reorders or plays next, with a countdown everyone sees",
           "Links you put up are downloaded once for everyone",
           "Chat, quick chat and danmaku over the video",
           "Invite with one starsync:// link, no accounts",
           "Updates itself, with a What's new list",
-          "Anime4K upscaling built in, plus your own .glsl shaders; each viewer picks their own"
+          "Anime4K upscaling built in, plus your own .glsl shaders; each viewer picks their own",
+          "A lightweight dedicated server (starsync-server) for an always-on box: no display needed, systemd unit included"
         ],
         "ru": [
           "Ретрансляция: что может воспроизвести один, смогут смотреть все",
           "Пауза, перемотка и воспроизведение синхронны у всех",
+          "Общая очередь «Далее»: любой добавляет, переставляет или включает следующее, с отсчётом у всех",
           "Видео по ссылке скачивается один раз для всех",
           "Чат, быстрый чат и данмаку поверх видео",
           "Приглашение одной ссылкой starsync://, без аккаунтов",
           "Обновляется сам и показывает, что нового",
-          "Апскейл Anime4K встроен, плюс свои шейдеры .glsl; каждый зритель выбирает себе сам"
+          "Апскейл Anime4K встроен, плюс свои шейдеры .glsl; каждый зритель выбирает себе сам",
+          "Лёгкий отдельный сервер (starsync-server) для постоянно включённой машины: экран не нужен, юнит systemd в комплекте"
         ]
       },
       "requirements": {
