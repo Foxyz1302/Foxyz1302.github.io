@@ -6,8 +6,8 @@
 // app.story (data.json).
 import { t, type Lang, type Text } from '../lib/data';
 
-type Edge = { from: string; to: string; label?: string };
-type Mode = { name: Text; tag?: Text; source: Text; text: Text; edges: Edge[]; loop?: Text; memory?: boolean; rates: Record<'you' | 'host' | 'friends', string> };
+type Edge = { from: string; to: string; label?: Text };
+type Mode = { name: Text; tag?: Text; source: Text; text: Text; edges: Edge[]; loop?: Text; memory?: boolean; rates: Record<'you' | 'host' | 'friends', Text> };
 interface Props { id: string; lang: Lang; labels: Record<string, Text>; modes: Mode[] }
 const { id, lang, labels, modes } = Astro.props;
 
@@ -64,7 +64,7 @@ const tabCss = modes.map((_, i) => `.flow-${id}:has(#${id}-${i}:checked) .panel-
         {m.edges.flatMap(edgePaths).map((p) => (
           <g>
             <path d={p.d} class="edge" marker-end={`url(#${id}-a${i})`} />
-            {p.label && <text x={p.mid[0]} y={p.mid[1]} class="edge-t" text-anchor="middle">{p.label}</text>}
+            {p.label && <text x={p.mid[0]} y={p.mid[1]} class="edge-t" text-anchor="middle">{t(p.label, lang)}</text>}
           </g>
         ))}
 
@@ -75,19 +75,19 @@ const tabCss = modes.map((_, i) => `.flow-${id}:has(#${id}-${i}:checked) .panel-
         <!-- you -->
         <rect x="270" y="38" width="150" height="60" rx="12" class="node you" />
         <text x="345" y="66" text-anchor="middle" class="node-t">{L('you')}</text>
-        <text x="345" y="86" text-anchor="middle" class="rate">{m.rates.you}</text>
+        <text x="345" y="86" text-anchor="middle" class="rate">{t(m.rates.you, lang)}</text>
         {m.loop && <text x="345" y="22" text-anchor="middle" class="loop">↺ {t(m.loop, lang)}</text>}
 
         <!-- host -->
         <rect x="270" y="208" width="150" height="60" rx="12" class="node host" />
         <text x="345" y="234" text-anchor="middle" class="node-t on">{L('host')}</text>
-        <text x="345" y="254" text-anchor="middle" class="rate on">{m.rates.host}</text>
+        <text x="345" y="254" text-anchor="middle" class="rate on">{t(m.rates.host, lang)}</text>
         {m.memory && <text x="345" y="284" text-anchor="middle" class="sub">{L('hostSub')}</text>}
 
         <!-- friends -->
         {FY.map((y, k) => <circle cx="608" cy={y} r="18" class:list={['friend', `c${k}`]} />)}
         <text x="608" y="246" text-anchor="middle" class="node-t">{L('friends')}</text>
-        <text x="608" y="264" text-anchor="middle" class="rate">{m.rates.friends}</text>
+        <text x="608" y="264" text-anchor="middle" class="rate">{t(m.rates.friends, lang)}</text>
       </svg>
     </div>
   ))}

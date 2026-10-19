@@ -121,16 +121,18 @@
       },
       "description": {
         "en": "I made Starsync because I'd had it with Syncplay and Discord streaming. Here is what it does differently.",
-        "ru": "Выберите видео из библиотеки Jellyfin, вставьте ссылку или откройте файл с диска: пауза, перемотка и воспроизведение у всех идут вместе. Это приложение для компьютера, а не вкладка браузера: без перекодирования, каждый смотрит оригинал."
+        "ru": "Я сделал Starsync, потому что мне надоели Syncplay и стримы в Discord. Вот что в нём по-другому."
       },
       "story": [
         {
           "visual": "compare",
           "title": {
-            "en": "Why not Syncplay or Discord?"
+            "en": "Why not Syncplay or Discord?",
+            "ru": "Почему не Syncplay и не Discord?"
           },
           "text": {
-            "en": "Syncplay means two windows, everyone needing their own copy of the file and switching every video by hand. Discord is built for live streams: one dropped connection cuts the video, and the quality drops with it."
+            "en": "Syncplay means two windows, everyone needing their own copy of the file and switching every video by hand. Discord is built for live streams: one dropped connection cuts the video, and the quality drops with it.",
+            "ru": "Syncplay — это два окна, у каждого должна быть своя копия файла, и каждое видео переключается вручную. Discord сделан для прямых трансляций: стоит одному потерять связь, и видео обрывается, а качество падает вместе с ним."
           },
           "compare": {
             "columns": [
@@ -141,7 +143,8 @@
             "rows": [
               {
                 "label": {
-                  "en": "Everything in one window"
+                  "en": "Everything in one window",
+                  "ru": "Всё в одном окне"
                 },
                 "values": [
                   "no",
@@ -151,7 +154,8 @@
               },
               {
                 "label": {
-                  "en": "Friends don't need their own copy"
+                  "en": "Friends don't need their own copy",
+                  "ru": "Друзьям не нужна своя копия файла"
                 },
                 "values": [
                   "no",
@@ -161,7 +165,8 @@
               },
               {
                 "label": {
-                  "en": "Original quality for everyone"
+                  "en": "Original quality for everyone",
+                  "ru": "Оригинальное качество у всех"
                 },
                 "values": [
                   "yes",
@@ -171,7 +176,8 @@
               },
               {
                 "label": {
-                  "en": "A dropped connection doesn't cut the video"
+                  "en": "A dropped connection doesn't cut the video",
+                  "ru": "Обрыв связи не прерывает видео"
                 },
                 "values": [
                   "partly",
@@ -181,7 +187,8 @@
               },
               {
                 "label": {
-                  "en": "Next video without switching by hand"
+                  "en": "Next video without switching by hand",
+                  "ru": "Следующее видео без ручного переключения"
                 },
                 "values": [
                   "no",
@@ -191,7 +198,8 @@
               },
               {
                 "label": {
-                  "en": "Instant sync and a proper ready check"
+                  "en": "Instant sync and a proper ready check",
+                  "ru": "Мгновенная синхронизация и нормальная проверка готовности"
                 },
                 "values": [
                   "partly",
@@ -205,52 +213,66 @@
         {
           "visual": "recovery",
           "title": {
-            "en": "Drops don't stop the movie"
+            "en": "Drops don't stop the movie",
+            "ru": "Обрыв связи не останавливает фильм"
           },
           "text": {
-            "en": "It rides out internet drops for as long as there's buffer. Whether the server or a viewer drops, both recover smoothly without getting in the way of the video, and the sync is so tight it often feels like nobody is on the other end."
+            "en": "It rides out internet drops for as long as there's buffer. Whether the server or a viewer drops, both recover smoothly without getting in the way of the video, and the sync is so tight it often feels like nobody is on the other end.",
+            "ru": "Пропадание интернета переживается, пока хватает буфера. Отвалится сервер или зритель — оба плавно восстанавливаются и не мешают просмотру, а синхронизация настолько точная, что часто кажется, будто на той стороне никого нет."
           },
           "labels": {
             "playback": {
-              "en": "Playback"
+              "en": "Playback",
+              "ru": "Видео"
             },
             "network": {
-              "en": "Connection"
+              "en": "Connection",
+              "ru": "Связь"
             },
             "lost": {
-              "en": "connection lost"
+              "en": "connection lost",
+              "ru": "связь пропала"
             },
             "buffer": {
-              "en": "plays from buffer"
+              "en": "plays from buffer",
+              "ru": "играет из буфера"
             },
             "back": {
-              "en": "back in sync"
+              "en": "back in sync",
+              "ru": "снова синхронно"
             }
           }
         },
         {
           "visual": "flow",
           "title": {
-            "en": "Everyone can put something up"
+            "en": "Everyone can put something up",
+            "ru": "Видео может поставить каждый"
           },
           "text": {
-            "en": "Share a link, a file from your PC or something from your Jellyfin, without giving anyone access to your library. Pick a way below to see where the video actually travels and what it costs each connection."
+            "en": "Share a link, a file from your PC or something from your Jellyfin, without giving anyone access to your library. Pick a way below to see where the video actually travels and what it costs each connection.",
+            "ru": "Поделитесь ссылкой, файлом со своего ПК или видео из своего Jellyfin, не давая никому доступ к библиотеке. Выберите способ ниже, чтобы увидеть, как на самом деле идёт видео и во что это обходится каждому соединению."
           },
           "labels": {
             "you": {
-              "en": "You"
+              "en": "You",
+              "ru": "Вы"
             },
             "host": {
-              "en": "Host"
+              "en": "Host",
+              "ru": "Хост"
             },
             "hostSub": {
-              "en": "keeps a few minutes in memory"
+              "en": "keeps a few minutes in memory",
+              "ru": "держит несколько минут в памяти"
             },
             "friends": {
-              "en": "Friends"
+              "en": "Friends",
+              "ru": "Друзья"
             },
             "unit": {
-              "en": "1× = the video's own bitrate; a 1080p episode is usually about 3–10 Mbit/s. Separately, everyone keeps a tiny sync connection to the host: just \"position, playing\"."
+              "en": "1× = the video's own bitrate; a 1080p episode is usually about 3–10 Mbit/s. Separately, everyone keeps a tiny sync connection to the host: just \"position, playing\".",
+              "ru": "1× — битрейт самого видео; серия в 1080p обычно около 3–10 Мбит/с. Отдельно у каждого есть крошечное соединение синхронизации с хостом: только «позиция, играет»."
             },
             "down": "↓",
             "up": "↑"
@@ -258,16 +280,20 @@
           "modes": [
             {
               "name": {
-                "en": "A link, through you"
+                "en": "A link, through you",
+                "ru": "Ссылка, через вас"
               },
               "tag": {
-                "en": "default"
+                "en": "default",
+                "ru": "по умолчанию"
               },
               "source": {
-                "en": "Website (yt-dlp)"
+                "en": "Website (yt-dlp)",
+                "ru": "Сайт (yt-dlp)"
               },
               "text": {
-                "en": "Your app reads the video from the site once. The same stream plays for you and goes up to the host, which sends it on to everyone. If it plays for you, it plays for them, your cookies included."
+                "en": "Your app reads the video from the site once. The same stream plays for you and goes up to the host, which sends it on to everyone. If it plays for you, it plays for them, your cookies included.",
+                "ru": "Ваше приложение читает видео с сайта один раз. Этот же поток играет у вас и уходит на хост, а хост раздаёт его всем. Если играет у вас — играет и у них, вместе с вашими куки."
               },
               "edges": [
                 {
@@ -283,28 +309,38 @@
                 {
                   "from": "host",
                   "to": "friends",
-                  "label": "1× each"
+                  "label": {
+                    "en": "1× each",
+                    "ru": "1× каждому"
+                  }
                 }
               ],
               "loop": {
-                "en": "plays for you from the same stream"
+                "en": "plays for you from the same stream",
+                "ru": "у вас играет из этого же потока"
               },
               "rates": {
                 "you": "↓1×  ↑1×",
-                "host": "↓1×  ↑1× per friend",
+                "host": {
+                  "en": "↓1×  ↑1× per friend",
+                  "ru": "↓1×  ↑1× на друга"
+                },
                 "friends": "↓1×"
               },
               "memory": true
             },
             {
               "name": {
-                "en": "A file on your PC"
+                "en": "A file on your PC",
+                "ru": "Файл с вашего ПК"
               },
               "source": {
-                "en": "Your disk"
+                "en": "Your disk",
+                "ru": "Ваш диск"
               },
               "text": {
-                "en": "The same path as a link: your app streams the file to the host, the host passes it on. Nothing is uploaded anywhere first, and nothing is converted."
+                "en": "The same path as a link: your app streams the file to the host, the host passes it on. Nothing is uploaded anywhere first, and nothing is converted.",
+                "ru": "Тот же путь, что и у ссылки: приложение отдаёт файл хосту, хост передаёт его дальше. Ничего не загружается заранее и ничего не перекодируется."
               },
               "edges": [
                 {
@@ -319,28 +355,38 @@
                 {
                   "from": "host",
                   "to": "friends",
-                  "label": "1× each"
+                  "label": {
+                    "en": "1× each",
+                    "ru": "1× каждому"
+                  }
                 }
               ],
               "loop": {
-                "en": "you play the file directly"
+                "en": "you play the file directly",
+                "ru": "у вас файл играет напрямую"
               },
               "rates": {
                 "you": "↑1×",
-                "host": "↓1×  ↑1× per friend",
+                "host": {
+                  "en": "↓1×  ↑1× per friend",
+                  "ru": "↓1×  ↑1× на друга"
+                },
                 "friends": "↓1×"
               },
               "memory": true
             },
             {
               "name": {
-                "en": "A file on the host's PC"
+                "en": "A file on the host's PC",
+                "ru": "Файл на ПК хоста"
               },
               "source": {
-                "en": "Host's disk"
+                "en": "Host's disk",
+                "ru": "Диск хоста"
               },
               "text": {
-                "en": "When you are the host, the file streams straight from your disk to everyone. Only the host's upload is used."
+                "en": "When you are the host, the file streams straight from your disk to everyone. Only the host's upload is used.",
+                "ru": "Если хост — вы, файл идёт всем прямо с вашего диска. Используется только исходящий канал хоста."
               },
               "edges": [
                 {
@@ -355,24 +401,33 @@
                 {
                   "from": "host",
                   "to": "friends",
-                  "label": "1× each"
+                  "label": {
+                    "en": "1× each",
+                    "ru": "1× каждому"
+                  }
                 }
               ],
               "rates": {
                 "you": "↓1×",
-                "host": "↑1× per viewer",
+                "host": {
+                  "en": "↑1× per viewer",
+                  "ru": "↑1× на зрителя"
+                },
                 "friends": "↓1×"
               }
             },
             {
               "name": {
-                "en": "The host fetches it"
+                "en": "The host fetches it",
+                "ru": "Хост скачивает сам"
               },
               "source": {
-                "en": "Website (yt-dlp)"
+                "en": "Website (yt-dlp)",
+                "ru": "Сайт (yt-dlp)"
               },
               "text": {
-                "en": "The host downloads the link once into memory and serves everyone, you included. Handy when the host has the fast connection."
+                "en": "The host downloads the link once into memory and serves everyone, you included. Handy when the host has the fast connection.",
+                "ru": "Хост один раз скачивает ссылку в память и раздаёт всем, включая вас. Удобно, когда быстрый интернет у хоста."
               },
               "edges": [
                 {
@@ -388,25 +443,34 @@
                 {
                   "from": "host",
                   "to": "friends",
-                  "label": "1× each"
+                  "label": {
+                    "en": "1× each",
+                    "ru": "1× каждому"
+                  }
                 }
               ],
               "rates": {
                 "you": "↓1×",
-                "host": "↓1×  ↑1× per viewer",
+                "host": {
+                  "en": "↓1×  ↑1× per viewer",
+                  "ru": "↓1×  ↑1× на зрителя"
+                },
                 "friends": "↓1×"
               },
               "memory": true
             },
             {
               "name": {
-                "en": "Everyone fetches it"
+                "en": "Everyone fetches it",
+                "ru": "Каждый скачивает сам"
               },
               "source": {
-                "en": "Website (yt-dlp)"
+                "en": "Website (yt-dlp)",
+                "ru": "Сайт (yt-dlp)"
               },
               "text": {
-                "en": "Each app loads the link by itself. The host carries no video at all, only the clock."
+                "en": "Each app loads the link by itself. The host carries no video at all, only the clock.",
+                "ru": "Каждое приложение загружает ссылку само. Хост вообще не передаёт видео, только время."
               },
               "edges": [
                 {
@@ -417,24 +481,33 @@
                 {
                   "from": "source",
                   "to": "friends",
-                  "label": "1× each"
+                  "label": {
+                    "en": "1× each",
+                    "ru": "1× каждому"
+                  }
                 }
               ],
               "rates": {
                 "you": "↓1×",
-                "host": "sync only",
+                "host": {
+                  "en": "sync only",
+                  "ru": "только синхр."
+                },
                 "friends": "↓1×"
               }
             },
             {
               "name": {
-                "en": "Jellyfin"
+                "en": "Jellyfin",
+                "ru": "Jellyfin"
               },
               "source": {
-                "en": "Jellyfin"
+                "en": "Jellyfin",
+                "ru": "Jellyfin"
               },
               "text": {
-                "en": "Everyone with an account plays it straight from Jellyfin with their own sign-in. Friends without one get it through the host's login, which never leaves the host."
+                "en": "Everyone with an account plays it straight from Jellyfin with their own sign-in. Friends without one get it through the host's login, which never leaves the host.",
+                "ru": "У кого есть аккаунт, смотрят прямо из Jellyfin под своим входом. Друзья без аккаунта получают видео через вход хоста, и он никуда с хоста не уходит."
               },
               "edges": [
                 {
@@ -449,22 +522,34 @@
                 {
                   "from": "source",
                   "to": "friend:1",
-                  "label": "own account"
+                  "label": {
+                    "en": "own account",
+                    "ru": "свой аккаунт"
+                  }
                 },
                 {
                   "from": "source",
                   "to": "host",
-                  "label": "1× per guest"
+                  "label": {
+                    "en": "1× per guest",
+                    "ru": "1× на гостя"
+                  }
                 },
                 {
                   "from": "host",
                   "to": "friend:2",
-                  "label": "guest"
+                  "label": {
+                    "en": "guest",
+                    "ru": "гость"
+                  }
                 }
               ],
               "rates": {
                 "you": "↓1×",
-                "host": "↓↑ 1× per guest",
+                "host": {
+                  "en": "↓↑ 1× per guest",
+                  "ru": "↓↑ 1× на гостя"
+                },
                 "friends": "↓1×"
               }
             }
@@ -473,19 +558,31 @@
         {
           "visual": "image",
           "title": {
-            "en": "The anime week at a glance"
+            "en": "The anime week at a glance",
+            "ru": "Аниме-неделя одним взглядом"
           },
           "text": {
-            "en": "Browse the Jellyfin library with watch tracking on everything. The weekly schedule shows when each episode airs, what's already on Jellyfin and what you've watched, and lets you request new shows from your auto-downloader or Sonarr."
+            "en": "Browse the Jellyfin library with watch tracking on everything. The weekly schedule shows when each episode airs, what's already on Jellyfin and what you've watched, and lets you request new shows from your auto-downloader or Sonarr.",
+            "ru": "Библиотека Jellyfin с отметками о просмотре для всего. Недельное расписание показывает, когда выходит каждая серия, что уже есть в Jellyfin и что вы посмотрели, и позволяет заказать новые тайтлы в автозагрузчик или Sonarr."
           },
           "src": "/apps/starsync/6-schedule.webp",
           "alt": {
-            "en": "Starsync's weekly anime schedule: a column per day with posters and air times, episodes already on Jellyfin marked as watched, and countdowns for upcoming ones."
+            "en": "Starsync's weekly anime schedule: a column per day with posters and air times, episodes already on Jellyfin marked as watched, and countdowns for upcoming ones.",
+            "ru": "Недельное расписание аниме в Starsync: колонка на каждый день с постерами и временем выхода, серии из Jellyfin с отметкой о просмотре и обратный отсчёт до новых."
           }
         }
       ],
-      "platforms": ["linux", "windows"],
-      "tags": ["Flutter", "Desktop", "mpv", "Jellyfin", "Anime4K"],
+      "platforms": [
+        "linux",
+        "windows"
+      ],
+      "tags": [
+        "Flutter",
+        "Desktop",
+        "mpv",
+        "Jellyfin",
+        "Anime4K"
+      ],
       "features": {
         "en": [
           "Play, pause and seek stay in sync for everyone",
@@ -497,11 +594,11 @@
         ],
         "ru": [
           "Пауза, перемотка и воспроизведение синхронны у всех",
-          "Библиотека Jellyfin, прямые ссылки и файлы с диска",
           "Видео по ссылке скачивается один раз для всех",
           "Чат, быстрый чат и данмаку поверх видео",
           "Приглашение одной ссылкой starsync://, без аккаунтов",
-          "Обновляется сам и показывает, что нового"
+          "Обновляется сам и показывает, что нового",
+          "Апскейл Anime4K встроен, плюс свои шейдеры .glsl; каждый зритель выбирает себе сам"
         ]
       },
       "requirements": {
@@ -509,17 +606,62 @@
         "ru": "Linux: библиотека mpv (пакет mpv или libmpv2). Windows: ничего не нужно, mpv уже внутри."
       },
       "media": [
-        { "type": "image", "src": "/apps/starsync/1-player.webp", "alt": { "en": "Starsync player paused on a movie scene, with the group chat open beside the video", "ru": "Плеер Starsync на паузе со сценой из фильма и открытым рядом общим чатом" } },
-        { "type": "image", "src": "/apps/starsync/3-danmaku.webp", "alt": { "en": "Chat messages flying across the video as danmaku while friends watch together", "ru": "Сообщения чата пролетают поверх видео (данмаку) во время совместного просмотра" } },
-        { "type": "image", "src": "/apps/starsync/2-library.webp", "alt": { "en": "Browsing a Jellyfin library of shows in Starsync, with an episode list for the selected series", "ru": "Библиотека сериалов Jellyfin в Starsync со списком серий выбранного сериала" } },
-        { "type": "image", "src": "/apps/starsync/4-session.webp", "alt": { "en": "The people in a watch session, all ready, with a quick chat message typed over the video", "ru": "Участники сеанса просмотра, все готовы, и быстрое сообщение в чат поверх видео" } },
-        { "type": "image", "src": "/apps/starsync/5-settings.webp", "alt": { "en": "Starsync player settings, with the video still playing in a mini player", "ru": "Настройки плеера Starsync, видео продолжает играть в мини-плеере" } }
+        {
+          "type": "image",
+          "src": "/apps/starsync/1-player.webp",
+          "alt": {
+            "en": "Starsync player paused on a movie scene, with the group chat open beside the video",
+            "ru": "Плеер Starsync на паузе со сценой из фильма и открытым рядом общим чатом"
+          }
+        },
+        {
+          "type": "image",
+          "src": "/apps/starsync/3-danmaku.webp",
+          "alt": {
+            "en": "Chat messages flying across the video as danmaku while friends watch together",
+            "ru": "Сообщения чата пролетают поверх видео (данмаку) во время совместного просмотра"
+          }
+        },
+        {
+          "type": "image",
+          "src": "/apps/starsync/2-library.webp",
+          "alt": {
+            "en": "Browsing a Jellyfin library of shows in Starsync, with an episode list for the selected series",
+            "ru": "Библиотека сериалов Jellyfin в Starsync со списком серий выбранного сериала"
+          }
+        },
+        {
+          "type": "image",
+          "src": "/apps/starsync/4-session.webp",
+          "alt": {
+            "en": "The people in a watch session, all ready, with a quick chat message typed over the video",
+            "ru": "Участники сеанса просмотра, все готовы, и быстрое сообщение в чат поверх видео"
+          }
+        },
+        {
+          "type": "image",
+          "src": "/apps/starsync/5-settings.webp",
+          "alt": {
+            "en": "Starsync player settings, with the video still playing in a mini player",
+            "ru": "Настройки плеера Starsync, видео продолжает играть в мини-плеере"
+          }
+        }
       ],
-      "mediaCredit": { "en": "Video in the screenshots: Sintel © Blender Foundation, durian.blender.org, CC BY 3.0.", "ru": "Видео на скриншотах: Sintel © Blender Foundation, durian.blender.org, CC BY 3.0." },
+      "mediaCredit": {
+        "en": "Video in the screenshots: Sintel © Blender Foundation, durian.blender.org, CC BY 3.0.",
+        "ru": "Видео на скриншотах: Sintel © Blender Foundation, durian.blender.org, CC BY 3.0."
+      },
       "releases": {
         "sources": [
-          { "type": "github", "repo": "Foxyz1302/starsync" },
-          { "type": "gitea", "host": "https://git.senkochan.moe", "repo": "Foxyz/sync_replay_project" }
+          {
+            "type": "github",
+            "repo": "Foxyz1302/starsync"
+          },
+          {
+            "type": "gitea",
+            "host": "https://git.senkochan.moe",
+            "repo": "Foxyz/sync_replay_project"
+          }
         ],
         "assets": {
           "linux-x64": "-linux-x64.tar.gz",
@@ -534,92 +676,165 @@
     {
       "id": "vr-physics-controller",
       "name": "VR physics controller",
-      "kind": { "en": "Godot package", "ru": "Пакет для Godot" },
+      "kind": {
+        "en": "Godot package",
+        "ru": "Пакет для Godot"
+      },
       "tech": "godot",
       "status": "in-development",
-      "platforms": ["windows", "linux"],
+      "platforms": [
+        "windows",
+        "linux"
+      ],
       "focus": "desktop",
-      "pitch": { "en": "A full-body, physics-driven VR player for Godot, in C#: your whole body is a ragdoll that touches, pushes and climbs the world.", "ru": "Физический VR-игрок для Godot на C#: всё тело — рэгдолл, который касается мира, толкает его и карабкается." }
+      "pitch": {
+        "en": "A full-body, physics-driven VR player for Godot, in C#: your whole body is a ragdoll that touches, pushes and climbs the world.",
+        "ru": "Физический VR-игрок для Godot на C#: всё ваше тело — рэгдолл, который касается мира, толкает его и карабкается."
+      }
     },
     {
       "id": "rimworld-mod-manager",
       "name": "RimWorld mod manager",
       "status": "in-development",
-      "platforms": ["windows", "linux"],
+      "platforms": [
+        "windows",
+        "linux"
+      ],
       "focus": "desktop",
-      "pitch": { "en": "RimSort is fine, but mine is many times faster, and since everything is visual, you can tell what a mod does at a glance and build your modpack exactly the way you want.", "ru": "Сортировка, включение и проверка модов RimWorld в одном окне." }
+      "pitch": {
+        "en": "RimSort is fine, but mine is many times faster, and since everything is visual, you can tell what a mod does at a glance and build your modpack exactly the way you want.",
+        "ru": "RimSort нормальный, но мой в разы быстрее, а раз всё наглядно, по моду сразу видно, что он делает, и модпак собирается ровно так, как вы хотите."
+      }
     },
     {
       "id": "elin-mod-manager",
       "name": "Elin mod manager",
       "status": "next",
-      "platforms": ["windows", "linux"],
+      "platforms": [
+        "windows",
+        "linux"
+      ],
       "focus": "desktop",
-      "pitch": { "en": "A simple but powerful mod manager for Elin. Order your mods exactly the way you want, and merge sprite mods into one so every enemy gets exactly the sprites you picked.", "ru": "Управление модами Elin и их порядком загрузки." }
+      "pitch": {
+        "en": "A simple but powerful mod manager for Elin. Order your mods exactly the way you want, and merge sprite mods into one so every enemy gets exactly the sprites you picked.",
+        "ru": "Простой, но мощный менеджер модов для Elin. Расставляйте моды ровно в нужном порядке и объединяйте спрайтовые моды в один, чтобы у каждого врага были именно те спрайты, что вы выбрали."
+      }
     },
     {
       "id": "deadlock-mod-manager",
       "name": "Deadlock mod manager",
       "status": "prototype",
-      "platforms": ["windows", "linux"],
+      "platforms": [
+        "windows",
+        "linux"
+      ],
       "focus": "desktop",
-      "pitch": { "en": "A native, convenient mod manager to find, switch and remove Deadlock mods.", "ru": "Установка, переключение и удаление модов Deadlock." }
+      "pitch": {
+        "en": "A native, convenient mod manager to find, switch and remove Deadlock mods.",
+        "ru": "Нативный и удобный менеджер модов Deadlock: найти, переключить и удалить."
+      }
     },
     {
       "id": "imagen",
       "name": "SwarmUI app",
       "status": "prototype",
-      "platforms": ["android", "windows", "linux"],
+      "platforms": [
+        "android",
+        "windows",
+        "linux"
+      ],
       "focus": "mobile",
-      "pitch": { "en": "My oldest app. Generate images on your phone with a tag system instead of typing prompts, in an interface made for mobile. Works with your own self-hosted SwarmUI.", "ru": "Генерация изображений через SwarmUI на своём сервере." }
+      "pitch": {
+        "en": "My oldest app. Generate images on your phone with a tag system instead of typing prompts, in an interface made for mobile. Works with your own self-hosted SwarmUI.",
+        "ru": "Моё самое старое приложение. Генерация картинок на телефоне через систему тегов вместо набора промптов, в интерфейсе, сделанном под телефон. Работает с вашим собственным SwarmUI."
+      }
     },
     {
       "id": "meme-collector",
       "name": "Meme collector",
       "status": "prototype",
-      "platforms": ["windows", "linux"],
+      "platforms": [
+        "windows",
+        "linux"
+      ],
       "focus": "desktop",
-      "pitch": { "en": "Add your favourite media to your own self-hosted collection, then find anything by describing it in plain words, thanks to AI image and text search. Fast even with a huge collection.", "ru": "Поиск по своим мемам и GIF-реакциям и копирование одним нажатием." }
+      "pitch": {
+        "en": "Add your favourite media to your own self-hosted collection, then find anything by describing it in plain words, thanks to AI image and text search. Fast even with a huge collection.",
+        "ru": "Складывайте любимые картинки и видео в свою коллекцию на своём сервере и находите что угодно, просто описав словами, благодаря поиску по изображениям и тексту на ИИ. Быстро даже на огромной коллекции."
+      }
     },
     {
       "id": "torrent-client",
       "name": "Torrent client",
       "status": "prototype",
-      "platforms": ["windows", "linux"],
+      "platforms": [
+        "windows",
+        "linux"
+      ],
       "focus": "desktop",
-      "pitch": { "en": "A full-featured torrent client in Flutter, focused on a great UX and performance, without wasting system resources on things you don't need.", "ru": "Торрент-клиент, который воспроизводит видео ещё во время загрузки." }
+      "pitch": {
+        "en": "A full-featured torrent client in Flutter, focused on a great UX and performance, without wasting system resources on things you don't need.",
+        "ru": "Полноценный торрент-клиент на Flutter с упором на удобство и скорость, без траты ресурсов на ненужное."
+      }
     },
     {
       "id": "comfy-client",
       "name": "ComfyUI app",
       "status": "prototype",
-      "platforms": ["android", "linux"],
+      "platforms": [
+        "android",
+        "linux"
+      ],
       "focus": "mobile",
-      "pitch": { "en": "Run your existing workflows from your phone, put together your own interface for them in an editor, or build new workflows from scratch, all without ever touching a browser. A real native app, not a web page dressed up as one.", "ru": "Нативное приложение для запуска сценариев ComfyUI." }
+      "pitch": {
+        "en": "Run your existing workflows from your phone, put together your own interface for them in an editor, or build new workflows from scratch, all without ever touching a browser. A real native app, not a web page dressed up as one.",
+        "ru": "Запускайте готовые сценарии с телефона, собирайте для них свой интерфейс в редакторе или стройте новые сценарии с нуля, и всё это ни разу не открывая браузер. Настоящее нативное приложение, а не веб-страница, переодетая в него."
+      }
     },
     {
       "id": "kemono-app",
       "name": "Kemono app",
       "status": "prototype",
-      "platforms": ["android", "windows", "linux"],
+      "platforms": [
+        "android",
+        "windows",
+        "linux"
+      ],
       "focus": "mobile",
-      "pitch": { "en": "A simple Kemono browser with better UX: see what's in a post at a glance without opening it, and fast.", "ru": "Приложение для просмотра онлайн-архива авторов." }
+      "pitch": {
+        "en": "A simple Kemono browser with better UX: see what's in a post at a glance without opening it, and fast.",
+        "ru": "Простой браузер Kemono с удобным интерфейсом: содержимое поста видно сразу, без открытия, и всё быстро."
+      }
     },
     {
       "id": "booru-browser",
       "name": "Booru browser",
       "status": "prototype",
-      "platforms": ["android", "windows", "linux"],
+      "platforms": [
+        "android",
+        "windows",
+        "linux"
+      ],
       "focus": "mobile",
-      "pitch": { "en": "A simple, universal booru browser that looks nice and stays smooth even on the slowest phones.", "ru": "Быстрый просмотрщик сайтов-имиджбордов." }
+      "pitch": {
+        "en": "A simple, universal booru browser that looks nice and stays smooth even on the slowest phones.",
+        "ru": "Простой универсальный браузер для booru-сайтов, который хорошо выглядит и работает плавно даже на самых слабых телефонах."
+      }
     },
     {
       "id": "pixiv-app",
       "name": "Pixiv app",
       "status": "prototype",
-      "platforms": ["android", "windows", "linux"],
+      "platforms": [
+        "android",
+        "windows",
+        "linux"
+      ],
       "focus": "mobile",
-      "pitch": { "en": "A custom Pixiv client with an optimized layout and UI. It uses Pixiv's own web API, so it can do everything the site does, unlike other custom Pixiv apps, which also tend to have subpar UI/UX.", "ru": "Клиент для просмотра сообщества иллюстраторов." }
+      "pitch": {
+        "en": "A custom Pixiv client with an optimized layout and UI. It uses Pixiv's own web API, so it can do everything the site does, unlike other custom Pixiv apps, which also tend to have subpar UI/UX.",
+        "ru": "Свой клиент Pixiv с продуманной раскладкой и интерфейсом. Работает через собственный веб-API Pixiv, поэтому умеет всё, что умеет сайт, в отличие от других клиентов, у которых к тому же слабый интерфейс."
+      }
     },
     {
       "id": "colony-sim",
@@ -627,7 +842,10 @@
       "game": true,
       "status": "prototype",
       "platforms": [],
-      "pitch": { "en": "RimWorld crossed with Dwarf Fortress's adventure mode: a procedurally generated world, simulated NPCs and online multiplayer.", "ru": "RimWorld вместе с режимом приключений Dwarf Fortress: процедурно созданный мир, симулированные NPC и онлайн-мультиплеер." }
+      "pitch": {
+        "en": "RimWorld crossed with Dwarf Fortress's adventure mode: a procedurally generated world, simulated NPCs and online multiplayer.",
+        "ru": "RimWorld вместе с режимом приключений Dwarf Fortress: процедурно созданный мир, симулированные NPC и онлайн-мультиплеер."
+      }
     }
   ],
 
