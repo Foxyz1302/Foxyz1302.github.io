@@ -116,7 +116,7 @@
         "ru": "Смотрите видео с друзьями синхронно, в настоящем плеере mpv."
       },
       "description": {
-        "en": "Pick from your Jellyfin library, paste any video link, or open a file from your disk; everyone's play, pause and seek stay together. A desktop app, not a browser tab: no transcoding, everyone plays the original file.",
+        "en": "I made this app because I'd had it with Syncplay: two windows, underwhelming sync and ready logic, everyone needing their own copy of the file, and switching every video by hand. Discord streaming is convenient, but it's built for live streams. One person's connection drops and the video cuts out, and the quality drops along with it.\n\nIn Starsync everyone gets the original file, so the quality is the same for the whole group. It rides out internet drops for as long as there's buffer, and whether the server or a viewer drops, both recover smoothly without getting in the way of the video. The sync is instant, and it often feels like nobody is on the other end at all.\n\nAnyone on the server can open videos from their own Jellyfin for the others to watch, without giving anyone access to their library. Anyone can also put up almost any link from the internet thanks to yt-dlp, or a video straight from their own PC, and only the host ever needs an open port.\n\nProper Jellyfin integration lets you browse the library with watch tracking on everything. A weekly anime schedule shows exactly when each episode comes out, what's already on Jellyfin and what you've watched, and lets you request new shows from your auto-downloader or Sonarr.",
         "ru": "Выберите видео из библиотеки Jellyfin, вставьте ссылку или откройте файл с диска: пауза, перемотка и воспроизведение у всех идут вместе. Это приложение для компьютера, а не вкладка браузера: без перекодирования, каждый смотрит оригинал."
       },
       "platforms": ["linux", "windows"],
@@ -182,7 +182,7 @@
       "status": "in-development",
       "platforms": ["windows", "linux"],
       "focus": "desktop",
-      "pitch": { "en": "Sort, enable and check RimWorld mods from one desktop window.", "ru": "Сортировка, включение и проверка модов RimWorld в одном окне." }
+      "pitch": { "en": "RimSort is fine, but mine is many times faster, and since everything is visual, you can tell what a mod does at a glance and build your modpack exactly the way you want.", "ru": "Сортировка, включение и проверка модов RimWorld в одном окне." }
     },
     {
       "id": "elin-mod-manager",
@@ -190,7 +190,7 @@
       "status": "next",
       "platforms": ["windows", "linux"],
       "focus": "desktop",
-      "pitch": { "en": "Manage and order mods for Elin.", "ru": "Управление модами Elin и их порядком загрузки." }
+      "pitch": { "en": "A simple but powerful mod manager for Elin. Order your mods exactly the way you want, and merge sprite mods into one so every enemy gets exactly the sprites you picked.", "ru": "Управление модами Elin и их порядком загрузки." }
     },
     {
       "id": "deadlock-mod-manager",
@@ -198,7 +198,7 @@
       "status": "prototype",
       "platforms": ["windows", "linux"],
       "focus": "desktop",
-      "pitch": { "en": "Install, switch and remove Deadlock mods.", "ru": "Установка, переключение и удаление модов Deadlock." }
+      "pitch": { "en": "A native, convenient mod manager to find, switch and remove Deadlock mods.", "ru": "Установка, переключение и удаление модов Deadlock." }
     },
     {
       "id": "imagen",
@@ -206,7 +206,7 @@
       "status": "prototype",
       "platforms": ["android", "windows", "linux"],
       "focus": "mobile",
-      "pitch": { "en": "Generate images with SwarmUI on your own server.", "ru": "Генерация изображений через SwarmUI на своём сервере." }
+      "pitch": { "en": "My oldest app. Generate images on your phone with a tag system instead of typing prompts, in an interface made for mobile. Works with your own self-hosted SwarmUI.", "ru": "Генерация изображений через SwarmUI на своём сервере." }
     },
     {
       "id": "meme-collector",
@@ -214,7 +214,7 @@
       "status": "prototype",
       "platforms": ["windows", "linux"],
       "focus": "desktop",
-      "pitch": { "en": "Search your saved memes and reaction GIFs and copy one in a keystroke.", "ru": "Поиск по своим мемам и GIF-реакциям и копирование одним нажатием." }
+      "pitch": { "en": "Add your favourite media to your own self-hosted collection, then find anything by describing it in plain words, thanks to AI image and text search. Fast even with a huge collection.", "ru": "Поиск по своим мемам и GIF-реакциям и копирование одним нажатием." }
     },
     {
       "id": "torrent-client",
@@ -222,7 +222,7 @@
       "status": "prototype",
       "platforms": ["windows", "linux"],
       "focus": "desktop",
-      "pitch": { "en": "A torrent client that can play video while it downloads.", "ru": "Торрент-клиент, который воспроизводит видео ещё во время загрузки." }
+      "pitch": { "en": "A full-featured torrent client in Flutter, focused on a great UX and performance, without wasting system resources on things you don't need.", "ru": "Торрент-клиент, который воспроизводит видео ещё во время загрузки." }
     },
     {
       "id": "comfy-client",
@@ -230,7 +230,7 @@
       "status": "prototype",
       "platforms": ["android", "linux"],
       "focus": "mobile",
-      "pitch": { "en": "A native app for running ComfyUI workflows.", "ru": "Нативное приложение для запуска сценариев ComfyUI." }
+      "pitch": { "en": "Run your existing workflows from your phone, put together your own interface for them in an editor, or build new workflows from scratch, all without ever touching a browser. A real native app, not a web page dressed up as one.", "ru": "Нативное приложение для запуска сценариев ComfyUI." }
     },
     {
       "id": "kemono-app",
@@ -238,7 +238,7 @@
       "status": "prototype",
       "platforms": ["android", "windows", "linux"],
       "focus": "mobile",
-      "pitch": { "en": "A browser app for an online creator archive.", "ru": "Приложение для просмотра онлайн-архива авторов." }
+      "pitch": { "en": "A simple Kemono browser with better UX: see what's in a post at a glance without opening it, and fast.", "ru": "Приложение для просмотра онлайн-архива авторов." }
     },
     {
       "id": "booru-browser",
@@ -246,7 +246,7 @@
       "status": "prototype",
       "platforms": ["android", "windows", "linux"],
       "focus": "mobile",
-      "pitch": { "en": "A fast browser for image-board sites.", "ru": "Быстрый просмотрщик сайтов-имиджбордов." }
+      "pitch": { "en": "A simple, universal booru browser that looks nice and stays smooth even on the slowest phones.", "ru": "Быстрый просмотрщик сайтов-имиджбордов." }
     },
     {
       "id": "pixiv-app",
@@ -254,7 +254,24 @@
       "status": "prototype",
       "platforms": ["android", "windows", "linux"],
       "focus": "mobile",
-      "pitch": { "en": "A client for browsing an illustration community.", "ru": "Клиент для просмотра сообщества иллюстраторов." }
+      "pitch": { "en": "A custom Pixiv client with an optimized layout and UI. It uses Pixiv's own web API, so it can do everything the site does, unlike other custom Pixiv apps, which also tend to have subpar UI/UX.", "ru": "Клиент для просмотра сообщества иллюстраторов." }
+    },
+    {
+      "id": "colony-sim",
+      "name": "Colony sim with adventure mode",
+      "game": true,
+      "status": "prototype",
+      "platforms": [],
+      "pitch": { "en": "RimWorld crossed with Dwarf Fortress's adventure mode: a procedurally generated world, simulated NPCs and online multiplayer.", "ru": "RimWorld вместе с режимом приключений Dwarf Fortress: процедурно созданный мир, симулированные NPC и онлайн-мультиплеер." }
+    },
+    {
+      "id": "exhibition-game",
+      "name": "Exhibitionism game",
+      "kind": "18+",
+      "game": true,
+      "status": "prototype",
+      "platforms": [],
+      "pitch": { "en": "An adult game about exhibitionism, with high stakes.", "ru": "Игра для взрослых об эксгибиционизме, с высокими ставками." }
     }
   ],
 

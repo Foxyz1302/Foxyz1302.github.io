@@ -73,6 +73,8 @@ export interface App {
   status: 'released' | 'in-development' | 'next' | 'prototype' | 'coming';
   /** What it is built with: 'flutter' (default) or 'godot'; a small logo on its tile. */
   tech?: 'flutter' | 'godot';
+  /** A game: listed in its own Games group, no tech badge unless `tech` is set. */
+  game?: boolean;
   /** What the app is built for first: its platform icons are bright, the rest dimmed. */
   focus?: 'mobile' | 'desktop';
   /** What it is when it is not an app, e.g. "Godot package" (shown on its card). */

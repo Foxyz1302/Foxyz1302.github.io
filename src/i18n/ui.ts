@@ -5,7 +5,7 @@ import type { Lang } from '../lib/data';
 
 const en = {
   'nav.home': 'Home',
-  'nav.apps': 'Apps',
+  'nav.apps': 'Projects',
   'nav.commissions': 'Commissions',
   'nav.about': 'About',
   'nav.support': 'Support',
@@ -17,8 +17,8 @@ const en = {
 
   'home.hire': 'Hire me',
   'home.support': 'Support my work',
-  'home.featured': 'Apps',
-  'home.allApps': 'All apps',
+  'home.featured': 'Projects',
+  'home.allApps': 'All projects',
   'home.what': 'What I do',
   'home.what1.t': 'Desktop apps',
   'home.what1.d': 'Linux and Windows apps in Flutter that feel native: real windows, tray, deep links, self-updates.',
@@ -27,8 +27,8 @@ const en = {
   'home.what3.t': 'Servers and shipping',
   'home.what3.d': 'The server behind the app, media playback, release scripts and docs.',
 
-  'apps.title': 'Apps',
-  'apps.lead': 'Things I build and ship. Free to use; if one makes your day better, you can support it.',
+  'apps.title': 'Projects',
+  'apps.lead': 'Apps, tools and games I make. The apps are free to use; if one makes your day better, you can support it.',
   'apps.status.released': 'Released',
   'apps.status.in-development': 'In development',
   'apps.status.next': 'Up next',
@@ -38,6 +38,8 @@ const en = {
   'apps.upcomingLead': 'Each of these already runs on my own machine as a working prototype; none is public yet. Names just say what an app does; real names come with the release.',
   'apps.groupNow': 'Working on now',
   'apps.groupPrototypes': 'Prototypes',
+  'apps.groupGames': 'Games',
+  'apps.moreProtos': '…and plenty of other prototypes that might get a real public release too, if they turn out useful enough.',
   'apps.upcomingCta': 'Want one of these sooner, or something like it for yourself?',
   'apps.upcomingCtaLink': 'Tell me.',
   'apps.workingTitle': 'working title',
@@ -117,7 +119,7 @@ type Key = keyof typeof en;
 
 const ru: Record<Key, string> = {
   'nav.home': 'Главная',
-  'nav.apps': 'Приложения',
+  'nav.apps': 'Проекты',
   'nav.commissions': 'Заказы',
   'nav.about': 'Обо мне',
   'nav.support': 'Поддержать',
@@ -129,8 +131,8 @@ const ru: Record<Key, string> = {
 
   'home.hire': 'Заказать',
   'home.support': 'Поддержать',
-  'home.featured': 'Приложения',
-  'home.allApps': 'Все приложения',
+  'home.featured': 'Проекты',
+  'home.allApps': 'Все проекты',
   'home.what': 'Что я делаю',
   'home.what1.t': 'Приложения для ПК',
   'home.what1.d': 'Приложения для Linux и Windows на Flutter, которые ощущаются родными: окна, трей, ссылки, автообновление.',
@@ -139,7 +141,7 @@ const ru: Record<Key, string> = {
   'home.what3.t': 'Серверы и выпуск',
   'home.what3.d': 'Сервер для приложения, воспроизведение видео, скрипты выпуска и документация.',
 
-  'apps.title': 'Приложения',
+  'apps.title': 'Проекты',
   'apps.lead': 'То, что я делаю и выпускаю. Пользоваться бесплатно; если что-то пригодилось, можно поддержать.',
   'apps.status.released': 'Вышло',
   'apps.status.in-development': 'В разработке',
@@ -150,6 +152,8 @@ const ru: Record<Key, string> = {
   'apps.upcomingLead': 'Каждое из них уже работает у меня как рабочий прототип, но публично пока не выложено. Названия просто говорят, что делает приложение; настоящие появятся к выпуску.',
   'apps.groupNow': 'Сейчас в работе',
   'apps.groupPrototypes': 'Прототипы',
+  'apps.groupGames': 'Игры',
+  'apps.moreProtos': '…и ещё много прототипов, которые тоже могут выйти публично, если окажутся достаточно полезными.',
   'apps.upcomingCta': 'Хотите одно из них раньше или что-то похожее для себя?',
   'apps.upcomingCtaLink': 'Напишите мне.',
   'apps.workingTitle': 'рабочее название',

@@ -7,4 +7,7 @@ import data from './public/data.json' with { type: 'json' };
 export default defineConfig({
   site: data.site.url,
   trailingSlash: 'always',
+  // The list was renamed from Apps to Projects; old links keep working.
+  // App pages themselves stay at /apps/<id>/.
+  redirects: { '/apps/': '/projects/', '/ru/apps/': '/ru/projects/' },
 });

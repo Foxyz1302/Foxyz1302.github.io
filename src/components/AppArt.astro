@@ -7,7 +7,7 @@ import type { App } from '../lib/data';
 
 interface Props { app: App; size?: number }
 const { app, size = 56 } = Astro.props;
-const tech = app.tech ?? 'flutter';
+const tech = app.tech ?? (app.game ? null : 'flutter');
 const badge = Math.round(size * 0.46);
 const initials = app.name.split(/\s+/).filter((w) => /^[\p{L}\d]/u.test(w)).slice(0, 2).map((w) => w[0].toUpperCase()).join('');
 ---
@@ -16,9 +16,11 @@ const initials = app.name.split(/\s+/).filter((w) => /^[\p{L}\d]/u.test(w)).slic
     <rect x="0.5" y="0.5" width="63" height="63" rx="13" style="fill: var(--panel-strong); stroke: var(--border)" />
     <text x="32" y="39.5" text-anchor="middle" font-weight="800" font-size="20" style="font-family: var(--font-head); fill: var(--text)">{initials}</text>
   </svg>
-  <span class="badge" style={`background:${TECH_COLOR[tech]}`} title={TECH_NAME[tech]}>
-    <svg viewBox="0 0 24 24" fill="#fff" aria-label={TECH_NAME[tech]} role="img"><path d={TECH_ICON[tech]} /></svg>
-  </span>
+  {tech && (
+    <span class="badge" style={`background:${TECH_COLOR[tech]}`} title={TECH_NAME[tech]}>
+      <svg viewBox="0 0 24 24" fill="#fff" aria-label={TECH_NAME[tech]} role="img"><path d={TECH_ICON[tech]} /></svg>
+    </span>
+  )}
 </span>
 
 <style>

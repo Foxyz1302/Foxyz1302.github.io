@@ -39,7 +39,7 @@ const site = data.site.url.replace(/^https?:\/\//, '');
     {apps.map((a) => (
       <div class="cv-item">
         <h3>{a.name} <span>{a.platforms.join(', ')}</span></h3>
-        <p>{t(a.description ?? a.pitch, lang)}</p>
+        <p>{t(a.description ?? a.pitch, lang).split(/\n\s*\n/)[0]}</p>
       </div>
     ))}
 

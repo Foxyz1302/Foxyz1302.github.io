@@ -28,14 +28,19 @@ const upcoming = data.apps.filter((a) => !isReleased(a)).sort((a, b) => (rank[a.
     <section class="container section-tight" id="upcoming">
       <span class="eyebrow">{s('apps.upcoming')}</span>
       <p class="muted up-lead">{s('apps.upcomingLead')}</p>
-      {[upcoming.filter((a) => a.status === 'in-development' || a.status === 'next'), upcoming.filter((a) => a.status !== 'in-development' && a.status !== 'next')].map((group, gi) => group.length > 0 && (
+      {[
+        ['apps.groupNow', upcoming.filter((a) => !a.game && (a.status === 'in-development' || a.status === 'next'))],
+        ['apps.groupPrototypes', upcoming.filter((a) => !a.game && a.status !== 'in-development' && a.status !== 'next')],
+        ['apps.groupGames', upcoming.filter((a) => a.game)],
+      ].map(([title, group]) => (group as typeof upcoming).length > 0 && (
         <>
-          <h3 class="up-group">{s(gi === 0 ? 'apps.groupNow' : 'apps.groupPrototypes')}</h3>
+          <h3 class="up-group">{s(title as 'apps.groupNow')}</h3>
           <div class="grid up-grid">
-            {group.map((app, i) => <UpcomingCard app={app} lang={lang} delay={Math.min(i, 6) * 0.04} />)}
+            {(group as typeof upcoming).map((app, i) => <UpcomingCard app={app} lang={lang} delay={Math.min(i, 6) * 0.04} />)}
           </div>
         </>
       ))}
+      <p class="up-more">{s('apps.moreProtos')}</p>
       <p class="up-cta">{s('apps.upcomingCta')} <a href={href('/commissions/', lang)}>{s('apps.upcomingCtaLink')}</a></p>
     </section>
   )}
@@ -44,6 +49,7 @@ const upcoming = data.apps.filter((a) => !isReleased(a)).sort((a, b) => (rank[a.
 <style>
   .up-lead { font-size: 0.92rem; margin: -0.4rem 0 1.2rem; }
   .up-group { font-size: 1rem; color: var(--muted); font-weight: 600; margin: 1.6rem 0 0.8rem; }
-  .up-cta { margin-top: 1.4rem; color: var(--muted); font-size: 0.95rem; }
+  .up-more { margin-top: 1.4rem; color: var(--muted); font-size: 0.95rem; }
+  .up-cta { margin-top: 0.5rem; color: var(--muted); font-size: 0.95rem; }
   .up-grid { grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 12px; }
 </style>

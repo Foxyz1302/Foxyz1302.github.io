@@ -22,7 +22,7 @@ const ytId = (src: string) => src.match(/(?:v=|youtu\.be\/|embed\/)([\w-]{11})/)
 ---
 <Base lang={lang} title={app.name} description={t(app.pitch, lang)}>
   <div class="container page-head app-head">
-    <a class="back" href={href('/apps/', lang)}>← {s('apps.title')}</a>
+    <a class="back" href={href('/projects/', lang)}>← {s('apps.title')}</a>
     <div class="app-hero">
       <img class="app-icon reveal" src={app.icon} alt="" width="112" height="112" />
       <div class="app-title">
@@ -56,7 +56,7 @@ const ytId = (src: string) => src.match(/(?:v=|youtu\.be\/|embed\/)([\w-]{11})/)
         </section>
       )}
 
-      {app.description && <p class="desc reveal">{t(app.description, lang)}</p>}
+      {app.description && <div class="desc reveal">{t(app.description, lang).split(/\n\s*\n/).map((para) => <p>{para}</p>)}</div>}
 
       {features.length > 0 && (
         <section class="reveal">
@@ -141,7 +141,7 @@ const ytId = (src: string) => src.match(/(?:v=|youtu\.be\/|embed\/)([\w-]{11})/)
   .shot.is-placeholder { outline-offset: -4px; }
   .credit { font-size: 0.78rem; margin-top: 0.3rem; }
 
-  .desc { font-size: 1.1rem; max-width: 68ch; }
+  .desc { font-size: 1.1rem; max-width: 68ch; display: grid; gap: 0.9em; }
   .h-sm { font-size: var(--step-2); margin-bottom: 1rem; }
   .small { font-size: 0.85rem; margin: -0.5rem 0 1rem; }
   .features { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: 0.6rem; }

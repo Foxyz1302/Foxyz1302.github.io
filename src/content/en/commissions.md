@@ -25,4 +25,5 @@ So you only pay for work you have seen, and the final code comes once everything
 
 - I write in English and Russian.
 - Small projects are welcome; a first small task is a good way to start.
+- I'm fine with NSFW and adult (18+) projects too.
 - Payment is agreed per project: card or PayPal through Ko-fi, crypto (USDT), or a bank transfer for clients in Russia.

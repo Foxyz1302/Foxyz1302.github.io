@@ -42,12 +42,12 @@ const what = [
   <section class="container section-tight">
     <div class="section-head">
       <span class="eyebrow">{s('home.featured')}</span>
-      <a class="see-all" href={href('/apps/', lang)}>{s('home.allApps')} <Icon name="arrow" /></a>
+      <a class="see-all" href={href('/projects/', lang)}>{s('home.allApps')} <Icon name="arrow" /></a>
     </div>
     <div class="grid grid-3">
       {featured.map((app, i) => <AppCard app={app} lang={lang} delay={i * 0.08} />)}
       {upcomingCount > 0 && (
-        <a class="card more-card reveal" style="--d:.1s" href={href('/apps/#upcoming', lang)}>
+        <a class="card more-card reveal" style="--d:.1s" href={href('/projects/#upcoming', lang)}>
           <span class="more-n">+{upcomingCount}</span>
           <span>{s('home.moreComing')}</span>
           <Icon name="arrow" />

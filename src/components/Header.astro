@@ -10,11 +10,12 @@ const s = ui(lang);
 const other: Lang = lang === 'en' ? 'ru' : 'en';
 
 const links = [
-  { path: '/apps/', label: s('nav.apps') },
+  { path: '/projects/', label: s('nav.apps') },
   { path: '/commissions/', label: s('nav.commissions') },
   { path: '/about/', label: s('nav.about') },
 ];
-const isActive = (p: string) => path.startsWith(p);
+// App pages (/apps/<id>/) belong to Projects.
+const isActive = (p: string) => path.startsWith(p) || (p === '/projects/' && path.startsWith('/apps/'));
 ---
 <header class="site-header">
   <div class="container bar">

@@ -24,10 +24,12 @@ const rest = app.platforms.filter((p) => !isMain(p));
       <span class:list={['status', app.status]}>{s(`apps.status.${app.status}`)}</span>
       {app.kind && <span class="kind">{t(app.kind, lang)}</span>}
     </div>
-    <div class="plats" title={app.platforms.map((p) => PLATFORM_LABEL[p]).join(', ')}>
-      <span class="plat-group main">{main.map((p) => <span class="plat"><Icon name={p} /></span>)}</span>
-      {rest.map((p) => <span class="plat"><Icon name={p} /></span>)}
-    </div>
+    {app.platforms.length > 0 && (
+      <div class="plats" title={app.platforms.map((p) => PLATFORM_LABEL[p]).join(', ')}>
+        {main.length > 0 && <span class="plat-group main">{main.map((p) => <span class="plat"><Icon name={p} /></span>)}</span>}
+        {rest.map((p) => <span class="plat"><Icon name={p} /></span>)}
+      </div>
+    )}
   </div>
 </div>
 
