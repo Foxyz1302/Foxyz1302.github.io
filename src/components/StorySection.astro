@@ -1,0 +1,131 @@
+---
+// One illustrated section of an app page: title, a line or two of text and a
+// picture drawn in the theme's colours (a comparison table, the drop-recovery
+// timeline, the sharing diagram) or a screenshot. Content: app.story in data.json.
+import Icon from './Icon.astro';
+import { t, type StorySection, type Lang } from '../lib/data';
+
+interface Props { section: StorySection; lang: Lang; index: number }
+const { section: sec, lang, index } = Astro.props;
+const mark = { yes: '✓', no: '✕', partly: '~' } as const;
+---
+<section class:list={['story reveal', `v-${sec.visual}`]} style={`--d:${Math.min(index, 3) * 0.05}s`}>
+  <div class="story-text">
+    <h2 class="h-sm">{t(sec.title, lang)}</h2>
+    {sec.text && <p>{t(sec.text, lang)}</p>}
+  </div>
+
+  {sec.visual === 'compare' && (
+    <div class="compare-wrap">
+      <table class="compare">
+        <thead>
+          <tr><th></th>{sec.compare.columns.map((c, i) => <th class:list={{ ours: i === sec.compare.columns.length - 1 }}>{c}</th>)}</tr>
+        </thead>
+        <tbody>
+          {sec.compare.rows.map((r) => (
+            <tr>
+              <th scope="row">{t(r.label, lang)}</th>
+              {r.values.map((v, i) => <td class:list={[v, { ours: i === r.values.length - 1 }]}><span aria-label={v}>{mark[v]}</span></td>)}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )}
+
+  {sec.visual === 'recovery' && (
+    <figure class="diagram">
+      <svg viewBox="0 0 640 170" role="img" aria-label={`${t(sec.labels.lost, lang)}, ${t(sec.labels.buffer, lang)}, ${t(sec.labels.back, lang)}`}>
+        <text x="0" y="46" class="lbl">{t(sec.labels.playback, lang)}</text>
+        <text x="0" y="116" class="lbl">{t(sec.labels.network, lang)}</text>
+        <!-- playback: one unbroken bar -->
+        <rect x="120" y="32" width="510" height="20" rx="10" class="play" />
+        <rect x="290" y="32" width="170" height="20" class="buf" />
+        <path d="M120 42 h510" class="play-line" />
+        <!-- connection: a gap -->
+        <rect x="120" y="102" width="170" height="20" rx="10" class="net" />
+        <rect x="460" y="102" width="170" height="20" rx="10" class="net" />
+        <path d="M296 112 h158" class="gap" />
+        <text x="375" y="150" class="note lost" text-anchor="middle">{t(sec.labels.lost, lang)}</text>
+        <text x="375" y="22" class="note" text-anchor="middle">{t(sec.labels.buffer, lang)}</text>
+        <path d="M460 92 v-30" class="back-line" />
+        <circle cx="460" cy="42" r="7" class="back-dot" />
+        <text x="470" y="88" class="note ok">↻ {t(sec.labels.back, lang)}</text>
+      </svg>
+    </figure>
+  )}
+
+  {sec.visual === 'sharing' && (
+    <figure class="diagram">
+      <svg viewBox="0 0 640 230" role="img" aria-label={sec.labels.sources.map((x) => t(x, lang)).join(', ')}>
+        {sec.labels.sources.map((src, i) => (
+          <g>
+            <rect x="0" y={20 + i * 70} width="190" height="46" rx="10" class="box" />
+            <text x="95" y={49 + i * 70} text-anchor="middle" class="box-t">{t(src, lang)}</text>
+            <path d={`M190 ${43 + i * 70} C 230 ${43 + i * 70}, 230 115, 262 115`} class="arrow" />
+          </g>
+        ))}
+        <rect x="262" y="85" width="140" height="60" rx="12" class="host" />
+        <text x="332" y="112" text-anchor="middle" class="host-t">{t(sec.labels.host, lang)}</text>
+        <text x="332" y="132" text-anchor="middle" class="host-s">{t(sec.labels.port, lang)}</text>
+        <path d="M402 115 h60" class="arrow" />
+        {[0, 1, 2, 3].map((i) => <circle cx={490 + i * 34} cy="115" r="14" class:list={['viewer', `c${i}`]} />)}
+        <text x="541" y="160" text-anchor="middle" class="lbl">{t(sec.labels.viewers, lang)}</text>
+      </svg>
+    </figure>
+  )}
+
+  {sec.visual === 'image' && (
+    <figure class="shot">
+      <a href={sec.src} target="_blank" rel="noopener"><img src={sec.src} alt={t(sec.alt, lang)} loading="lazy" /></a>
+    </figure>
+  )}
+</section>
+
+<style>
+  .story { display: grid; gap: 1.1rem; }
+  .story-text p { color: var(--muted); max-width: 62ch; }
+  .story h2 { margin-bottom: 0.4rem; }
+
+  .compare-wrap { overflow-x: auto; }
+  .compare { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 0.92rem; }
+  .compare th, .compare td { padding: 0.6rem 0.8rem; border-bottom: 1px solid var(--border-soft); }
+  .compare thead th { font-family: var(--mono); font-size: 0.78rem; color: var(--muted); font-weight: 500; text-align: center; }
+  .compare tbody th { text-align: left; font-weight: 400; }
+  .compare td { text-align: center; font-weight: 700; }
+  .compare td.yes { color: var(--ok); }
+  .compare td.no { color: var(--muted); opacity: 0.6; }
+  .compare td.partly { color: var(--warn); }
+  .compare .ours { background: color-mix(in srgb, var(--primary) 9%, transparent); }
+  .compare thead th.ours { color: var(--text); border-radius: 8px 8px 0 0; }
+  .compare tbody tr:last-child td.ours { border-radius: 0 0 8px 8px; }
+
+  .diagram { margin: 0; padding: 1.2rem 1.2rem 0.8rem; border: 1px solid var(--border-soft); border-radius: var(--radius); background: var(--card-bg); }
+  .diagram svg { width: 100%; height: auto; overflow: visible; }
+  .lbl { font: 500 15px var(--font); fill: var(--muted); }
+  .note { font: 500 14px var(--font); fill: var(--muted); }
+  .note.lost { fill: var(--primary); }
+  .note.ok { fill: var(--ok); }
+  .play { fill: color-mix(in srgb, var(--text) 85%, transparent); }
+  .buf { fill: var(--accent); }
+  .play-line { stroke: none; }
+  .net { fill: color-mix(in srgb, var(--text) 30%, transparent); }
+  .gap { stroke: var(--primary); stroke-width: 3; stroke-dasharray: 6 7; }
+  .back-line { stroke: var(--ok); stroke-width: 2; stroke-dasharray: 3 4; }
+  .back-dot { fill: var(--ok); }
+  .box { fill: var(--panel-strong); stroke: var(--border); }
+  .box-t { font: 500 15px var(--font); fill: var(--text); }
+  .arrow { fill: none; stroke: var(--muted); stroke-width: 2; }
+  .host { fill: var(--primary); }
+  .host-t { font: 700 17px var(--font-head); fill: var(--btn-fg); }
+  .host-s { font: 500 12px var(--font); fill: var(--btn-fg); opacity: 0.85; }
+  .viewer { stroke: var(--card-bg); stroke-width: 3; }
+  .viewer.c0 { fill: var(--accent); }
+  .viewer.c1 { fill: var(--text); }
+  .viewer.c2 { fill: var(--ok); }
+  .viewer.c3 { fill: var(--muted); }
+
+  .shot { margin: 0; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); background: #000; }
+  .shot a { display: block; cursor: zoom-in; }
+  .shot img { width: 100%; height: auto; }
+</style>

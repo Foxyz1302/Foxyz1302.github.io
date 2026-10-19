@@ -66,6 +66,14 @@ export interface Media {
   placeholder?: boolean;
 }
 
+/** One illustrated section on an app page: a title, a line or two, and a picture. */
+export type StorySection = { title: Text; text?: Text } & (
+  | { visual: 'compare'; compare: { columns: string[]; rows: { label: Text; values: ('yes' | 'no' | 'partly')[] }[] } }
+  | { visual: 'recovery'; labels: Record<'playback' | 'network' | 'lost' | 'buffer' | 'back', Text> }
+  | { visual: 'sharing'; labels: { sources: Text[]; host: Text; port: Text; viewers: Text } }
+  | { visual: 'image'; src: string; alt?: Text }
+);
+
 export interface App {
   id: string;
   name: string;
@@ -87,6 +95,8 @@ export interface App {
   icon?: string;
   pitch: Text;
   description?: Text;
+  /** Illustrated sections under the screenshots ("show, don't tell"). */
+  story?: StorySection[];
   platforms: Platform[];
   tags?: string[];
   features?: Partial<Record<Lang, string[]>>;

@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
 import DownloadButton from '../components/DownloadButton.astro';
+import StorySection from '../components/StorySection.astro';
 import { t, href, PLATFORM_LABEL, type App, type Lang } from '../lib/data';
 import { latestRelease, changelog } from '../lib/releases';
 import { ui } from '../i18n/ui';
@@ -56,7 +57,11 @@ const ytId = (src: string) => src.match(/(?:v=|youtu\.be\/|embed\/)([\w-]{11})/)
         </section>
       )}
 
-      {app.description && <div class="desc reveal">{t(app.description, lang).split(/\n\s*\n/).map((para) => <p>{para}</p>)}</div>}
+      {app.story && app.description && <p class="desc reveal">{t(app.description, lang)}</p>}
+
+      {app.story?.map((sec, i) => <StorySection section={sec} lang={lang} index={i} />)}
+
+      {app.description && !app.story && <div class="desc reveal">{t(app.description, lang).split(/\n\s*\n/).map((para) => <p>{para}</p>)}</div>}
 
       {features.length > 0 && (
         <section class="reveal">

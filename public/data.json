@@ -116,15 +116,164 @@
         "ru": "Смотрите видео с друзьями синхронно, в настоящем плеере mpv."
       },
       "description": {
-        "en": "I made this app because I'd had it with Syncplay: two windows, underwhelming sync and ready logic, everyone needing their own copy of the file, and switching every video by hand. Discord streaming is convenient, but it's built for live streams. One person's connection drops and the video cuts out, and the quality drops along with it.\n\nIn Starsync everyone gets the original file, so the quality is the same for the whole group. It rides out internet drops for as long as there's buffer, and whether the server or a viewer drops, both recover smoothly without getting in the way of the video. The sync is instant, and it often feels like nobody is on the other end at all.\n\nAnyone on the server can open videos from their own Jellyfin for the others to watch, without giving anyone access to their library. Anyone can also put up almost any link from the internet thanks to yt-dlp, or a video straight from their own PC, and only the host ever needs an open port.\n\nProper Jellyfin integration lets you browse the library with watch tracking on everything. A weekly anime schedule shows exactly when each episode comes out, what's already on Jellyfin and what you've watched, and lets you request new shows from your auto-downloader or Sonarr.",
+        "en": "I made Starsync because I'd had it with Syncplay and Discord streaming. Here is what it does differently.",
         "ru": "Выберите видео из библиотеки Jellyfin, вставьте ссылку или откройте файл с диска: пауза, перемотка и воспроизведение у всех идут вместе. Это приложение для компьютера, а не вкладка браузера: без перекодирования, каждый смотрит оригинал."
       },
+      "story": [
+        {
+          "visual": "compare",
+          "title": {
+            "en": "Why not Syncplay or Discord?"
+          },
+          "text": {
+            "en": "Syncplay means two windows, everyone needing their own copy of the file and switching every video by hand. Discord is built for live streams: one dropped connection cuts the video, and the quality drops with it."
+          },
+          "compare": {
+            "columns": [
+              "Syncplay",
+              "Discord",
+              "Starsync"
+            ],
+            "rows": [
+              {
+                "label": {
+                  "en": "Everything in one window"
+                },
+                "values": [
+                  "no",
+                  "yes",
+                  "yes"
+                ]
+              },
+              {
+                "label": {
+                  "en": "Friends don't need their own copy"
+                },
+                "values": [
+                  "no",
+                  "yes",
+                  "yes"
+                ]
+              },
+              {
+                "label": {
+                  "en": "Original quality for everyone"
+                },
+                "values": [
+                  "yes",
+                  "no",
+                  "yes"
+                ]
+              },
+              {
+                "label": {
+                  "en": "A dropped connection doesn't cut the video"
+                },
+                "values": [
+                  "partly",
+                  "no",
+                  "yes"
+                ]
+              },
+              {
+                "label": {
+                  "en": "Next video without switching by hand"
+                },
+                "values": [
+                  "no",
+                  "partly",
+                  "yes"
+                ]
+              },
+              {
+                "label": {
+                  "en": "Instant sync and a proper ready check"
+                },
+                "values": [
+                  "partly",
+                  "no",
+                  "yes"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "visual": "recovery",
+          "title": {
+            "en": "Drops don't stop the movie"
+          },
+          "text": {
+            "en": "It rides out internet drops for as long as there's buffer. Whether the server or a viewer drops, both recover smoothly without getting in the way of the video, and the sync is so tight it often feels like nobody is on the other end."
+          },
+          "labels": {
+            "playback": {
+              "en": "Playback"
+            },
+            "network": {
+              "en": "Connection"
+            },
+            "lost": {
+              "en": "connection lost"
+            },
+            "buffer": {
+              "en": "plays from buffer"
+            },
+            "back": {
+              "en": "back in sync"
+            }
+          }
+        },
+        {
+          "visual": "sharing",
+          "title": {
+            "en": "Everyone can put something up"
+          },
+          "text": {
+            "en": "Anyone can share videos from their own Jellyfin without giving anyone access to their library, put up almost any link thanks to yt-dlp, or play a file straight from their PC. Only the host ever needs an open port."
+          },
+          "labels": {
+            "sources": [
+              {
+                "en": "Your Jellyfin"
+              },
+              {
+                "en": "Any link (yt-dlp)"
+              },
+              {
+                "en": "A file on your PC"
+              }
+            ],
+            "host": {
+              "en": "Host"
+            },
+            "port": {
+              "en": "the only open port"
+            },
+            "viewers": {
+              "en": "Everyone watching"
+            }
+          }
+        },
+        {
+          "visual": "image",
+          "title": {
+            "en": "The anime week at a glance"
+          },
+          "text": {
+            "en": "Browse the Jellyfin library with watch tracking on everything. The weekly schedule shows when each episode airs, what's already on Jellyfin and what you've watched, and lets you request new shows from your auto-downloader or Sonarr."
+          },
+          "src": "/apps/starsync/6-schedule.webp",
+          "alt": {
+            "en": "Starsync's weekly anime schedule"
+          }
+        }
+      ],
       "platforms": ["linux", "windows"],
       "tags": ["Flutter", "Desktop", "mpv", "Jellyfin"],
       "features": {
         "en": [
           "Play, pause and seek stay in sync for everyone",
-          "Jellyfin library, direct links and local files",
           "Links you put up are downloaded once for everyone",
           "Chat, quick chat and danmaku over the video",
           "Invite with one starsync:// link, no accounts",
