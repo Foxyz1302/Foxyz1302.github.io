@@ -1,0 +1,124 @@
+---
+// "Where does the video travel?" One tab per way of sharing (link through
+// you, file, host fetches, everyone fetches, Jellyfin): a diagram of the
+// byte flow with what each side downloads and uploads. Tabs are radio
+// buttons, so it works without scripts. Content: a `flow` section in
+// app.story (data.json).
+import { t, type Lang, type Text } from '../lib/data';
+
+type Edge = { from: string; to: string; label?: string };
+type Mode = { name: Text; tag?: Text; source: Text; text: Text; edges: Edge[]; loop?: Text; memory?: boolean; rates: Record<'you' | 'host' | 'friends', string> };
+interface Props { id: string; lang: Lang; labels: Record<string, Text>; modes: Mode[] }
+const { id, lang, labels, modes } = Astro.props;
+
+const L = (k: string) => t(labels[k], lang);
+const FY = [96, 150, 204]; // friends' circles
+const pt = {
+  source: { r: [170, 150], top: [170, 138] },
+  you: { l: [270, 68], b: [345, 98], t: [345, 38] },
+  host: { l: [270, 238], t: [345, 208], r: [420, 238] },
+};
+function edgePaths(e: Edge) {
+  const tos = e.to === 'friends' ? [0, 1, 2] : e.to.startsWith('friend:') ? [Number(e.to.split(':')[1])] : null;
+  if (tos) {
+    return tos.map((i, k) => {
+      const [x2, y2] = [588, FY[i]];
+      const d = e.from === 'host'
+        ? `M420 238 C 500 238, 500 ${y2}, ${x2} ${y2}`
+        : `M170 140 C 200 -45, 540 -45, ${x2} ${y2}`; // over the top, clear of You
+      const mid = e.from === 'host' ? [500, 284] : [500, 4];
+      return { d, label: k === tos.length - 1 ? e.label : undefined, mid };
+    });
+  }
+  const key = `${e.from}>${e.to}`;
+  const map: Record<string, [string, number[]]> = {
+    'source>you': ['M170 140 C 220 140, 220 68, 268 68', [205, 92]],
+    'source>host': ['M170 160 C 220 160, 220 238, 268 238', [205, 214]],
+    'you>host': ['M335 98 V 206', [300, 156]],
+    'host>you': ['M355 208 V 100', [390, 156]],
+  };
+  const [d, mid] = map[key];
+  return [{ d, label: e.label, mid }];
+}
+const tabCss = modes.map((_, i) => `.flow-${id}:has(#${id}-${i}:checked) .panel-${i} { display: grid; } .flow-${id}:has(#${id}-${i}:checked) label[for="${id}-${i}"] { background: var(--primary); color: var(--btn-fg); border-color: var(--primary); }`).join('\n');
+---
+<div class:list={['flow', `flow-${id}`]}>
+  <Fragment set:html={`<style>${tabCss}</style>`} />
+  <div class="tabs" role="tablist">
+    {modes.map((m, i) => (
+      <>
+        <input type="radio" name={id} id={`${id}-${i}`} checked={i === 0} class="sr" />
+        <label for={`${id}-${i}`}>{t(m.name, lang)}{m.tag && <small>{t(m.tag, lang)}</small>}</label>
+      </>
+    ))}
+  </div>
+
+  {modes.map((m, i) => (
+    <div class:list={['panel', `panel-${i}`]}>
+      <p class="mode-text">{t(m.text, lang)}</p>
+      <svg viewBox="0 -20 680 315" role="img" aria-label={t(m.text, lang)}>
+        <defs>
+          <marker id={`${id}-a${i}`} viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10z" class="head" /></marker>
+        </defs>
+
+        {m.edges.flatMap(edgePaths).map((p) => (
+          <g>
+            <path d={p.d} class="edge" marker-end={`url(#${id}-a${i})`} />
+            {p.label && <text x={p.mid[0]} y={p.mid[1]} class="edge-t" text-anchor="middle">{p.label}</text>}
+          </g>
+        ))}
+
+        <!-- source -->
+        <rect x="10" y="122" width="160" height="56" rx="12" class="node src" />
+        <text x="90" y="155" text-anchor="middle" class="node-t">{t(m.source, lang)}</text>
+
+        <!-- you -->
+        <rect x="270" y="38" width="150" height="60" rx="12" class="node you" />
+        <text x="345" y="66" text-anchor="middle" class="node-t">{L('you')}</text>
+        <text x="345" y="86" text-anchor="middle" class="rate">{m.rates.you}</text>
+        {m.loop && <text x="345" y="22" text-anchor="middle" class="loop">↺ {t(m.loop, lang)}</text>}
+
+        <!-- host -->
+        <rect x="270" y="208" width="150" height="60" rx="12" class="node host" />
+        <text x="345" y="234" text-anchor="middle" class="node-t on">{L('host')}</text>
+        <text x="345" y="254" text-anchor="middle" class="rate on">{m.rates.host}</text>
+        {m.memory && <text x="345" y="284" text-anchor="middle" class="sub">{L('hostSub')}</text>}
+
+        <!-- friends -->
+        {FY.map((y, k) => <circle cx="608" cy={y} r="18" class:list={['friend', `c${k}`]} />)}
+        <text x="608" y="246" text-anchor="middle" class="node-t">{L('friends')}</text>
+        <text x="608" y="264" text-anchor="middle" class="rate">{m.rates.friends}</text>
+      </svg>
+    </div>
+  ))}
+  <p class="unit">{L('unit')}</p>
+</div>
+
+<style>
+  .flow { display: grid; gap: 0.9rem; padding: 1.1rem; border: 1px solid var(--border-soft); border-radius: var(--radius); background: var(--card-bg); }
+  .sr { position: absolute; opacity: 0; pointer-events: none; }
+  .tabs { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .tabs label { cursor: pointer; font-size: 0.86rem; padding: 0.4rem 0.75rem; border-radius: 8px; border: 1px solid var(--border); color: var(--muted); display: inline-flex; gap: 0.4rem; align-items: baseline; transition: background 0.2s, color 0.2s; }
+  .tabs label:hover { color: var(--text); }
+  .tabs small { font-family: var(--mono); font-size: 0.66rem; opacity: 0.8; }
+  .sr:focus-visible + label { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .panel { display: none; gap: 0.6rem; }
+  .mode-text { color: var(--muted); max-width: 64ch; min-height: 3em; }
+  svg { width: 100%; height: auto; overflow: visible; }
+  .node { fill: var(--panel-strong); stroke: var(--border); }
+  .node.host { fill: var(--primary); stroke: none; }
+  .node-t { font: 700 16px var(--font-head); fill: var(--text); }
+  .node-t.on, .rate.on { fill: var(--btn-fg); }
+  .rate { font: 500 12.5px var(--mono); fill: var(--muted); }
+  .sub { font: 500 12px var(--font); fill: var(--muted); }
+  .loop { font: 500 12.5px var(--font); fill: var(--accent); }
+  .edge { fill: none; stroke: var(--accent); stroke-width: 2.5; stroke-dasharray: 7 6; animation: flow 1.2s linear infinite; }
+  .head { fill: var(--accent); }
+  .edge-t { font: 600 12.5px var(--mono); fill: var(--accent); paint-order: stroke; stroke: var(--card-bg); stroke-width: 5px; }
+  .friend { stroke: var(--card-bg); stroke-width: 3; }
+  .friend.c0 { fill: var(--accent); }
+  .friend.c1 { fill: var(--text); }
+  .friend.c2 { fill: var(--ok); }
+  .unit { font-size: 0.8rem; color: var(--muted); }
+  @keyframes flow { to { stroke-dashoffset: -26; } }
+</style>

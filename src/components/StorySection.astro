@@ -2,7 +2,7 @@
 // One illustrated section of an app page: title, a line or two of text and a
 // picture drawn in the theme's colours (a comparison table, the drop-recovery
 // timeline, the sharing diagram) or a screenshot. Content: app.story in data.json.
-import Icon from './Icon.astro';
+import FlowDiagram from './FlowDiagram.astro';
 import { t, type StorySection, type Lang } from '../lib/data';
 
 interface Props { section: StorySection; lang: Lang; index: number }
@@ -74,6 +74,8 @@ const mark = { yes: '✓', no: '✕', partly: '~' } as const;
       </svg>
     </figure>
   )}
+
+  {sec.visual === 'flow' && <FlowDiagram id={`flow${index}`} lang={lang} labels={sec.labels} modes={sec.modes} />}
 
   {sec.visual === 'image' && (
     <figure class="shot">

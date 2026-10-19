@@ -225,35 +225,246 @@
           }
         },
         {
-          "visual": "sharing",
+          "visual": "flow",
           "title": {
             "en": "Everyone can put something up"
           },
           "text": {
-            "en": "Anyone can share videos from their own Jellyfin without giving anyone access to their library, put up almost any link thanks to yt-dlp, or play a file straight from their PC. Only the host ever needs an open port."
+            "en": "Share a link, a file from your PC or something from your Jellyfin, without giving anyone access to your library. Pick a way below to see where the video actually travels and what it costs each connection."
           },
           "labels": {
-            "sources": [
-              {
-                "en": "Your Jellyfin"
-              },
-              {
-                "en": "Any link (yt-dlp)"
-              },
-              {
-                "en": "A file on your PC"
-              }
-            ],
+            "you": {
+              "en": "You"
+            },
             "host": {
               "en": "Host"
             },
-            "port": {
-              "en": "the only open port"
+            "hostSub": {
+              "en": "keeps a few minutes in memory"
             },
-            "viewers": {
-              "en": "Everyone watching"
+            "friends": {
+              "en": "Friends"
+            },
+            "unit": {
+              "en": "1× = the video's own bitrate; a 1080p episode is usually about 3–10 Mbit/s. Separately, everyone keeps a tiny sync connection to the host: just \"position, playing\"."
+            },
+            "down": "↓",
+            "up": "↑"
+          },
+          "modes": [
+            {
+              "name": {
+                "en": "A link, through you"
+              },
+              "tag": {
+                "en": "default"
+              },
+              "source": {
+                "en": "Website (yt-dlp)"
+              },
+              "text": {
+                "en": "Your app reads the video from the site once. The same stream plays for you and goes up to the host, which sends it on to everyone. If it plays for you, it plays for them, your cookies included."
+              },
+              "edges": [
+                {
+                  "from": "source",
+                  "to": "you",
+                  "label": "1×"
+                },
+                {
+                  "from": "you",
+                  "to": "host",
+                  "label": "1×"
+                },
+                {
+                  "from": "host",
+                  "to": "friends",
+                  "label": "1× each"
+                }
+              ],
+              "loop": {
+                "en": "plays for you from the same stream"
+              },
+              "rates": {
+                "you": "↓1×  ↑1×",
+                "host": "↓1×  ↑1× per friend",
+                "friends": "↓1×"
+              },
+              "memory": true
+            },
+            {
+              "name": {
+                "en": "A file on your PC"
+              },
+              "source": {
+                "en": "Your disk"
+              },
+              "text": {
+                "en": "The same path as a link: your app streams the file to the host, the host passes it on. Nothing is uploaded anywhere first, and nothing is converted."
+              },
+              "edges": [
+                {
+                  "from": "source",
+                  "to": "you"
+                },
+                {
+                  "from": "you",
+                  "to": "host",
+                  "label": "1×"
+                },
+                {
+                  "from": "host",
+                  "to": "friends",
+                  "label": "1× each"
+                }
+              ],
+              "loop": {
+                "en": "you play the file directly"
+              },
+              "rates": {
+                "you": "↑1×",
+                "host": "↓1×  ↑1× per friend",
+                "friends": "↓1×"
+              },
+              "memory": true
+            },
+            {
+              "name": {
+                "en": "A file on the host's PC"
+              },
+              "source": {
+                "en": "Host's disk"
+              },
+              "text": {
+                "en": "When you are the host, the file streams straight from your disk to everyone. Only the host's upload is used."
+              },
+              "edges": [
+                {
+                  "from": "source",
+                  "to": "host"
+                },
+                {
+                  "from": "host",
+                  "to": "you",
+                  "label": "1×"
+                },
+                {
+                  "from": "host",
+                  "to": "friends",
+                  "label": "1× each"
+                }
+              ],
+              "rates": {
+                "you": "↓1×",
+                "host": "↑1× per viewer",
+                "friends": "↓1×"
+              }
+            },
+            {
+              "name": {
+                "en": "The host fetches it"
+              },
+              "source": {
+                "en": "Website (yt-dlp)"
+              },
+              "text": {
+                "en": "The host downloads the link once into memory and serves everyone, you included. Handy when the host has the fast connection."
+              },
+              "edges": [
+                {
+                  "from": "source",
+                  "to": "host",
+                  "label": "1×"
+                },
+                {
+                  "from": "host",
+                  "to": "you",
+                  "label": "1×"
+                },
+                {
+                  "from": "host",
+                  "to": "friends",
+                  "label": "1× each"
+                }
+              ],
+              "rates": {
+                "you": "↓1×",
+                "host": "↓1×  ↑1× per viewer",
+                "friends": "↓1×"
+              },
+              "memory": true
+            },
+            {
+              "name": {
+                "en": "Everyone fetches it"
+              },
+              "source": {
+                "en": "Website (yt-dlp)"
+              },
+              "text": {
+                "en": "Each app loads the link by itself. The host carries no video at all, only the clock."
+              },
+              "edges": [
+                {
+                  "from": "source",
+                  "to": "you",
+                  "label": "1×"
+                },
+                {
+                  "from": "source",
+                  "to": "friends",
+                  "label": "1× each"
+                }
+              ],
+              "rates": {
+                "you": "↓1×",
+                "host": "sync only",
+                "friends": "↓1×"
+              }
+            },
+            {
+              "name": {
+                "en": "Jellyfin"
+              },
+              "source": {
+                "en": "Jellyfin"
+              },
+              "text": {
+                "en": "Everyone with an account plays it straight from Jellyfin with their own sign-in. Friends without one get it through the host's login, which never leaves the host."
+              },
+              "edges": [
+                {
+                  "from": "source",
+                  "to": "you",
+                  "label": "1×"
+                },
+                {
+                  "from": "source",
+                  "to": "friend:0"
+                },
+                {
+                  "from": "source",
+                  "to": "friend:1",
+                  "label": "own account"
+                },
+                {
+                  "from": "source",
+                  "to": "host",
+                  "label": "1× per guest"
+                },
+                {
+                  "from": "host",
+                  "to": "friend:2",
+                  "label": "guest"
+                }
+              ],
+              "rates": {
+                "you": "↓1×",
+                "host": "↓↑ 1× per guest",
+                "friends": "↓1×"
+              }
             }
-          }
+          ]
         },
         {
           "visual": "image",
@@ -270,14 +481,15 @@
         }
       ],
       "platforms": ["linux", "windows"],
-      "tags": ["Flutter", "Desktop", "mpv", "Jellyfin"],
+      "tags": ["Flutter", "Desktop", "mpv", "Jellyfin", "Anime4K"],
       "features": {
         "en": [
           "Play, pause and seek stay in sync for everyone",
           "Links you put up are downloaded once for everyone",
           "Chat, quick chat and danmaku over the video",
           "Invite with one starsync:// link, no accounts",
-          "Updates itself, with a What's new list"
+          "Updates itself, with a What's new list",
+          "Anime4K upscaling built in, plus your own .glsl shaders; each viewer picks their own"
         ],
         "ru": [
           "Пауза, перемотка и воспроизведение синхронны у всех",
