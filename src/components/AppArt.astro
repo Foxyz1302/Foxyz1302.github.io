@@ -23,7 +23,7 @@ const initials = app.name.split(/\s+/).filter((w) => /^[\p{L}\d]/u.test(w)).slic
 
 <style>
   .art { position: relative; display: block; flex: none; width: var(--size); height: var(--size); }
-  .tile { display: block; border-radius: 13px; }
+  .tile { display: block; overflow: visible; }
   .badge {
     position: absolute;
     right: calc(var(--badge) * -0.3);
