@@ -21,8 +21,8 @@ const isMain = (p: string) => !app.focus || (app.focus === 'mobile') === mobile.
     <div class="up-meta">
       <span class:list={['status', app.status]}>{s(`apps.status.${app.status}`)}</span>
       {app.kind && <span class="kind">{t(app.kind, lang)}</span>}
-      <span class="plats" title={app.platforms.map((p) => PLATFORM_LABEL[p]).join(', ')}>{app.platforms.map((p) => <span class:list={['plat', { main: isMain(p) }]}><Icon name={p} /></span>)}</span>
     </div>
+    <div class="plats" title={app.platforms.map((p) => PLATFORM_LABEL[p]).join(', ')}>{app.platforms.map((p) => <span class:list={['plat', { main: isMain(p) }]}><Icon name={p} /></span>)}</div>
   </div>
 </div>
 
@@ -46,8 +46,8 @@ const isMain = (p: string) => !app.focus || (app.focus === 'mobile') === mobile.
   .up-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem 0.8rem; margin-top: 0.3rem; }
   .up-meta .status { font-size: 0.68rem; }
   .kind { font-family: var(--mono); font-size: 0.66rem; color: var(--accent); border: 1px solid var(--border); border-radius: 4px; padding: 0.05rem 0.4rem; }
-  .plats { display: inline-flex; gap: 0.45rem; align-items: center; }
-  .plat { display: inline-flex; color: var(--muted); opacity: 0.4; }
-  .plat.main { color: var(--text); opacity: 1; }
+  .plats { display: flex; gap: 0.35rem; align-items: center; margin-top: 0.45rem; }
+  .plat { display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 7px; border: 1px solid transparent; color: var(--muted); }
+  .plat.main { color: var(--text); border-color: var(--accent); }
   .plats :global(svg) { width: 14px; height: 14px; }
 </style>
