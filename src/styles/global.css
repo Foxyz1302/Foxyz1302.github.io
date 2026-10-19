@@ -188,6 +188,154 @@
   --font-head: 'M PLUS Rounded 1c', var(--font);
 }
 
+/* Second round, around ink. */
+/* Ink with a stronger violet undertone. */
+[data-theme='dusk'] {
+  --primary-glow: transparent;
+  --bg-image: none;
+  --grain: 0.03;
+  --glow: transparent;
+  --orb: none;
+  --btn-radius: 10px;
+  --card-blur: none;
+  --card-shadow-hover: none;
+  --radius: 12px;
+  --font-head: 'M PLUS Rounded 1c', var(--font);
+  --bg: #16132a;
+  --bg-raised: #1e1a35;
+  --panel: #1e1a35;
+  --panel-strong: #252040;
+  --primary: #d8342f;
+  --primary-soft: rgba(216, 52, 47, 0.12);
+  --accent: #c3b2f2;
+  --border: rgba(214, 205, 245, 0.15);
+  --border-soft: rgba(214, 205, 245, 0.08);
+  --text: #f2ecf4;
+  --text-strong: #ffffff;
+  --muted: #a49db8;
+  --title-fill: linear-gradient(#f2ecf4, #f2ecf4);
+  --header-bg: rgba(22, 19, 42, 0.94);
+  --link-line: rgba(195, 178, 242, 0.45);
+  --btn-bg: #d8342f;
+  --btn-fg: #fff8ec;
+  --btn-shadow: 0 3px 0 #85191a;
+  --btn-shadow-hover: 0 5px 0 #85191a;
+  --card-border-hover: rgba(195, 178, 242, 0.55);
+  --chip-bg: rgba(195, 178, 242, 0.08);
+}
+
+/* Warm charcoal, like sumi ink: no purple at all. */
+[data-theme='sumi'] {
+  --primary-glow: transparent;
+  --bg-image: none;
+  --grain: 0.03;
+  --glow: transparent;
+  --orb: none;
+  --btn-radius: 10px;
+  --card-blur: none;
+  --card-shadow-hover: none;
+  --radius: 12px;
+  --font-head: 'M PLUS Rounded 1c', var(--font);
+  --bg: #141312;
+  --bg-raised: #1c1a18;
+  --panel: #1c1a18;
+  --panel-strong: #23211e;
+  --primary: #d23a2c;
+  --primary-soft: rgba(210, 58, 44, 0.12);
+  --accent: #e2b45a;
+  --border: rgba(240, 230, 212, 0.13);
+  --border-soft: rgba(240, 230, 212, 0.07);
+  --text: #efe6d4;
+  --text-strong: #fffaf0;
+  --muted: #a39b8d;
+  --title-fill: linear-gradient(#efe6d4, #efe6d4);
+  --header-bg: rgba(20, 19, 18, 0.94);
+  --link-line: rgba(226, 180, 90, 0.45);
+  --btn-bg: #d23a2c;
+  --btn-fg: #fff8ec;
+  --btn-shadow: 0 3px 0 #7d1f17;
+  --btn-shadow-hover: 0 5px 0 #7d1f17;
+  --card-border-hover: rgba(226, 180, 90, 0.55);
+  --chip-bg: rgba(226, 180, 90, 0.08);
+}
+
+/* Deep indigo, like aizome dye. */
+[data-theme='aizome'] {
+  --primary-glow: transparent;
+  --bg-image: none;
+  --grain: 0.03;
+  --glow: transparent;
+  --orb: none;
+  --btn-radius: 10px;
+  --card-blur: none;
+  --card-shadow-hover: none;
+  --radius: 12px;
+  --font-head: 'M PLUS Rounded 1c', var(--font);
+  --bg: #0f1526;
+  --bg-raised: #161d33;
+  --panel: #161d33;
+  --panel-strong: #1c243d;
+  --primary: #d8342f;
+  --primary-soft: rgba(216, 52, 47, 0.12);
+  --accent: #e8b54a;
+  --border: rgba(222, 230, 245, 0.14);
+  --border-soft: rgba(222, 230, 245, 0.07);
+  --text: #eef0f4;
+  --text-strong: #ffffff;
+  --muted: #9aa3b8;
+  --title-fill: linear-gradient(#f3ecdf, #f3ecdf);
+  --header-bg: rgba(15, 21, 38, 0.94);
+  --link-line: rgba(232, 181, 74, 0.45);
+  --btn-bg: #d8342f;
+  --btn-fg: #fff8ec;
+  --btn-shadow: 0 3px 0 #7f1b1a;
+  --btn-shadow-hover: 0 5px 0 #7f1b1a;
+  --card-border-hover: rgba(232, 181, 74, 0.55);
+  --chip-bg: rgba(232, 181, 74, 0.08);
+}
+
+/* Washi, softer: unbleached paper, thin lines, small shadows. */
+[data-theme='kinari'] {
+  color-scheme: light;
+  --bg: #efe9dd;
+  --bg-raised: #f7f2e8;
+  --panel: #f8f4ec;
+  --panel-strong: #fbf8f2;
+  --primary: #c13a30;
+  --primary-soft: rgba(193, 58, 48, 0.09);
+  --primary-glow: transparent;
+  --accent: #3b3466;
+  --border: rgba(35, 29, 56, 0.22);
+  --border-soft: rgba(35, 29, 56, 0.1);
+  --text: #231d38;
+  --text-strong: #120d24;
+  --muted: #655d70;
+  --ok: #1d8a4b;
+  --warn: #b26b00;
+  --bg-image: none;
+  --grain: 0.05;
+  --title-fill: linear-gradient(#231d38, #231d38);
+  --glow: transparent;
+  --orb: none;
+  --header-bg: rgba(239, 233, 221, 0.95);
+  --link-line: rgba(193, 58, 48, 0.45);
+  --btn-bg: #c13a30;
+  --btn-fg: #fbf8f2;
+  --btn-border: transparent;
+  --btn-shadow: 0 2px 0 #7f2219;
+  --btn-shadow-hover: 0 4px 0 #7f2219;
+  --btn-radius: 10px;
+  --card-border: rgba(35, 29, 56, 0.22);
+  --card-border-hover: rgba(35, 29, 56, 0.5);
+  --card-border-w: 1px;
+  --card-blur: none;
+  --card-shadow: 0 2px 0 rgba(35, 29, 56, 0.12);
+  --card-shadow-hover: 0 4px 0 rgba(35, 29, 56, 0.18);
+  --chip-bg: rgba(59, 52, 102, 0.06);
+  --radius: 12px;
+  --font-head: 'M PLUS Rounded 1c', var(--font);
+}
+
 *, *::before, *::after { box-sizing: border-box; }
 * { margin: 0; }
 
