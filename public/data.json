@@ -170,6 +170,7 @@
       "id": "vr-physics-controller",
       "name": "VR physics controller",
       "kind": { "en": "Godot package", "ru": "Пакет для Godot" },
+      "tech": "godot",
       "status": "in-development",
       "platforms": ["windows", "linux"],
       "focus": "desktop",

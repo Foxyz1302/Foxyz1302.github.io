@@ -71,7 +71,9 @@ export interface App {
   name: string;
   /** Only 'released' apps get a page, a Download button, an embed and a place in the card feed. */
   status: 'released' | 'in-development' | 'next' | 'prototype' | 'coming';
-  /** What the app is built for first: shown as "Phone first" / "Desktop first" on upcoming cards. */
+  /** What it is built with: 'flutter' (default) or 'godot'; a small logo on its tile. */
+  tech?: 'flutter' | 'godot';
+  /** What the app is built for first: its platform icons are bright, the rest dimmed. */
   focus?: 'mobile' | 'desktop';
   /** What it is when it is not an app, e.g. "Godot package" (shown on its card). */
   kind?: Text;

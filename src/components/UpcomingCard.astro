@@ -9,6 +9,9 @@ import { ui } from '../i18n/ui';
 interface Props { app: App; lang: Lang; delay?: number }
 const { app, lang, delay = 0 } = Astro.props;
 const s = ui(lang);
+// The platforms the app is built for first are bright, the others dimmed.
+const mobile = ['android', 'ios'];
+const isMain = (p: string) => !app.focus || (app.focus === 'mobile') === mobile.includes(p);
 ---
 <div class="up reveal" style={`--d:${delay}s`}>
   {app.icon ? <img src={app.icon} alt="" width="44" height="44" class="up-icon" /> : <AppArt app={app} size={44} />}
@@ -18,8 +21,7 @@ const s = ui(lang);
     <div class="up-meta">
       <span class:list={['status', app.status]}>{s(`apps.status.${app.status}`)}</span>
       {app.kind && <span class="kind">{t(app.kind, lang)}</span>}
-      {app.focus && <span class="focus">{s(`apps.focus.${app.focus}`)}</span>}
-      <span class="plats" title={app.platforms.map((p) => PLATFORM_LABEL[p]).join(', ')}>{app.platforms.map((p) => <Icon name={p} />)}</span>
+      <span class="plats" title={app.platforms.map((p) => PLATFORM_LABEL[p]).join(', ')}>{app.platforms.map((p) => <span class:list={['plat', { main: isMain(p) }]}><Icon name={p} /></span>)}</span>
     </div>
   </div>
 </div>
@@ -43,8 +45,9 @@ const s = ui(lang);
   .up p { font-size: 0.86rem; color: var(--muted); line-height: 1.45; }
   .up-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem 0.8rem; margin-top: 0.3rem; }
   .up-meta .status { font-size: 0.68rem; }
-  .focus { font-size: 0.72rem; color: var(--muted); }
   .kind { font-family: var(--mono); font-size: 0.66rem; color: var(--accent); border: 1px solid var(--border); border-radius: 4px; padding: 0.05rem 0.4rem; }
-  .plats { display: inline-flex; gap: 0.4rem; color: var(--muted); opacity: 0.7; }
-  .plats :global(svg) { width: 13px; height: 13px; }
+  .plats { display: inline-flex; gap: 0.45rem; align-items: center; }
+  .plat { display: inline-flex; color: var(--muted); opacity: 0.4; }
+  .plat.main { color: var(--text); opacity: 1; }
+  .plats :global(svg) { width: 14px; height: 14px; }
 </style>
