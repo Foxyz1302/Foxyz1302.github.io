@@ -16,6 +16,8 @@ const features = app.features?.[lang] ?? app.features?.en ?? [];
 // `code` and **bold** in changelog lines; everything else is escaped.
 const esc = (x: string) => x.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]!);
 const inline = (x: string) => esc(x).replace(/`([^`]+)`/g, '<code>$1</code>').replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+const plural = new Intl.PluralRules(lang);
+const changes = (n: number) => s(`apps.changes.${plural.select(n)}` as 'apps.changes.other').replace('{n}', String(n));
 const ytId = (src: string) => src.match(/(?:v=|youtu\.be\/|embed\/)([\w-]{11})/)?.[1] ?? src;
 ---
 <Base lang={lang} title={app.name} description={t(app.pitch, lang)}>
@@ -42,7 +44,7 @@ const ytId = (src: string) => src.match(/(?:v=|youtu\.be\/|embed\/)([\w-]{11})/)
           <div class="media-strip">
             {app.media.map((m) => (
               <figure class:list={['shot', { 'is-placeholder': m.placeholder }]}>
-                {m.type === 'image' && <img src={m.src} alt={t(m.alt, lang)} loading="lazy" />}
+                {m.type === 'image' && <a href={m.src} target="_blank" rel="noopener"><img src={m.src} alt={t(m.alt, lang)} loading="lazy" /></a>}
                 {m.type === 'video' && <video src={m.src} controls preload="metadata" playsinline />}
                 {m.type === 'youtube' && (
                   <iframe src={`https://www.youtube-nocookie.com/embed/${ytId(m.src)}`} title={t(m.alt, lang) || app.name} loading="lazy" allow="encrypted-media; picture-in-picture" allowfullscreen />
@@ -50,6 +52,7 @@ const ytId = (src: string) => src.match(/(?:v=|youtu\.be\/|embed\/)([\w-]{11})/)
               </figure>
             ))}
           </div>
+          {app.mediaCredit && <p class="muted credit">{t(app.mediaCredit, lang)}</p>}
         </section>
       )}
 
@@ -71,8 +74,12 @@ const ytId = (src: string) => src.match(/(?:v=|youtu\.be\/|embed\/)([\w-]{11})/)
           <ol class="log">
             {log.map((e, i) => (
               <li>
-                <details open={i === 0}>
-                  <summary><span class="mono ver">{e.version}</span><span class="sum">{e.summary}</span></summary>
+                <details>
+                  <summary>
+                    <span class="mono ver">{e.version}</span>
+                    <span class="sum">{i === 0 && <span class="latest">{s('apps.latest')}</span>}{e.summary || s('apps.changesOnly')}</span>
+                    <span class="count">{changes(e.groups.reduce((n, g) => n + g.items.length, 0))}<span class="chev" aria-hidden="true">›</span></span>
+                  </summary>
                   {e.groups.map((g) => (
                     <div class="log-group">
                       <span class:list={['log-tag', g.title.toLowerCase()]}>{g.title}</span>
@@ -126,8 +133,13 @@ const ytId = (src: string) => src.match(/(?:v=|youtu\.be\/|embed\/)([\w-]{11})/)
 
   .media-strip { display: flex; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 0.6rem; scrollbar-color: var(--primary) transparent; }
   .shot { flex: 0 0 min(100%, 640px); scroll-snap-align: start; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); background: #000; aspect-ratio: 16 / 10; }
+  .shot > a { display: block; width: 100%; height: 100%; cursor: zoom-in; }
   .shot img, .shot video, .shot iframe { width: 100%; height: 100%; object-fit: cover; border: 0; }
+  /* Screenshots keep their own shape (app windows differ); the frame letterboxes them. */
+  .shot img { object-fit: contain; }
+  .shot img[src$='.svg'] { object-fit: cover; }
   .shot.is-placeholder { outline-offset: -4px; }
+  .credit { font-size: 0.78rem; margin-top: 0.3rem; }
 
   .desc { font-size: 1.1rem; max-width: 68ch; }
   .h-sm { font-size: var(--step-2); margin-bottom: 1rem; }
@@ -140,6 +152,11 @@ const ytId = (src: string) => src.match(/(?:v=|youtu\.be\/|embed\/)([\w-]{11})/)
   .log details { border: 1px solid var(--border-soft); border-radius: var(--radius-sm); background: rgba(255, 255, 255, 0.02); }
   .log details[open] { border-color: var(--border); background: rgba(255, 255, 255, 0.035); }
   .log summary { cursor: pointer; list-style: none; display: flex; gap: 1rem; align-items: baseline; padding: 0.9rem 1rem; }
+  .log summary:hover .sum { color: white; }
+  .latest { font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ok); border: 1px solid rgba(74, 222, 128, 0.35); border-radius: 4px; padding: 0.05rem 0.4rem; margin-right: 0.6rem; vertical-align: 0.1em; }
+  .count { margin-left: auto; flex: none; display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--mono); font-size: 0.75rem; color: var(--muted); white-space: nowrap; }
+  .chev { font-size: 1.1rem; line-height: 1; transition: transform 0.2s; }
+  .log details[open] .chev { transform: rotate(90deg); }
   .log summary::-webkit-details-marker { display: none; }
   .ver { color: var(--accent); font-weight: 600; flex: none; }
   .sum { color: var(--muted); font-size: 0.92rem; }
@@ -159,6 +176,7 @@ const ytId = (src: string) => src.match(/(?:v=|youtu\.be\/|embed\/)([\w-]{11})/)
   }
   @media (max-width: 520px) {
     .app-hero { flex-direction: column; align-items: flex-start; }
-    .log summary { flex-direction: column; gap: 0.2rem; }
+    .log summary { flex-wrap: wrap; gap: 0.2rem 1rem; }
+    .log .sum { order: 3; flex-basis: 100%; }
   }
 </style>

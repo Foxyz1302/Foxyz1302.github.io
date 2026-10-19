@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 800">
-  <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2d2547"/><stop offset="1" stop-color="#14111d"/></linearGradient></defs>
-  <rect width="1280" height="800" fill="url(#g)"/>
-  <rect x="40" y="40" width="1200" height="720" rx="24" fill="none" stroke="#fbbf24" stroke-opacity="0.5" stroke-width="3" stroke-dasharray="18 12"/>
-  <circle cx="640" cy="370" r="70" fill="none" stroke="#ffffff" stroke-opacity="0.15" stroke-width="6"/>
-  <path d="M620 335 L620 405 L675 370 Z" fill="#fff1d6"/>
-  <text x="640" y="520" text-anchor="middle" font-family="sans-serif" font-size="40" fill="#fff1d6" fill-opacity="0.85">Starsync · Library</text>
-  <text x="640" y="570" text-anchor="middle" font-family="monospace" font-size="26" fill="#fbbf24">screenshot placeholder</text>
-</svg>

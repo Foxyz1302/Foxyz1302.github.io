@@ -41,7 +41,7 @@ const site = data.site.url;
       <p class="pitch">{t(app.pitch, lang)}</p>
       <div class="actions">
         <DownloadButton app={app} release={release} lang={lang} compact target="_blank" />
-        <a class="btn btn-ghost" href={new URL(href('/support/', lang), site).href} target="_blank" rel="noopener"><Icon name="heart" />{s('embed.support')}</a>
+        <a class="btn btn-ghost" data-goatcounter-click={`embed-support-${app.id}`} href={new URL(href('/support/', lang), site).href} target="_blank" rel="noopener"><Icon name="heart" />{s('embed.support')}</a>
       </div>
     </article>
     <script>

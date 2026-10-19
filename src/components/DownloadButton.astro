@@ -17,7 +17,7 @@ const rel = target === '_blank' ? 'noopener' : undefined;
 ---
 {fallback ? (
   <div class:list={['dl', { compact }]} data-dl data-assets={JSON.stringify(assets)} data-label-for={s('apps.downloadFor')}>
-    <a class="btn btn-primary dl-main" href={fallback} target={target} rel={rel} data-dl-main>
+    <a class="btn btn-primary dl-main" href={fallback} target={target} rel={rel} data-dl-main data-goatcounter-click={`download-${app.id}`}>
       <Icon name="download" /><span data-dl-text>{s('apps.download')}</span>
     </a>
     {!compact && (
@@ -32,7 +32,7 @@ const rel = target === '_blank' ? 'noopener' : undefined;
         <summary>{s('apps.otherPlatforms')}</summary>
         <ul>
           {assets.map((a) => (
-            <li><a href={a.url} target={target} rel={rel}><Icon name={a.platform} /><span>{a.label}</span><span class="mono muted">{a.name}</span><span class="mono muted">{a.sizeText}</span></a></li>
+            <li><a href={a.url} target={target} rel={rel} data-goatcounter-click={`download-${app.id}-${a.platform}`}><Icon name={a.platform} /><span>{a.label}</span><span class="mono muted">{a.name}</span><span class="mono muted">{a.sizeText}</span></a></li>
           ))}
         </ul>
         {release && <a class="dl-all" href={release.listUrl} target={target} rel={rel}>{s('apps.allReleases')} <Icon name="arrow" /></a>}

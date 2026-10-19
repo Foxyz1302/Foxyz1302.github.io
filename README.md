@@ -1,6 +1,6 @@
-# foxyz site
+# Foxyz site
 
-Personal site of foxyz: apps, commissions, resume and support. English and
+Personal site of Foxyz: apps, commissions, resume and support. English and
 Russian. Built with [Astro](https://astro.build) into plain static files and
 published on GitHub Pages.
 
@@ -76,6 +76,8 @@ Details, the Dart example and caching rules: [docs/CARD-FEED.md](docs/CARD-FEED.
 ```
 public/data.json        content
 public/                 images, icons, CNAME, embed.js (copied as-is)
+public/brand/           the logo (logo.webp/png) and square mark (mark.webp/png); made from
+                        ../logo-concepts/round6/source (R.html, U.html), see that folder
 src/content/<lang>/     Markdown texts
 src/i18n/ui.ts          short interface texts
 src/views/              one file per page (Home, Apps, AppPage, Commissions, About, Cv, Support, Embed)

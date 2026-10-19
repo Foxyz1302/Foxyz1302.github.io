@@ -32,7 +32,7 @@ const site = data.site.url.replace(/^https?:\/\//, '');
 
     <h2>{s('about.skills')}</h2>
     <dl class="cv-skills">
-      {r.skills.map((g) => <><dt>{t(g.group, lang)}</dt><dd>{g.items.join(' · ')}</dd></>)}
+      {r.skills.map((g) => <><dt>{t(g.group, lang)}</dt><dd>{g.items.map((x) => t(x, lang)).join(' · ')}</dd></>)}
     </dl>
 
     <h2>{s('about.projects')}</h2>
@@ -46,7 +46,7 @@ const site = data.site.url.replace(/^https?:\/\//, '');
     <h2>{s('about.timeline')}</h2>
     {r.timeline.map((e) => (
       <div class:list={['cv-item', { 'is-placeholder': e.placeholder }]}>
-        <h3>{t(e.what, lang)} <span>{e.when}</span></h3>
+        <h3>{t(e.what, lang)} <span>{t(e.when, lang)}</span></h3>
         {e.detail && <p>{t(e.detail, lang)}</p>}
       </div>
     ))}

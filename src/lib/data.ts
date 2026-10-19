@@ -15,6 +15,8 @@ export interface Contact {
   label: string;
   value: string;
   url: string;
+  /** How fast replies usually come on this channel; contacts are listed fastest first. */
+  replies?: Text;
   placeholder?: boolean;
 }
 
@@ -22,6 +24,8 @@ export interface Price {
   name: Text;
   from?: number;
   perHour?: number;
+  /** Shown instead of an amount, e.g. "by agreement". */
+  text?: Text;
   placeholder?: boolean;
 }
 
@@ -67,6 +71,8 @@ export interface App {
   name: string;
   /** Only 'released' apps get a page, a Download button, an embed and a place in the card feed. */
   status: 'released' | 'in-development' | 'coming';
+  /** What it is when it is not an app, e.g. "Godot package" (shown on its card). */
+  kind?: Text;
   /** The name is not final: shown with a "working title" note. */
   workingTitle?: boolean;
   featured?: boolean;
@@ -80,6 +86,8 @@ export interface App {
   features?: Partial<Record<Lang, string[]>>;
   requirements?: Text;
   media?: Media[];
+  /** Credit line under the screenshots (for example the license of a film shown in them). */
+  mediaCredit?: Text;
   releases?: {
     sources: ReleaseSource[];
     /** platform key (e.g. linux-x64) -> end of the asset's file name */
@@ -90,6 +98,8 @@ export interface App {
 
 export interface SiteData {
   site: { url: string; title: string; description: Text; sourceRepo?: string };
+  /** Visitor stats. goatcounter: the account code ("foxyz" for foxyz.goatcounter.com); empty = no stats script. */
+  analytics?: { goatcounter?: string };
   person: { name: string; role: Text; pitch: Text; languages?: Text; avatar: string };
   contact: Contact[];
   commissions: Commissions;
@@ -97,8 +107,8 @@ export interface SiteData {
   apps: App[];
   resume: {
     summary: Text;
-    skills: { group: Text; items: string[] }[];
-    timeline: { when: string; what: Text; detail?: Text; placeholder?: boolean }[];
+    skills: { group: Text; items: Text[] }[];
+    timeline: { when: Text; what: Text; detail?: Text; placeholder?: boolean }[];
   };
 }
 

@@ -16,7 +16,6 @@ const upcoming = data.apps.filter((a) => !isReleased(a)).sort((a, b) => (rank[a.
 ---
 <Base lang={lang} title={s('apps.title')}>
   <div class="container page-head">
-    <span class="eyebrow">// {s('apps.title')}</span>
     <h1 class="gradient-text">{s('apps.title')}</h1>
     <p class="lead">{s('apps.lead')}</p>
   </div>
@@ -27,7 +26,7 @@ const upcoming = data.apps.filter((a) => !isReleased(a)).sort((a, b) => (rank[a.
   </section>
   {upcoming.length > 0 && (
     <section class="container section-tight" id="upcoming">
-      <span class="eyebrow">// {s('apps.upcoming')}</span>
+      <span class="eyebrow">{s('apps.upcoming')}</span>
       <p class="muted up-lead">{s('apps.upcomingLead')}</p>
       <div class="grid up-grid">
         {upcoming.map((app, i) => <UpcomingCard app={app} lang={lang} delay={Math.min(i, 6) * 0.04} />)}

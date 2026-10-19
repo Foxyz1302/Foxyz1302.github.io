@@ -24,7 +24,7 @@ const crypto = await Promise.all(
 ---
 <Base lang={lang} title={s('sup.title')} description={page.frontmatter.lead}>
   <div class="container page-head">
-    <span class="eyebrow">// {s('sup.title')}</span>
+    <span class="eyebrow">{s('sup.title')}</span>
     <h1 class="gradient-text">{page.frontmatter.title}</h1>
     <p class="lead">{page.frontmatter.lead}</p>
   </div>
@@ -32,7 +32,7 @@ const crypto = await Promise.all(
   <section class="container section-tight">
     <div class="grid links">
       {links.map((o, i) => (
-        <a href={o.url} target="_blank" rel="noopener" class:list={['card link-opt reveal', { first: i === 0, 'is-placeholder': o.placeholder }]} style={`--d:${i * 0.06}s`}>
+        <a href={o.url} target="_blank" rel="noopener" data-goatcounter-click={`support-${o.id}`} class:list={['card link-opt reveal', { first: i === 0, 'is-placeholder': o.placeholder }]} style={`--d:${i * 0.06}s`}>
           <div class="opt-icon"><Icon name={o.id === 'kofi' ? 'kofi' : 'heart'} /></div>
           <div class="opt-text">
             <h3>{t(o.name, lang)} {o.placeholder && <span class="todo-badge">{s('todo')}</span>}</h3>
@@ -59,7 +59,7 @@ const crypto = await Promise.all(
               {o.preferred && <span class="chip">{s('sup.preferred')}</span>}
             </div>
             {o.note && <p class="muted coin-note">{t(o.note, lang)}</p>}
-            <button class="addr mono" type="button" data-copy={o.address} data-copied={s('sup.copied')} title={s('sup.copy')}>
+            <button class="addr mono" type="button" data-goatcounter-click={`copy-${o.id}`} data-copy={o.address} data-copied={s('sup.copied')} title={s('sup.copy')}>
               <span>{o.address}</span><Icon name="copy" />
             </button>
             <details class="qr">

@@ -17,6 +17,7 @@ const s = ui(lang);
     <p>{t(app.pitch, lang)}</p>
     <div class="up-meta">
       <span class:list={['status', app.status]}>{s(`apps.status.${app.status}`)}</span>
+      {app.kind && <span class="kind">{t(app.kind, lang)}</span>}
       <span class="plats" title={app.platforms.map((p) => PLATFORM_LABEL[p]).join(', ')}>{app.platforms.map((p) => <Icon name={p} />)}</span>
     </div>
   </div>
@@ -41,6 +42,7 @@ const s = ui(lang);
   .up p { font-size: 0.86rem; color: var(--muted); line-height: 1.45; }
   .up-meta { display: flex; align-items: center; gap: 0.8rem; margin-top: 0.3rem; }
   .up-meta .status { font-size: 0.68rem; }
+  .kind { font-family: var(--mono); font-size: 0.66rem; color: var(--accent); border: 1px solid var(--border); border-radius: 4px; padding: 0.05rem 0.4rem; }
   .plats { display: inline-flex; gap: 0.4rem; color: var(--muted); opacity: 0.7; }
   .plats :global(svg) { width: 13px; height: 13px; }
 </style>

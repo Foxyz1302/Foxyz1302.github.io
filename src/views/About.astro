@@ -17,7 +17,7 @@ const projects = data.apps.filter((a) => a.status === 'released');
   <div class="container page-head about-head">
     <img src={data.person.avatar} alt="" width="120" height="120" class="avatar reveal" />
     <div>
-      <span class="eyebrow">// {s('about.title')}</span>
+      <span class="eyebrow">{s('about.title')}</span>
       <h1 class="gradient-text">{page.frontmatter.title}</h1>
       <p class="lead">{t(r.summary, lang)}</p>
       <div class="btn-row">
@@ -37,7 +37,7 @@ const projects = data.apps.filter((a) => a.status === 'released');
       {r.skills.map((g, i) => (
         <div class="card reveal" style={`--d:${i * 0.06}s`}>
           <h3>{t(g.group, lang)}</h3>
-          <div class="chips">{g.items.map((x) => <span class="chip plain">{x}</span>)}</div>
+          <div class="chips">{g.items.map((x) => <span class="chip plain">{t(x, lang)}</span>)}</div>
         </div>
       ))}
     </div>
@@ -48,7 +48,7 @@ const projects = data.apps.filter((a) => a.status === 'released');
     <ol class="timeline">
       {r.timeline.map((e) => (
         <li class:list={['reveal', { 'is-placeholder': e.placeholder }]}>
-          <span class="when mono">{e.when}</span>
+          <span class="when mono">{t(e.when, lang)}</span>
           <div>
             <h3>{t(e.what, lang)} {e.placeholder && <span class="todo-badge">{s('todo')}</span>}</h3>
             {e.detail && <p class="muted">{t(e.detail, lang)}</p>}
@@ -67,7 +67,7 @@ const projects = data.apps.filter((a) => a.status === 'released');
 <style>
   .about-head { display: flex; gap: clamp(1.2rem, 4vw, 2.8rem); align-items: center; }
   .about-head .lead { margin: 0.6rem 0 1.4rem; }
-  .avatar { width: clamp(88px, 14vw, 150px); border-radius: 32px; padding: 14px; background: var(--panel); border: 1px solid var(--border); box-shadow: 0 0 60px -20px var(--primary-glow); flex: none; }
+  .avatar { width: clamp(96px, 14vw, 150px); height: auto; filter: drop-shadow(0 12px 40px rgba(189, 0, 255, 0.35)); }
   .h-sm { font-size: var(--step-2); margin-bottom: 1rem; }
   .skills { grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr)); }
   .skills h3 { margin-bottom: 0.8rem; font-size: 1.05rem; }

@@ -16,7 +16,7 @@ const money = (n: number) => new Intl.NumberFormat(lang === 'ru' ? 'ru-RU' : 'en
 ---
 <Base lang={lang} title={s('com.title')} description={page.frontmatter.lead}>
   <div class="container page-head">
-    <span class="eyebrow">// {s('com.title')}</span>
+    <span class="eyebrow">{s('com.title')}</span>
     <h1 class="gradient-text">{page.frontmatter.title}</h1>
     <p class="lead">{page.frontmatter.lead}</p>
   </div>
@@ -28,23 +28,24 @@ const money = (n: number) => new Intl.NumberFormat(lang === 'ru' ? 'ru-RU' : 'en
       <div class:list={['card status-card reveal', c.status]}>
         <span class:list={['status', c.status]}>{s(`com.status.${c.status}`)}</span>
         {c.slots != null && c.status !== 'closed' && (
-          <p class:list={['slots', { 'is-placeholder': c.slotsPlaceholder }]}><strong>{c.slots}</strong> {s('com.slots')}</p>
+          <p class:list={['slots', { 'is-placeholder': c.slotsPlaceholder }]}><strong>{c.slots}</strong> {s(`com.slots.${new Intl.PluralRules(lang).select(c.slots)}` as 'com.slots.other')}</p>
         )}
         {c.note && <p class="muted">{t(c.note, lang)}</p>}
-        {main && <a class="btn btn-primary" href={main.url} target="_blank" rel="noopener"><Icon name={main.id} />{s('com.write')} {main.label}</a>}
+        {main && <a class="btn btn-primary" data-goatcounter-click={`hire-${main.id}`} href={main.url} target={main.id === 'email' ? undefined : '_blank'} rel="noopener"><Icon name={main.id} />{main.id === 'email' ? s('com.writeEmail') : `${s('com.write')} ${main.label}`}</a>}
       </div>
     </aside>
   </div>
 
   <section class="container section-tight">
     <h2 class="h-sm reveal">{s('com.prices')}</h2>
-    <div class="grid grid-3">
+    <div class:list={['grid', c.prices.length === 2 ? 'grid-2' : 'grid-3']}>
       {c.prices.map((p, i) => (
         <div class:list={['card price reveal', { 'is-placeholder': p.placeholder }]} style={`--d:${i * 0.06}s`}>
           <h3>{t(p.name, lang)} {p.placeholder && <span class="todo-badge">{s('todo')}</span>}</h3>
           <p class="amount">
             {p.from != null && <><span class="muted">{s('com.from')}</span> {money(p.from)}</>}
             {p.perHour != null && <>{money(p.perHour)} <span class="muted">{s('com.perHour')}</span></>}
+            {p.text && <span class="as-text">{t(p.text, lang)}</span>}
           </p>
         </div>
       ))}
@@ -60,8 +61,8 @@ const money = (n: number) => new Intl.NumberFormat(lang === 'ru' ? 'ru-RU' : 'en
       </div>
       <div class="contacts">
         {[main, ...others].filter(Boolean).map((x) => (
-          <a class:list={['contact', { 'is-placeholder': x!.placeholder }]} href={x!.url} target="_blank" rel="noopener">
-            <Icon name={x!.id} /><span>{x!.label}</span><span class="mono muted">{x!.value}</span>
+          <a class:list={['contact', { 'is-placeholder': x!.placeholder }]} data-goatcounter-click={`contact-${x!.id}`} href={x!.url} target={x!.url.startsWith('mailto:') ? undefined : '_blank'} rel="noopener">
+            <Icon name={x!.id} /><span class="c-name">{x!.label}<small class="muted">{x!.replies && `${s('com.replies')} ${t(x!.replies, lang)}`}</small></span><span class="mono muted">{x!.value}</span>
           </a>
         ))}
       </div>
@@ -77,6 +78,7 @@ const money = (n: number) => new Intl.NumberFormat(lang === 'ru' ? 'ru-RU' : 'en
   .slots { font-size: 1.1rem; }
   .slots strong { font-size: 2.2rem; font-weight: 700; margin-right: 0.2rem; }
   .h-sm { font-size: var(--step-2); margin-bottom: 1rem; }
+  .as-text { font-size: 1.35rem; }
   .price h3 { font-size: 1.02rem; color: var(--muted); font-weight: 500; }
   .amount { font-size: 1.8rem; font-weight: 700; margin-top: 0.5rem; letter-spacing: -0.02em; }
   .amount .muted { font-size: 0.9rem; font-weight: 500; }
@@ -86,6 +88,8 @@ const money = (n: number) => new Intl.NumberFormat(lang === 'ru' ? 'ru-RU' : 'en
   .contact { display: grid; grid-template-columns: 22px auto 1fr; gap: 0.7rem; align-items: center; padding: 0.75rem 1rem; border-radius: var(--radius-sm); background: rgba(0, 0, 0, 0.25); border: 1px solid var(--border-soft); transition: border-color 0.2s; }
   .contact:hover { border-color: var(--primary); }
   .contact :global(svg) { width: 20px; height: 20px; color: var(--accent); }
+  .c-name { display: grid; line-height: 1.2; }
+  .c-name small { font-size: 0.74rem; }
   .contact .mono { font-size: 0.8rem; text-align: right; overflow: hidden; text-overflow: ellipsis; }
   @media (max-width: 860px) {
     .com-body, .contact-card { grid-template-columns: 1fr; }

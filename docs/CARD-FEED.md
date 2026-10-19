@@ -37,7 +37,7 @@ present. Pick the app's language, fall back to `en`. All URLs are absolute.
   "updated": "2026-10-18T18:22:32Z", // ISO 8601 build time
   "refreshAfterHours": 24,           // int, how long a cached copy stays fresh
   "developer": {
-    "name": "foxyz",                 // string
+    "name": "Foxyz",                 // string
     "role": L10n,
     "pitch": L10n,
     "avatar": "https://…/avatar-256.png", // PNG, square, 256 px
@@ -85,7 +85,7 @@ Placeholders from `data.json` (`"placeholder": true`) never appear in the feed, 
 - GitHub Pages serves it with `Cache-Control: max-age=600` and an `ETag`;
   sending `If-None-Match` is a nice extra, not required.
 - The card is never shown unasked: the app opens it from its "made by
-  foxyz" signature (see the brief).
+  Foxyz" signature (see the brief).
 
 ### Reading it in Dart
 

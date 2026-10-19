@@ -1,5 +1,5 @@
 /*
- * foxyz app card embed.
+ * Foxyz app card embed.
  *
  *   <script src="https://donations.foxyz.ru/embed.js" data-app="starsync" async></script>
  *

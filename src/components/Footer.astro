@@ -1,28 +1,31 @@
 ---
 import Icon from './Icon.astro';
+import Flag from './Flag.astro';
 import { data, href, type Lang } from '../lib/data';
 import { ui } from '../i18n/ui';
 
-interface Props { lang: Lang }
-const { lang } = Astro.props;
+interface Props { lang: Lang; path: string }
+const { lang, path } = Astro.props;
+const other: Lang = lang === 'en' ? 'ru' : 'en';
 const s = ui(lang);
 const contacts = data.contact.filter((c) => !c.placeholder);
 ---
 <footer class="site-footer">
   <div class="container foot">
     <div class="foot-id">
-      <a class="foot-brand" href={href('/', lang)}><img src="/mark.svg" alt="" width="22" height="22" />{data.person.name}</a>
-      <p class="muted">{s('footer.made')}</p>
+      <a class="foot-brand" href={href('/', lang)}><img src="/brand/mark.webp" alt="" width="26" height="26" />{data.person.name}</a>
+      <p class="muted">© {new Date().getFullYear()} {data.person.name}</p>
     </div>
     <nav class="foot-links">
       <a href={href('/apps/', lang)}>{s('nav.apps')}</a>
       <a href={href('/commissions/', lang)}>{s('nav.commissions')}</a>
       <a href={href('/about/', lang)}>{s('nav.about')}</a>
       <a href={href('/support/', lang)}>{s('nav.support')}</a>
+      <a class="foot-lang" href={href(path, other)} hreflang={other} lang={other} data-lang-link={other}><Flag lang={other} />{s('lang.switch')}</a>
     </nav>
     <div class="foot-social">
       {contacts.map((c) => (
-        <a href={c.url} aria-label={c.label} title={`${c.label}: ${c.value}`} rel="me noopener" target="_blank"><Icon name={c.id} /></a>
+        <a href={c.url} aria-label={c.label} title={`${c.label}: ${c.value}`} rel="me noopener" target={c.url.startsWith('mailto:') ? undefined : '_blank'}><Icon name={c.id} /></a>
       ))}
       {data.site.sourceRepo && <a href={data.site.sourceRepo} title={s('footer.source')} target="_blank" rel="noopener"><Icon name="code" /></a>}
     </div>
@@ -37,6 +40,7 @@ const contacts = data.contact.filter((c) => !c.placeholder);
   .foot-id p { font-size: 0.82rem; margin-top: 0.2rem; }
   .foot-links { display: flex; flex-wrap: wrap; gap: 0.3rem 1.2rem; color: var(--muted); }
   .foot-links a:hover { color: white; }
+  .foot-lang { display: inline-flex; align-items: center; gap: 0.45rem; }
   .foot-social { display: flex; gap: 0.5rem; }
   .foot-social a { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--border-soft); color: var(--muted); transition: 0.2s; }
   .foot-social a:hover { color: white; border-color: var(--primary); box-shadow: 0 0 16px -4px var(--primary-glow); }

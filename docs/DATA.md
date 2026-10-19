@@ -24,6 +24,12 @@ schema is in `src/lib/data.ts` (keep the two in step).
 | `description` | Text | Default page description for search and link previews. |
 | `sourceRepo` | string? | Link in the footer. |
 
+## `analytics`
+
+| Field | Type | Meaning |
+|---|---|---|
+| `goatcounter` | string | The GoatCounter account code: `"foxyz"` sends visits to `https://foxyz.goatcounter.com`. Empty means no stats script at all. GoatCounter uses no cookies, so no consent banner is needed. Besides page views it counts clicks on buttons marked `data-goatcounter-click` (downloads `download-<app>[-<platform>]`, donation links `support-<id>`, address copies `copy-<id>`, contact links `hire-<id>` / `contact-<id>`, embed Support `embed-support-<app>`); they show up as events in the dashboard. |
+
 ## `person`
 
 | Field | Type | Meaning |
@@ -49,7 +55,7 @@ display order.
 | `slotsPlaceholder` | bool? | Slots number not decided (the feed sends `null`). |
 | `note` | Text? | One or two lines under the status. |
 | `currency` | string | ISO code for prices, e.g. `USD`. |
-| `prices[]` | `{ name: Text, from?: number, perHour?: number, placeholder? }` | Price guide cards. |
+| `prices[]` | `{ name: Text, from?: number, perHour?: number, text?: Text, placeholder? }` | Price guide cards; `text` (e.g. "By agreement") shows instead of an amount. |
 | `contact` | string | `id` of the contact entry for the main button. |
 
 Longer texts are Markdown: `src/content/<lang>/commissions.md`.
@@ -69,8 +75,9 @@ Longer texts are Markdown: `src/content/<lang>/commissions.md`.
 |---|---|---|
 | `id` | string | URL part: `/apps/<id>/`, `/embed/<id>/`. Never change it once apps use it. |
 | `name` | string | |
-| `status` | `"released"` \| `"in-development"` \| `"coming"` | Only `released` apps get a page, a Download button, an embed and a place in the card feed and on Home. The others show as small cards under "In the works" on the Apps page (no link, no download). To release one: set `"released"` and add `icon`, `releases` (and `features`, `media`, `changelog`). |
-| `workingTitle` | bool? | The name is not final; shown with a "working title" note. |
+| `status` | `"released"` \| `"in-development"` \| `"coming"` | Only `released` apps get a page, a Download button, an embed and a place in the card feed and on Home. The others show as small cards under "In the works" on the Apps page (no link, no download): `in-development` is labelled "Early version" (it runs, but is bare-bones), `coming` means not started yet. To release one: set `"released"` and add `icon`, `releases` (and `features`, `media`, `changelog`). |
+| `mediaCredit` | Text? | Small credit line under the screenshots, e.g. the license of a film shown in them. |
+| `workingTitle` | bool? | The name is not final; shown with a "working title" note. Not needed while `name` just says what the app does ("Pixiv app"). |
 | `featured` | bool? | Shown on Home (first three released). |
 | `placeholder` | bool? | |
 | `icon` | string? | Square icon. Without one, generated art (initials on a violet tile) is drawn. If it is an `.svg`, put a `.png` with the same name next to it: the card feed sends the PNG. |
@@ -88,7 +95,7 @@ Longer texts are Markdown: `src/content/<lang>/commissions.md`.
 
 ## `resume`
 
-`summary: Text`, `skills[]: { group: Text, items: string[] }`,
-`timeline[]: { when, what: Text, detail?: Text, placeholder? }`. Used by
+`summary: Text`, `skills[]: { group: Text, items: Text[] }`,
+`timeline[]: { when: Text, what: Text, detail?: Text, placeholder? }`. Used by
 About and the printable CV (`/about/cv/`). The free-text part of About is
 `src/content/<lang>/about.md`.
