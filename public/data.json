@@ -265,7 +265,7 @@
           },
           "src": "/apps/starsync/6-schedule.webp",
           "alt": {
-            "en": "Starsync's weekly anime schedule"
+            "en": "Starsync's weekly anime schedule: a column per day with posters and air times, episodes already on Jellyfin marked as watched, and countdowns for upcoming ones."
           }
         }
       ],
