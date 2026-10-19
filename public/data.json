@@ -171,77 +171,88 @@
       "name": "VR physics controller",
       "kind": { "en": "Godot package", "ru": "Пакет для Godot" },
       "status": "in-development",
-      "platforms": [],
+      "platforms": ["windows", "linux"],
+      "focus": "desktop",
       "pitch": { "en": "A full-body, physics-driven VR player for Godot, in C#: your whole body is a ragdoll that touches, pushes and climbs the world.", "ru": "Физический VR-игрок для Godot на C#: всё тело — рэгдолл, который касается мира, толкает его и карабкается." }
     },
     {
       "id": "rimworld-mod-manager",
       "name": "RimWorld mod manager",
       "status": "in-development",
-      "platforms": ["linux", "windows"],
+      "platforms": ["windows", "linux"],
+      "focus": "desktop",
       "pitch": { "en": "Sort, enable and check RimWorld mods from one desktop window.", "ru": "Сортировка, включение и проверка модов RimWorld в одном окне." }
     },
     {
       "id": "elin-mod-manager",
       "name": "Elin mod manager",
-      "status": "in-development",
-      "platforms": ["windows"],
+      "status": "next",
+      "platforms": ["windows", "linux"],
+      "focus": "desktop",
       "pitch": { "en": "Manage and order mods for Elin.", "ru": "Управление модами Elin и их порядком загрузки." }
     },
     {
       "id": "deadlock-mod-manager",
       "name": "Deadlock mod manager",
-      "status": "in-development",
-      "platforms": ["linux", "windows"],
+      "status": "prototype",
+      "platforms": ["windows", "linux"],
+      "focus": "desktop",
       "pitch": { "en": "Install, switch and remove Deadlock mods.", "ru": "Установка, переключение и удаление модов Deadlock." }
     },
     {
       "id": "imagen",
       "name": "SwarmUI app",
-      "status": "in-development",
-      "platforms": ["linux", "windows", "android"],
+      "status": "prototype",
+      "platforms": ["android", "windows", "linux"],
+      "focus": "mobile",
       "pitch": { "en": "Generate images with SwarmUI on your own server.", "ru": "Генерация изображений через SwarmUI на своём сервере." }
     },
     {
       "id": "meme-collector",
       "name": "Meme collector",
-      "status": "in-development",
-      "platforms": ["windows"],
+      "status": "prototype",
+      "platforms": ["windows", "linux"],
+      "focus": "desktop",
       "pitch": { "en": "Search your saved memes and reaction GIFs and copy one in a keystroke.", "ru": "Поиск по своим мемам и GIF-реакциям и копирование одним нажатием." }
     },
     {
       "id": "torrent-client",
       "name": "Torrent client",
-      "status": "in-development",
-      "platforms": ["windows"],
+      "status": "prototype",
+      "platforms": ["windows", "linux"],
+      "focus": "desktop",
       "pitch": { "en": "A torrent client that can play video while it downloads.", "ru": "Торрент-клиент, который воспроизводит видео ещё во время загрузки." }
     },
     {
       "id": "comfy-client",
       "name": "ComfyUI app",
-      "status": "in-development",
-      "platforms": ["linux", "android"],
+      "status": "prototype",
+      "platforms": ["android", "linux"],
+      "focus": "mobile",
       "pitch": { "en": "A native app for running ComfyUI workflows.", "ru": "Нативное приложение для запуска сценариев ComfyUI." }
     },
     {
       "id": "kemono-app",
       "name": "Kemono app",
-      "status": "in-development",
-      "platforms": ["linux", "windows", "android"],
+      "status": "prototype",
+      "platforms": ["android", "windows", "linux"],
+      "focus": "mobile",
       "pitch": { "en": "A browser app for an online creator archive.", "ru": "Приложение для просмотра онлайн-архива авторов." }
     },
     {
       "id": "booru-browser",
       "name": "Booru browser",
-      "status": "in-development",
-      "platforms": ["windows", "android"],
+      "status": "prototype",
+      "platforms": ["android", "windows", "linux"],
+      "focus": "mobile",
       "pitch": { "en": "A fast browser for image-board sites.", "ru": "Быстрый просмотрщик сайтов-имиджбордов." }
     },
     {
       "id": "pixiv-app",
       "name": "Pixiv app",
-      "status": "in-development",
-      "platforms": ["linux", "windows", "android"],
+      "status": "prototype",
+      "platforms": ["android", "windows", "linux"],
+      "focus": "mobile",
       "pitch": { "en": "A client for browsing an illustration community.", "ru": "Клиент для просмотра сообщества иллюстраторов." }
     }
   ],

@@ -1,34 +1,24 @@
 ---
-// Placeholder art for apps without an icon: a dark tile in a violet shade
-// picked from the app id, soft orbit lines and the title's initials.
+// Placeholder art for apps without an icon: a flat tile in the theme's
+// colours with the title's initials and a small stamp in the corner (a nod to
+// the logo). Which corner, and whether the stamp is red or gold, comes from
+// the app id, so neighbouring tiles differ a little.
 import type { App } from '../lib/data';
 
 interface Props { app: App; size?: number }
 const { app, size = 56 } = Astro.props;
 let h = 0;
 for (const ch of app.id) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
-const hue = 255 + (h % 70); // violet to magenta
-const tilt = (h >> 3) % 360;
+const right = h % 2 === 0;
+const stamp = (h >> 1) % 3 === 0 ? 'var(--accent)' : 'var(--primary)';
 const initials = app.name.split(/\s+/).filter((w) => /^[\p{L}\d]/u.test(w)).slice(0, 2).map((w) => w[0].toUpperCase()).join('');
-const gid = `art-${app.id}`;
 ---
 <svg class="app-art" viewBox="0 0 64 64" width={size} height={size} role="img" aria-label={app.name}>
-  <defs>
-    <linearGradient id={gid} x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color={`hsl(${hue} 60% 22%)`} />
-      <stop offset="1" stop-color={`hsl(${hue + 20} 50% 8%)`} />
-    </linearGradient>
-  </defs>
-  <rect width="64" height="64" rx="15" fill={`url(#${gid})`} />
-  <g fill="none" stroke={`hsl(${hue} 90% 72%)`} stroke-opacity="0.22" transform={`rotate(${tilt} 32 32)`}>
-    <ellipse cx="32" cy="32" rx="26" ry="11" />
-    <ellipse cx="32" cy="32" rx="18" ry="24" stroke-opacity="0.12" />
-    <circle cx="57" cy="29" r="2" stroke="none" fill={`hsl(${hue} 95% 78%)`} fill-opacity="0.7" />
-  </g>
-  <rect x="0.5" y="0.5" width="63" height="63" rx="14.5" fill="none" stroke={`hsl(${hue} 90% 70%)`} stroke-opacity="0.18" />
-  <text x="32" y="38.5" text-anchor="middle" font-family="'JetBrains Mono Variable', ui-monospace, monospace" font-weight="600" font-size="17" fill={`hsl(${hue} 80% 88%)`} fill-opacity="0.85">{initials}</text>
+  <rect x="0.5" y="0.5" width="63" height="63" rx="13" style="fill: var(--panel-strong); stroke: var(--border)" />
+  <rect x={right ? 46 : 8} y="8" width="10" height="10" rx="2.5" transform={`rotate(${right ? 8 : -8} ${right ? 51 : 13} 13)`} style={`fill: ${stamp}`} />
+  <text x="32" y="41" text-anchor="middle" font-weight="800" font-size="19" style="font-family: var(--font-head); fill: var(--text)">{initials}</text>
 </svg>
 
 <style>
-  .app-art { display: block; flex: none; border-radius: 15px; }
+  .app-art { display: block; flex: none; border-radius: 13px; }
 </style>

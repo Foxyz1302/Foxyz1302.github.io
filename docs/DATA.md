@@ -75,7 +75,7 @@ Longer texts are Markdown: `src/content/<lang>/commissions.md`.
 |---|---|---|
 | `id` | string | URL part: `/apps/<id>/`, `/embed/<id>/`. Never change it once apps use it. |
 | `name` | string | |
-| `status` | `"released"` \| `"in-development"` \| `"coming"` | Only `released` apps get a page, a Download button, an embed and a place in the card feed and on Home. The others show as small cards under "In the works" on the Apps page (no link, no download): `in-development` is labelled "Early version" (it runs, but is bare-bones), `coming` means not started yet. To release one: set `"released"` and add `icon`, `releases` (and `features`, `media`, `changelog`). |
+| `status` | `"released"` \| `"in-development"` \| `"coming"` | Only `released` apps get a page, a Download button, an embed and a place in the card feed and on Home. The others show as small cards under "In the works" on the Apps page (no link, no download): `in-development` = being finished now, `next` = the one after that, `prototype` = a working prototype that only runs locally, `coming` = planned, not started. They are listed in that order. `focus` (`mobile` / `desktop`) shows "Phone first" or "Desktop first" on the card; list `platforms` in the same order (Android first for phone-first apps). To release one: set `"released"` and add `icon`, `releases` (and `features`, `media`, `changelog`). |
 | `mediaCredit` | Text? | Small credit line under the screenshots, e.g. the license of a film shown in them. |
 | `workingTitle` | bool? | The name is not final; shown with a "working title" note. Not needed while `name` just says what the app does ("Pixiv app"). |
 | `featured` | bool? | Shown on Home (first three released). |

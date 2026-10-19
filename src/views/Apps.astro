@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import AppCard from '../components/AppCard.astro';
 import UpcomingCard from '../components/UpcomingCard.astro';
-import { data, isReleased, type Lang } from '../lib/data';
+import { data, isReleased, href, type Lang } from '../lib/data';
 import { ui } from '../i18n/ui';
 
 interface Props { lang: Lang }
@@ -11,7 +11,7 @@ const s = ui(lang);
 // Released apps get the big cards; the rest sit below, quieter
 // ("in-development" before "coming", otherwise in data.json order).
 const released = data.apps.filter(isReleased);
-const rank = { 'in-development': 0, coming: 1 } as Record<string, number>;
+const rank = { 'in-development': 0, next: 1, prototype: 2, coming: 3 } as Record<string, number>;
 const upcoming = data.apps.filter((a) => !isReleased(a)).sort((a, b) => (rank[a.status] ?? 2) - (rank[b.status] ?? 2));
 ---
 <Base lang={lang} title={s('apps.title')}>
@@ -28,14 +28,22 @@ const upcoming = data.apps.filter((a) => !isReleased(a)).sort((a, b) => (rank[a.
     <section class="container section-tight" id="upcoming">
       <span class="eyebrow">{s('apps.upcoming')}</span>
       <p class="muted up-lead">{s('apps.upcomingLead')}</p>
-      <div class="grid up-grid">
-        {upcoming.map((app, i) => <UpcomingCard app={app} lang={lang} delay={Math.min(i, 6) * 0.04} />)}
-      </div>
+      {[upcoming.filter((a) => a.status === 'in-development' || a.status === 'next'), upcoming.filter((a) => a.status !== 'in-development' && a.status !== 'next')].map((group, gi) => group.length > 0 && (
+        <>
+          <h3 class="up-group">{s(gi === 0 ? 'apps.groupNow' : 'apps.groupPrototypes')}</h3>
+          <div class="grid up-grid">
+            {group.map((app, i) => <UpcomingCard app={app} lang={lang} delay={Math.min(i, 6) * 0.04} />)}
+          </div>
+        </>
+      ))}
+      <p class="up-cta">{s('apps.upcomingCta')} <a href={href('/commissions/', lang)}>{s('apps.upcomingCtaLink')}</a></p>
     </section>
   )}
 </Base>
 
 <style>
   .up-lead { font-size: 0.92rem; margin: -0.4rem 0 1.2rem; }
+  .up-group { font-size: 1rem; color: var(--muted); font-weight: 600; margin: 1.6rem 0 0.8rem; }
+  .up-cta { margin-top: 1.4rem; color: var(--muted); font-size: 0.95rem; }
   .up-grid { grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 12px; }
 </style>

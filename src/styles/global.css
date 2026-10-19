@@ -479,7 +479,8 @@ a.card:hover, .card.hoverable:hover {
 .status.open, .status.released { color: var(--ok); }
 .status.open::before { animation: pulse 2.4s ease-in-out infinite; }
 .status.limited, .status.in-development { color: var(--warn); }
-.status.closed, .status.coming { color: var(--muted); }
+.status.next { color: var(--text); }
+.status.closed, .status.coming, .status.prototype { color: var(--muted); }
 @keyframes pulse { 50% { box-shadow: 0 0 0 7px color-mix(in srgb, currentColor 0%, transparent); } }
 
 /* Placeholders: visible on purpose, so nothing undecided goes live unnoticed. */
