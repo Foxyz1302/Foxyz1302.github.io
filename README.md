@@ -66,7 +66,7 @@ changes, edit it and `site.url` in `data.json`.
   `/embed.js` inserts it with automatic height:
 
   ```html
-  <script src="https://donations.foxyz.ru/embed.js" data-app="starsync" async></script>
+  <script src="https://foxyz.ru/embed.js" data-app="starsync" async></script>
   ```
 
 Details, the Dart example and caching rules: [docs/CARD-FEED.md](docs/CARD-FEED.md).

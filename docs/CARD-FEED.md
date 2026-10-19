@@ -13,7 +13,7 @@ Both are generated from `public/data.json` on every build
 
 ## Card feed
 
-URL: `https://<site>/card/v1.json` (today `https://donations.foxyz.ru/card/v1.json`).
+URL: `https://<site>/card/v1.json` (today `https://foxyz.ru/card/v1.json`).
 
 ### Versioning contract
 
@@ -95,7 +95,7 @@ import 'dart:io';
 
 import 'package:http/http.dart' as http;
 
-const feedUrl = 'https://donations.foxyz.ru/card/v1.json';
+const feedUrl = 'https://foxyz.ru/card/v1.json';
 
 /// Picks the text for [lang], falling back to English.
 String l10n(Object? m, String lang) =>
@@ -157,7 +157,7 @@ class DevCardFeed {
 ### iframe
 
 ```html
-<iframe src="https://donations.foxyz.ru/embed/starsync/"
+<iframe src="https://foxyz.ru/embed/starsync/"
         title="Starsync" style="border:0;width:100%;max-width:424px;height:200px"></iframe>
 ```
 
@@ -168,7 +168,7 @@ class DevCardFeed {
 ### Script snippet (auto height)
 
 ```html
-<script src="https://donations.foxyz.ru/embed.js" data-app="starsync" async></script>
+<script src="https://foxyz.ru/embed.js" data-app="starsync" async></script>
 <!-- options: data-lang="ru", data-theme="light" -->
 ```
 

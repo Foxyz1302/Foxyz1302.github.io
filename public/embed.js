@@ -1,7 +1,7 @@
 /*
  * Foxyz app card embed.
  *
- *   <script src="https://donations.foxyz.ru/embed.js" data-app="starsync" async></script>
+ *   <script src="https://foxyz.ru/embed.js" data-app="starsync" async></script>
  *
  * Options (attributes on the script tag):
  *   data-app    app id from data.json (required)

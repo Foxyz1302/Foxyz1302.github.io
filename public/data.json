@@ -2,7 +2,7 @@
   "$comment": "The one file that holds the site's content. Schema: docs/DATA.md. Text can be a plain string or {\"en\": ..., \"ru\": ...}. \"placeholder\": true marks something not decided yet: the site shows it with a dashed TODO badge, the app card feed leaves it out.",
 
   "site": {
-    "url": "https://donations.foxyz.ru",
+    "url": "https://foxyz.ru",
     "title": "Foxyz",
     "description": {
       "en": "Foxyz, a solo Flutter developer: apps, commissions, resume and support.",
