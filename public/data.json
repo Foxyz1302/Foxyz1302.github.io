@@ -4,7 +4,7 @@
   "site": {
     "url": "https://foxyz.ru",
     "title": "Foxyz",
-    "theme": "neon",
+    "theme": "sumi",
     "description": {
       "en": "Foxyz, a solo Flutter developer: apps, commissions, resume and support.",
       "ru": "Foxyz, Flutter-разработчик: приложения, заказы, резюме и поддержка."

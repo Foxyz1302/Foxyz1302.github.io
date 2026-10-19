@@ -50,7 +50,7 @@ const canonical = new URL(href(path, lang), site).href;
 
     <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <meta name="theme-color" content="#08040a" />
+    <meta name="theme-color" content={({ neon: '#08040a', ink: '#13111b', washi: '#f3ecdf', plum: '#17121c', dusk: '#16132a', sumi: '#141312', aizome: '#0f1526', kinari: '#efe9dd' } as Record<string, string>)[data.site.theme ?? 'neon'] ?? '#141312'} />
 
     <!-- link previews (Discord, Telegram, X, ...) -->
     <meta property="og:type" content="website" />

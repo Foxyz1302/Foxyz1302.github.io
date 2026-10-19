@@ -62,22 +62,22 @@ const site = data.site.url.replace(/^https?:\/\//, '');
     background: #fbf8fd;
     color: #1d1424;
     border-radius: 14px;
-    box-shadow: 0 30px 80px -30px var(--primary-glow);
+    box-shadow: 0 20px 60px -30px rgba(0, 0, 0, 0.6);
     font-size: 0.95rem;
     line-height: 1.5;
   }
-  .cv-head { display: flex; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; border-bottom: 3px solid #bd00ff; padding-bottom: 1rem; }
+  .cv-head { display: flex; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; border-bottom: 3px solid #d23a2c; padding-bottom: 1rem; }
   .cv-head h1 { font-size: 2.6rem; letter-spacing: -0.04em; }
-  .cv-role { color: #7a00a8; font-weight: 600; }
-  .cv-contact { list-style: none; padding: 0; font-family: var(--mono); font-size: 0.78rem; text-align: right; color: #4a3b55; }
+  .cv-role { color: #a3291e; font-weight: 600; }
+  .cv-contact { list-style: none; padding: 0; font-family: var(--mono); font-size: 0.78rem; text-align: right; color: #4a4540; }
   .cv-summary { margin: 1.2rem 0; }
-  .paper h2 { font-size: 0.8rem; letter-spacing: 0.16em; text-transform: uppercase; color: #7a00a8; margin: 1.6rem 0 0.6rem; }
+  .paper h2 { font-size: 0.8rem; letter-spacing: 0.16em; text-transform: uppercase; color: #a3291e; margin: 1.6rem 0 0.6rem; }
   .cv-skills { display: grid; grid-template-columns: max-content 1fr; gap: 0.3rem 1.2rem; }
   .cv-skills dt { font-weight: 600; }
   .cv-item + .cv-item { margin-top: 0.8rem; }
   .cv-item h3 { font-size: 1rem; display: flex; justify-content: space-between; gap: 1rem; }
-  .cv-item h3 span { font-family: var(--mono); font-size: 0.75rem; font-weight: 400; color: #6b5a78; }
-  .cv-item p { color: #3b2f45; }
+  .cv-item h3 span { font-family: var(--mono); font-size: 0.75rem; font-weight: 400; color: #6b6358; }
+  .cv-item p { color: #3a352f; }
   @media (max-width: 560px) { .cv-contact { text-align: left; } .cv-skills { grid-template-columns: 1fr; } .cv-skills dd { margin-bottom: 0.5rem; } }
   @media print {
     :global(body) { background: white !important; }

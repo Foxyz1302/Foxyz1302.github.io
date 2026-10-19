@@ -97,7 +97,7 @@ export interface App {
 }
 
 export interface SiteData {
-  /** theme: 'neon' (original), 'ink', 'washi' or 'plum' (see global.css). */
+  /** theme: 'sumi' (in use), or 'neon', 'ink', 'washi', 'plum', 'dusk', 'aizome', 'kinari' (see global.css). */
   site: { url: string; title: string; theme?: string; description: Text; sourceRepo?: string };
   /** Visitor stats. goatcounter: the account code ("foxyz" for foxyz.goatcounter.com); empty = no stats script. */
   analytics?: { goatcounter?: string };

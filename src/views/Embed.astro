@@ -56,14 +56,14 @@ const site = data.site.url;
 <style is:global>
   /* no color-scheme here: a dark scheme makes the iframe paint an opaque backdrop */
   :root {
-    --bg: #110818; --panel: #1a0f24; --border: rgba(189, 0, 255, 0.3); --text: #f6f0fa; --muted: #a89fae;
-    --primary: #bd00ff; --primary-glow: rgba(189, 0, 255, 0.45); --accent: #d4aaff; --border-soft: rgba(255, 255, 255, 0.1);
+    --bg: #141312; --panel: #1c1a18; --border: rgba(240, 230, 212, 0.16); --text: #efe6d4; --muted: #a39b8d;
+    --primary: #d23a2c; --primary-dark: #7d1f17; --accent: #e2b45a; --border-soft: rgba(240, 230, 212, 0.1);
     --font: 'Outfit Variable', 'Onest Variable', system-ui, sans-serif; --mono: ui-monospace, monospace; --radius-sm: 10px;
     --ease: cubic-bezier(0.22, 1, 0.36, 1); --warn: #fbbf24;
   }
   :root[data-theme='light'] {
-    --bg: #ffffff; --panel: #faf5ff; --border: rgba(140, 0, 200, 0.25); --text: #1d1424; --muted: #6b5a78;
-    --accent: #7a00a8; --border-soft: rgba(0, 0, 0, 0.1);
+    --bg: #ffffff; --panel: #faf7f2; --border: rgba(30, 26, 22, 0.18); --text: #1c1a18; --muted: #6b6358;
+    --accent: #a3291e; --border-soft: rgba(0, 0, 0, 0.1);
   }
   * { box-sizing: border-box; margin: 0; }
   html, body { background: transparent; }
@@ -71,9 +71,9 @@ const site = data.site.url;
   a { color: inherit; text-decoration: none; }
   svg { display: block; }
   .ecard {
-    background: linear-gradient(160deg, color-mix(in srgb, var(--primary) 12%, var(--panel)), var(--panel) 55%);
+    background: var(--panel);
     border: 1px solid var(--border);
-    border-radius: 18px;
+    border-radius: 12px;
     padding: 16px;
     display: grid;
     gap: 12px;
@@ -89,12 +89,12 @@ const site = data.site.url;
   .actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
   .btn {
     display: inline-flex; align-items: center; justify-content: center; gap: 0.45em;
-    min-height: 40px; padding: 0 1.05rem; border-radius: 999px; font: 600 0.9rem/1 var(--font);
+    min-height: 40px; padding: 0 1.05rem; border-radius: 10px; font: 600 0.9rem/1 var(--font);
     border: 1px solid transparent; cursor: pointer; white-space: nowrap; transition: transform 0.2s var(--ease), box-shadow 0.2s, background 0.2s;
   }
   .btn svg { width: 16px; height: 16px; }
-  .btn-primary { background: linear-gradient(135deg, #c51bff, #8a00e6); color: white; box-shadow: 0 6px 20px -8px var(--primary-glow); }
-  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 24px -6px var(--primary-glow); }
+  .btn-primary { background: var(--primary); color: #fff8ec; box-shadow: 0 3px 0 var(--primary-dark); }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 4px 0 var(--primary-dark); }
   .btn-ghost { border-color: var(--border-soft); color: var(--text); background: color-mix(in srgb, var(--text) 4%, transparent); }
   .btn-ghost:hover { background: color-mix(in srgb, var(--text) 9%, transparent); }
   .muted { color: var(--muted); }
