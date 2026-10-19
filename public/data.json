@@ -624,15 +624,6 @@
       "status": "prototype",
       "platforms": [],
       "pitch": { "en": "RimWorld crossed with Dwarf Fortress's adventure mode: a procedurally generated world, simulated NPCs and online multiplayer.", "ru": "RimWorld вместе с режимом приключений Dwarf Fortress: процедурно созданный мир, симулированные NPC и онлайн-мультиплеер." }
-    },
-    {
-      "id": "exhibition-game",
-      "name": "Exhibitionism game",
-      "kind": "18+",
-      "game": true,
-      "status": "prototype",
-      "platforms": [],
-      "pitch": { "en": "An adult game about exhibitionism, with high stakes.", "ru": "Игра для взрослых об эксгибиционизме, с высокими ставками." }
     }
   ],
 
