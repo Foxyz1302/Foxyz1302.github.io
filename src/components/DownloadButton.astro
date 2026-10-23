@@ -2,9 +2,11 @@
 // The Download button. At build time it knows the latest release and its
 // files; in the browser a small script picks the file for the visitor's
 // system ("Download for Windows"). Without JS, or when nothing matches, the
-// button opens the release page.
+// button opens the release page. When a file download starts, a small
+// thank-you panel asks for an optional tip (once per visit; never in the
+// compact embed).
 import Icon from './Icon.astro';
-import { PLATFORM_LABEL, type App, type Lang } from '../lib/data';
+import { t, href, donationsFor, PLATFORM_LABEL, type App, type Lang } from '../lib/data';
 import { formatSize, releasesPage, type Release } from '../lib/releases';
 import { ui } from '../i18n/ui';
 
@@ -14,6 +16,8 @@ const s = ui(lang);
 const fallback = release?.pageUrl ?? releasesPage(app);
 const assets = (release?.assets ?? []).map((a) => ({ ...a, label: PLATFORM_LABEL[a.platform] ?? a.platform, sizeText: formatSize(a.size) }));
 const rel = target === '_blank' ? 'noopener' : undefined;
+const tip = donationsFor(lang).find((o) => o.kind === 'link' && o.url);
+const fill = (x: string) => x.replaceAll('{app}', app.name);
 ---
 {fallback ? (
   <div class:list={['dl', { compact }]} data-dl data-assets={JSON.stringify(assets)} data-label-for={s('apps.downloadFor')}>
@@ -32,11 +36,22 @@ const rel = target === '_blank' ? 'noopener' : undefined;
         <summary>{s('apps.otherPlatforms')}</summary>
         <ul>
           {assets.map((a) => (
-            <li><a href={a.url} target={target} rel={rel} data-goatcounter-click={`download-${app.id}-${a.platform}`}><Icon name={a.platform} /><span>{a.label}</span><span class="mono muted">{a.name}</span><span class="mono muted">{a.sizeText}</span></a></li>
+            <li><a href={a.url} target={target} rel={rel} data-file data-goatcounter-click={`download-${app.id}-${a.platform}`}><Icon name={a.platform} /><span>{a.label}</span><span class="mono muted">{a.name}</span><span class="mono muted">{a.sizeText}</span></a></li>
           ))}
         </ul>
         {release && <a class="dl-all" href={release.listUrl} target={target} rel={rel}>{s('apps.allReleases')} <Icon name="arrow" /></a>}
       </details>
+    )}
+    {!compact && (
+      <dialog class="thanks" data-thanks={app.id}>
+        <h2>{fill(s('dl.thanksTitle'))}</h2>
+        <p>{fill(s('dl.thanksText'))}</p>
+        <div class="thanks-actions">
+          {tip && <a class="btn btn-primary" href={tip.url} target="_blank" rel="noopener" data-goatcounter-click={`thanks-support-${tip.id}`}><Icon name="heart" />{s('dl.tipOn')} {t(tip.name, lang)}</a>}
+          <a class="btn btn-ghost" href={href('/support/', lang)} data-goatcounter-click="thanks-support-page">{s('dl.moreWays')}</a>
+        </div>
+        <form method="dialog"><button class="thanks-close">{s('dl.close')}</button></form>
+      </dialog>
     )}
   </div>
 ) : (
@@ -62,6 +77,7 @@ const rel = target === '_blank' ? 'noopener' : undefined;
     const main = box.querySelector<HTMLAnchorElement>('[data-dl-main]')!;
     if (match) {
       main.href = match.url;
+      main.dataset.file = '';
       main.querySelector('[data-dl-text]')!.textContent = `${box.dataset.labelFor} ${match.label}`;
       const size = box.querySelector('[data-dl-size]');
       if (size && match.sizeText) size.textContent = match.sizeText;
@@ -69,6 +85,18 @@ const rel = target === '_blank' ? 'noopener' : undefined;
       box.querySelector<HTMLElement>('[data-dl-none]')?.removeAttribute('hidden');
       box.querySelector<HTMLDetailsElement>('[data-dl-other]')?.setAttribute('open', '');
     }
+  });
+
+  // Thank-you panel: the download starts as usual; the panel opens just after,
+  // once per visit and app. Click outside or Close to dismiss.
+  document.querySelectorAll<HTMLDialogElement>('dialog[data-thanks]').forEach((dlg) => {
+    const key = `thanks-${dlg.dataset.thanks}`;
+    dlg.closest('[data-dl]')?.addEventListener('click', (e) => {
+      if (!(e.target as Element).closest('[data-file]')) return;
+      try { if (sessionStorage.getItem(key)) return; sessionStorage.setItem(key, '1'); } catch {}
+      setTimeout(() => dlg.showModal(), 350);
+    });
+    dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
   });
 </script>
 
@@ -100,4 +128,13 @@ const rel = target === '_blank' ? 'noopener' : undefined;
   .dl-other li .mono { font-size: 0.72rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .dl-all { display: inline-flex; align-items: center; gap: 0.3rem; margin-top: 0.6rem; color: var(--accent); font-size: 0.85rem; }
   .dl-all :global(svg) { width: 14px; height: 14px; }
+
+  .thanks { margin: auto; max-width: min(440px, calc(100vw - 32px)); padding: 1.6rem 1.6rem 1.2rem; border-radius: var(--radius); border: 1px solid var(--border); background: var(--bg-raised); color: var(--text); box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5); }
+  .thanks::backdrop { background: rgba(0, 0, 0, 0.6); }
+  .thanks h2 { font-size: 1.3rem; margin-bottom: 0.6rem; }
+  .thanks p { color: var(--muted); margin-bottom: 1.2rem; }
+  .thanks-actions { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+  .thanks form { margin-top: 0.9rem; }
+  .thanks-close { background: none; border: 0; padding: 0.3rem 0; color: var(--muted); font: inherit; font-size: 0.88rem; cursor: pointer; }
+  .thanks-close:hover { color: var(--text-strong); }
 </style>
