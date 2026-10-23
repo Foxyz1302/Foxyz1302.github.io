@@ -76,8 +76,8 @@ Details, the Dart example and caching rules: [docs/CARD-FEED.md](docs/CARD-FEED.
 ```
 public/data.json        content
 public/                 images, icons, CNAME, embed.js (copied as-is)
-public/brand/           the logo (logo.webp/png) and square mark (mark.webp/png); made from
-                        ../logo-concepts/round6/source (R.html, U.html), see that folder
+public/brand/           the logo (logo.svg, plus webp/png) and square mark (mark.svg, plus
+                        webp/png); made in ../logo-concepts/round7/source (build.py), see that folder
 src/content/<lang>/     Markdown texts
 src/i18n/ui.ts          short interface texts
 src/views/              one file per page (Home, Apps, AppPage, Commissions, About, Cv, Support, Embed)

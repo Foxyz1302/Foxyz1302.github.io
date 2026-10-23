@@ -21,7 +21,7 @@ const what = [
   <section class="hero container">
     <div class="hero-text">
       <h1 class="reveal" style="--d:.05s">
-        <img class="logo" src="/brand/logo.webp" alt={data.person.name} width="560" height="211" />
+        <img class="logo" src="/brand/logo.svg" alt={data.person.name} width="560" height="202" />
         <span class="role">{t(data.person.role, lang)}</span>
       </h1>
       <p class="lead reveal" style="--d:.1s">{t(data.person.pitch, lang)}</p>
@@ -33,7 +33,7 @@ const what = [
     </div>
     <div class="hero-mark reveal" style="--d:.1s" aria-hidden="true">
       <div class="orb"></div>
-      <img src="/brand/mark.webp" alt="" width="260" height="260" />
+      <img src="/brand/mark.svg" alt="" width="260" height="260" />
     </div>
   </section>
 
@@ -80,7 +80,7 @@ const what = [
   .hero-text { display: grid; gap: 1.4rem; justify-items: start; }
   .avail { font-size: 0.92rem; color: var(--muted); margin-top: -0.4rem; }
   .hero h1 { font-size: clamp(3rem, 2rem + 5vw, 5.6rem); letter-spacing: -0.045em; line-height: 0.98; }
-  .hero h1 .logo { display: block; width: min(560px, 100%); height: auto; margin-left: -0.6rem; }
+  .hero h1 .logo { display: block; width: 520px; max-width: 100%; height: auto; }
   .role { display: block; margin-top: 0.35em; line-height: 1.15; font-size: 0.42em; letter-spacing: -0.02em; color: var(--muted); font-weight: 500; }
   .hero-mark { position: relative; display: grid; place-items: center; }
   .hero-mark img { position: relative; width: min(260px, 60vw); filter: drop-shadow(0 20px 50px var(--glow)); animation: float 7s ease-in-out infinite; }
