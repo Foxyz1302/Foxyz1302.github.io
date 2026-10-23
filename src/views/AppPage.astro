@@ -3,7 +3,7 @@ import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
 import DownloadButton from '../components/DownloadButton.astro';
 import StorySection from '../components/StorySection.astro';
-import { t, href, PLATFORM_LABEL, type App, type Lang } from '../lib/data';
+import { data, t, href, PLATFORM_LABEL, type App, type Lang } from '../lib/data';
 import { latestRelease, changelog } from '../lib/releases';
 import { ui } from '../i18n/ui';
 
@@ -13,6 +13,19 @@ const s = ui(lang);
 const release = await latestRelease(app);
 const log = await changelog(app);
 const features = app.features?.[lang] ?? app.features?.en ?? [];
+// schema.org data so search engines can show it as an app (free, its systems, version).
+const appLd = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: app.name,
+  description: t(app.pitch, lang),
+  applicationCategory: 'MultimediaApplication',
+  operatingSystem: app.platforms.map((p) => PLATFORM_LABEL[p]).join(', '),
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  ...(release ? { softwareVersion: release.version, downloadUrl: release.listUrl } : {}),
+  ...(app.icon ? { image: new URL(app.icon, Astro.site).href } : {}),
+  author: { '@type': 'Person', name: data.person.name, url: data.site.url },
+};
 
 // `code` and **bold** in changelog lines; everything else is escaped.
 const esc = (x: string) => x.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]!);
@@ -21,7 +34,7 @@ const plural = new Intl.PluralRules(lang);
 const changes = (n: number) => s(`apps.changes.${plural.select(n)}` as 'apps.changes.other').replace('{n}', String(n));
 const ytId = (src: string) => src.match(/(?:v=|youtu\.be\/|embed\/)([\w-]{11})/)?.[1] ?? src;
 ---
-<Base lang={lang} title={app.name} description={t(app.pitch, lang)}>
+<Base lang={lang} title={app.name} description={t(app.pitch, lang)} jsonld={appLd}>
   <div class="container page-head app-head">
     <a class="back" href={href('/projects/', lang)}>← {s('apps.title')}</a>
     <div class="app-hero">

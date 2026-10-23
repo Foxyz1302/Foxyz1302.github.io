@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import AppCard from '../components/AppCard.astro';
 import Icon from '../components/Icon.astro';
-import { data, t, href, type Lang } from '../lib/data';
+import { data, t, href, personLd, type Lang } from '../lib/data';
 import { ui } from '../i18n/ui';
 
 interface Props { lang: Lang }
@@ -17,7 +17,7 @@ const what = [
   { icon: 'layers', t: s('home.what3.t'), d: s('home.what3.d') },
 ];
 ---
-<Base lang={lang}>
+<Base lang={lang} jsonld={personLd(Astro.site)}>
   <section class="hero container">
     <div class="hero-text">
       <a href={href('/commissions/', lang)} class:list={['status-pill reveal']}>

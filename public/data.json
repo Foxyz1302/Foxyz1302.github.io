@@ -57,7 +57,7 @@
   "donations": {
     "order": {
       "en": ["kofi", "usdt-trc20", "eth", "btc"],
-      "ru": ["boosty", "sbp", "kofi", "usdt-trc20", "eth", "btc"]
+      "ru": ["boosty", "kofi", "usdt-trc20", "eth", "btc"]
     },
     "options": [
       {

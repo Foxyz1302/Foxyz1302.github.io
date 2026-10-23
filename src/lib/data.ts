@@ -169,3 +169,16 @@ export const PLATFORM_LABEL: Record<string, string> = {
   'macos-arm64': 'macOS',
   'android-apk': 'Android',
 };
+
+/** schema.org Person for the home and About pages. */
+export function personLd(site: URL | undefined) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: data.person.name,
+    jobTitle: t(data.person.role, 'en'),
+    url: data.site.url,
+    image: new URL('/avatar-256.png', site).href,
+    sameAs: data.contact.filter((c) => c.url.startsWith('http')).map((c) => c.url),
+  };
+}

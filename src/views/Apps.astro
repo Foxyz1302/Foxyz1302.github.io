@@ -14,7 +14,7 @@ const released = data.apps.filter(isReleased);
 const rank = { 'in-development': 0, next: 1, prototype: 2, coming: 3 } as Record<string, number>;
 const upcoming = data.apps.filter((a) => !isReleased(a)).sort((a, b) => (rank[a.status] ?? 2) - (rank[b.status] ?? 2));
 ---
-<Base lang={lang} title={s('apps.title')}>
+<Base lang={lang} title={s('apps.title')} description={s('apps.lead')}>
   <div class="container page-head">
     <h1 class="gradient-text">{s('apps.title')}</h1>
     <p class="lead">{s('apps.lead')}</p>
