@@ -475,13 +475,11 @@ a.card:hover, .card.hoverable:hover {
 .chip.plain { color: var(--muted); background: color-mix(in srgb, var(--text) 4%, transparent); border-color: var(--border-soft); }
 
 .status { display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.04em; }
-.status::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: currentColor; box-shadow: 0 0 0 4px color-mix(in srgb, currentColor 20%, transparent); }
+.status::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
 .status.open, .status.released { color: var(--ok); }
-.status.open::before { animation: pulse 2.4s ease-in-out infinite; }
 .status.limited, .status.in-development { color: var(--warn); }
 .status.next { color: var(--text); }
 .status.closed, .status.coming, .status.prototype { color: var(--muted); }
-@keyframes pulse { 50% { box-shadow: 0 0 0 7px color-mix(in srgb, currentColor 0%, transparent); } }
 
 /* Placeholders: visible on purpose, so nothing undecided goes live unnoticed. */
 .is-placeholder { outline: 1px dashed rgba(251, 191, 36, 0.55); outline-offset: 3px; }
