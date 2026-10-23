@@ -660,8 +660,8 @@
             "ru": "Аниме-неделя одним взглядом"
           },
           "text": {
-            "en": "Browse the Jellyfin library with watch tracking on everything. The weekly schedule shows when each episode airs, what's already on Jellyfin and what you've watched, and lets you request new shows from your auto-downloader or Sonarr.",
-            "ru": "Библиотека Jellyfin с отметками о просмотре для всего. Недельное расписание показывает, когда выходит каждая серия, что уже есть в Jellyfin и что вы посмотрели, и позволяет заказать новые тайтлы в автозагрузчик или Sonarr."
+            "en": "Browse the Jellyfin library with watch tracking on everything. The weekly schedule shows when each episode airs, what's already on Jellyfin and what you've watched.",
+            "ru": "Библиотека Jellyfin с отметками о просмотре для всего. Недельное расписание показывает, когда выходит каждая серия, что уже есть в Jellyfin и что вы посмотрели."
           },
           "src": "/apps/starsync/6-schedule.webp",
           "alt": {
