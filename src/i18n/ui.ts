@@ -16,7 +16,7 @@ const en = {
   'lang.bannerClose': 'Close',
 
   'home.hire': 'Hire me',
-  'home.avail.open': 'Taking commissions now, one project at a time.',
+  'home.avail.open': 'Taking commissions now.',
   'home.avail.limited': 'Taking a few more commissions.',
   'home.avail.closed': 'Not taking commissions right now.',
   'home.support': 'Support my work',
@@ -138,7 +138,7 @@ const ru: Record<Key, string> = {
   'lang.bannerClose': 'Закрыть',
 
   'home.hire': 'Заказать',
-  'home.avail.open': 'Сейчас беру заказы, по одному проекту за раз.',
+  'home.avail.open': 'Сейчас беру заказы.',
   'home.avail.limited': 'Беру ещё пару заказов.',
   'home.avail.closed': 'Сейчас заказы не беру.',
   'home.support': 'Поддержать',

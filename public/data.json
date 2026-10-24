@@ -41,10 +41,9 @@
 
   "commissions": {
     "status": "open",
-    "slots": 1,
     "note": {
-      "en": "One project at a time, so yours gets my full attention. Fastest reply on Discord.",
-      "ru": "Один проект за раз, чтобы ваш получил всё моё внимание. Быстрее всего отвечаю в Discord."
+      "en": "Small tasks can usually start right away; bigger projects get a written plan first. Fastest reply on Discord.",
+      "ru": "Небольшие задачи обычно могу начать сразу; для крупных проектов сначала письменный план. Быстрее всего отвечаю в Discord."
     },
     "currency": "USD",
     "prices": [
@@ -660,8 +659,8 @@
             "ru": "Аниме-неделя одним взглядом"
           },
           "text": {
-            "en": "Browse the Jellyfin library with watch tracking on everything. The weekly schedule shows when each episode airs, what's already on Jellyfin and what you've watched.",
-            "ru": "Библиотека Jellyfin с отметками о просмотре для всего. Недельное расписание показывает, когда выходит каждая серия, что уже есть в Jellyfin и что вы посмотрели."
+            "en": "Browse the Jellyfin library with watch tracking on everything. The weekly schedule shows when each episode airs, what's already on Jellyfin and what you've watched. Planned: request new shows straight from the schedule through Sonarr.",
+            "ru": "Библиотека Jellyfin с отметками о просмотре для всего. Недельное расписание показывает, когда выходит каждая серия, что уже есть в Jellyfin и что вы посмотрели. В планах: заказывать новые тайтлы прямо из расписания через Sonarr."
           },
           "src": "/apps/starsync/6-schedule.webp",
           "alt": {
@@ -760,11 +759,6 @@
           {
             "type": "github",
             "repo": "Foxyz1302/starsync"
-          },
-          {
-            "type": "gitea",
-            "host": "https://git.senkochan.moe",
-            "repo": "Foxyz/sync_replay_project"
           }
         ],
         "assets": {
@@ -773,7 +767,7 @@
         }
       },
       "changelog": {
-        "url": "https://git.senkochan.moe/Foxyz/sync_replay_project/raw/branch/main/CHANGELOG.md",
+        "url": "https://raw.githubusercontent.com/Foxyz1302/starsync/main/CHANGELOG.md",
         "show": 3
       }
     },
